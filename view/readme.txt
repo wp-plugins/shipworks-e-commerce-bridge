@@ -8,6 +8,8 @@ Stable tag: 2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+
 == Description ==
 
 ShipWorks Bridge is a good plugin to improve your order management on based WordPress E-Commerce
