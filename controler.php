@@ -99,19 +99,19 @@ function shipworks_admin_menu() {
 function shipworks_admin() {  
    		// On affiche la page de base
 		require_once('control/controlAdmin.php');
-		wp_enqueue_style( 'ShipworksCss', plugins_url( 'ShipWorksBridge/css/admin.css' , dirname(__FILE__) ));
+		wp_enqueue_style( 'ShipworksCss', PLUGIN_PATH_SHIPWORKSWORDPRESS . 'css/admin.css' );
 }
 
 function shipworks_set_up() {
 		require_once('control/controlSetUp.php');
-		wp_enqueue_style( 'ShipworksCss', plugins_url( 'ShipWorksBridge/css/admin.css' , dirname(__FILE__) ));
+		wp_enqueue_style( 'ShipworksCss', PLUGIN_PATH_SHIPWORKSWORDPRESS . 'css/admin.css' );
 }
 
 function shipworks_subscription() {
 		require_once('control/controlSubscription.php');
-		wp_enqueue_style( 'ShipworksCss', plugins_url( 'ShipWorksBridge/css/admin.css' , dirname(__FILE__) ));
-		wp_enqueue_style( 'ModalCss', plugins_url( 'ShipWorksBridge/css/bootstrap.min.css' , dirname(__FILE__) ));
-		wp_enqueue_script( 'ModalJs', plugins_url( 'ShipWorksBridge/css/bootstrap.min.js' , dirname(__FILE__) ) );
+		wp_enqueue_style( 'ShipworksCss', PLUGIN_PATH_SHIPWORKSWORDPRESS . 'css/admin.css' );
+		wp_enqueue_style( 'ModalCss', PLUGIN_PATH_SHIPWORKSWORDPRESS .  'css/bootstrap.min.css' );
+		wp_enqueue_script( 'ModalJs', PLUGIN_PATH_SHIPWORKSWORDPRESS . 'css/bootstrap.min.js' );
 }
 
 /****************************************/
