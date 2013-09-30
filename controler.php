@@ -2,7 +2,7 @@
 /*
 Plugin Name: ShipWorks Bridge
 Plugin URI: http://www.advanced-creation.com 
-Description: Plugin to create a bridge between Shipworks Software and your Shopperpress Template in Wordpress.
+Description: ShipWorks for Wordpress build a bridge between your E-Commerce sites on Wordpress (such as WooCommerce) and ShipWorks.
 Version: 2.4.3
 Author: Advanced Creation
 Author URI: http://www.advanced-creation.com
