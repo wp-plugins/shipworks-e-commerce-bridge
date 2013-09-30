@@ -1,7 +1,0 @@
-[05-Jul-2013 20:13:06 Europe/Berlin] PHP Fatal error:  Call to undefined function __() in /home/developm/public_html/wp-content/plugins/ShipWorksBridge/view/admin.php on line 9
-[05-Jul-2013 20:13:51 Europe/Berlin] PHP Fatal error:  Call to undefined function __() in /home/developm/public_html/wp-content/plugins/ShipWorksBridge/view/admin.php on line 9
-[05-Jul-2013 20:13:55 Europe/Berlin] PHP Fatal error:  Call to undefined function __() in /home/developm/public_html/wp-content/plugins/ShipWorksBridge/view/admin.php on line 9
-[05-Jul-2013 20:14:21 Europe/Berlin] PHP Fatal error:  Call to a member function getUsername() on a non-object in /home/developm/public_html/wp-content/plugins/ShipWorksBridge/view/admin.php on line 15
-[05-Jul-2013 20:15:49 Europe/Berlin] PHP Fatal error:  Call to undefined function __() in /home/developm/public_html/wp-content/plugins/ShipWorksBridge/view/admin.php on line 9
-[05-Jul-2013 20:16:55 Europe/Berlin] PHP Fatal error:  Call to undefined function __() in /home/developm/public_html/wp-content/plugins/ShipWorksBridge/view/admin.php on line 9
-[19-Jul-2013 00:45:04 Europe/Berlin] PHP Fatal error:  Call to undefined function __() in /home/developm/public_html/wp-content/plugins/ShipWorksBridge/view/admin.php on line 9
