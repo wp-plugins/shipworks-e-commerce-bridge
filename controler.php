@@ -3,8 +3,8 @@
 Plugin Name: ShipWorks Bridge
 Plugin URI: http://www.advanced-creation.com 
 Description: Plugin to create a bridge between Shipworks Software and your Shopperpress Template in Wordpress.
-Version: 2.4
-Author: Nicolas Humeau
+Version: 2.4.3
+Author: Advanced Creation
 Author URI: http://www.advanced-creation.com
 License: GPL2
 */
@@ -99,21 +99,19 @@ function shipworks_admin_menu() {
 function shipworks_admin() {  
    		// On affiche la page de base
 		require_once('control/controlAdmin.php');
-		wp_enqueue_style( 'ShipworksCss', plugins_url( 'shipworks-e-commerce-bridge/css/admin.css' , dirname(__FILE__) ));
+		wp_enqueue_style( 'ShipworksCss', plugins_url( 'ShipWorksBridge/css/admin.css' , dirname(__FILE__) ));
 }
 
 function shipworks_set_up() {
 		require_once('control/controlSetUp.php');
-		wp_enqueue_style( 'ShipworksCss', plugins_url( 'shipworks-e-commerce-bridge/css/admin.css' , dirname(__FILE__) ));
-
+		wp_enqueue_style( 'ShipworksCss', plugins_url( 'ShipWorksBridge/css/admin.css' , dirname(__FILE__) ));
 }
 
 function shipworks_subscription() {
 		require_once('control/controlSubscription.php');
-		wp_enqueue_style( 'ShipworksCss', plugins_url( 'shipworks-e-commerce-bridge/css/admin.css' , dirname(__FILE__) ));
-		wp_enqueue_style( 'ModalCss', plugins_url( 'shipworks-e-commerce-bridge/css/bootstrap.min.css' , dirname(__FILE__) ));
-		wp_enqueue_script( 'ModalJs', plugins_url( 'shipworks-e-commerce-bridge/css/bootstrap.min.js' , dirname(__FILE__) ) );
-
+		wp_enqueue_style( 'ShipworksCss', plugins_url( 'ShipWorksBridge/css/admin.css' , dirname(__FILE__) ));
+		wp_enqueue_style( 'ModalCss', plugins_url( 'ShipWorksBridge/css/bootstrap.min.css' , dirname(__FILE__) ));
+		wp_enqueue_script( 'ModalJs', plugins_url( 'ShipWorksBridge/css/bootstrap.min.js' , dirname(__FILE__) ) );
 }
 
 /****************************************/

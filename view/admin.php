@@ -18,7 +18,7 @@
 			</p>
 		</div>
 <?php } ?>
-<form name="shipworks_account_form" method="post" action="<?php PLUGIN_PATH_SHIPWORKSWORDPRESS . 'control/controlAdmin.php'?>">
+<form name="shipworks_account_form" method="post" action="<?php PLUGIN_PATH_SHIPWORKSWORDPRESS.'../../ShipWorksBridge/view/control/controlAdmin.php'?>">
 	<?php    echo "<h3>" . __( 'Shipworks Account' ) . "</h3>"; ?>
 	<p>Account you will enter in Shipworks Generic Module, to see in detail how to proceed click here</p>
 	<table class="form-table">
@@ -43,7 +43,7 @@
 		</tbody>
 	</table>
 </form>
-<form name="shipworks_address_form" method="post" action="<?php PLUGIN_PATH_SHIPWORKSWORDPRESS . 'control/controlAdmin.php'?>">
+<form name="shipworks_address_form" method="post" action="<?php PLUGIN_PATH_SHIPWORKSWORDPRESS.'../../ShipWorksBridge/view/control/controlAdmin.php'?>">
 	<?php    echo "<h3>" . __( 'Store Address' ) . "</h3>"; ?>
 	<p>Please fill the form below, it should be your store address from packages are shipping</p>
 	<table class="form-table">

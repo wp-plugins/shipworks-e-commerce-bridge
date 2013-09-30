@@ -100,10 +100,10 @@ class Order
 		$this->createdDate = filtreString( $this->createdDate );
 		$this->modifiedDate = filtreString( $this->modifiedDate );
 		$this->status = filtreEntier( $this->status );
-		$this->firstname =  filtreString( $this->firstname );
-		$this->middlename = filtreString( $this->middlename );
-		$this->lastname =  filtreString( $this->lastname );
-		$this->company =  filtreString( $this->company );
+		$this->firstname =  filtreTitle( $this->firstname );
+		$this->middlename = filtreTitle( $this->middlename );
+		$this->lastname =  filtreTitle( $this->lastname );
+		$this->company =  filtreTitle( $this->company );
 		$this->address =  filtreString( $this->address );
 		$this->street2 = filtreString( $this->street2 );
 		$this->street3 = filtreString( $this->street3 );
@@ -117,8 +117,8 @@ class Order
 		$this->phone =  filtreString( $this->phone );
 		$this->fax = filtreString( $this->fax );
 		$this->website = filtreString( $this->website );
-		$this->shipfirstname = filtreString( $this->shipfirstname );
-		$this->shiplastname = filtreString( $this->shiplastname );
+		$this->shipfirstname = filtreTitle( $this->shipfirstname );
+		$this->shiplastname = filtreTitle( $this->shiplastname );
 		$this->shipaddress = filtreString( $this->shipaddress );
 		$this->shipxaddress = filtreString( $this->shipxaddress );
 		$this->shipcity =  filtreString( $this->shipcity );
@@ -198,7 +198,7 @@ class Order
 		$this->company = $this->row['company'];
 		$this->address = $this->row['address'];
 		$this->xaddress = $this->row['xaddress'];
-		$this->street2 = '';
+		$this->street2 = $this->row['xaddress']; // add to correct no address line 2 shipping on shopp
 		$this->street3 = '';
 		$this->city = $this->row['city'];
 		$this->state = $this->row['state'];
@@ -215,6 +215,8 @@ class Order
 		$this->shiplastname = '';
 		$this->shipaddress = $this->row['shipaddress'];
 		$this->shipxaddress = $this->row['shipxaddress'];
+		$this->shipstreet2 = $this->row['shipxaddress']; // add to correct no address line 2 billing on shopp
+		
 		$this->shipcity = $this->row['shipcity'];
 		$this->shipstate = $this->row['shipstate'];
 		$this->shippostcode = $this->row['shippostcode'];

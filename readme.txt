@@ -4,9 +4,11 @@ Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, shopp, shopperpress, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge
 Requires at least: 3.0.1
 Tested up to: 3.6
-Stable tag: 2.4
+Stable tag: 2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
 
 == Description ==
 
@@ -18,12 +20,12 @@ and emails, and update the online status of each order.
 = Compatible E-Commmerce software =
 When you activate the plugin on your site it immediately says if you are running or not a compatible
 E-Commerce template/plugin. Here the list of the compatible products:
-* Woocommerce ( 2.0++ )
-* WP eCommerce ( 3.0++ )	
-* Shopp ( 1.2.2++ )
-* Shopperpress ( 7.1++ )
-* Cart66 Lite ( 1.5++ )
-* Jigoshop ( 1++ )
+	-Woocommerce ( 2.0++ )
+	-WP eCommerce ( 3.0++ )	
+	-Shopp ( 1.2.2++ )
+	-Shopperpress ( 7.1++ )
+	-Cart66 Lite ( 1.5++ )
+	-Jigoshop ( 1++ )
 	
 Requires:
 	-WordPress ( 3++ )
@@ -73,26 +75,26 @@ contact@advanced-creation.com.
 == Changelog ==
 
 = 2.4 =
-Compatible with Jigoshop
-Fixed some bugs
+*Compatible with Jigoshop
+*Fixed some bugs
 
 = 2.3 =
-Compatible with Cart66 Lite
-Fixed some bugs
+*Compatible with Cart66 Lite
+*Fixed some bugs
 
 = 2.2 =
-Compatible with WP e-Commerce
-Update for Shopp 1.2.9 version
-Fixed some bugs
+*Compatible with WP e-Commerce
+*Update for Shopp 1.2.9 version
+*Fixed some bugs
 
 = 2.1 =
-Compatible with Woocommerce
-Fixed some bugs
+*Compatible with Woocommerce
+*Fixed some bugs
 
 = 2.0 =
-Totally rebuilt
-More stable
-Compatible with shopperpress
+*Totally rebuilt
+*More stable
+*Compatible with shopperpress
 
 = 1.0 =
 First version

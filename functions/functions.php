@@ -21,7 +21,15 @@ function getVersion( $path ) {
 			 fclose($fichier);
 	return $toReturn;
 }
-
+function filtreTitle($var) {
+	$var = trim($var);
+	$var = preg_replace("/[^0-9a-zA-Z \-'_]+/", ' ', $var);
+	if (empty($var)) {
+		return '';
+	} else {
+		return trim($var);	
+	}
+}
 function filtreString($var) {
 	$var = trim($var);
 	if (empty($var)) {
