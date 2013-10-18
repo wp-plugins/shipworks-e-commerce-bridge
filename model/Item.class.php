@@ -146,7 +146,7 @@ class Item
 		$this->itemID = filtreEntier( $this->itemID );
 		$this->productID = filtreFloat( $this->productID );
 		$this->code = filtreFloat( $this->code );
-		$this->sku = filtreFloat( $this->sku );
+		$this->sku = filtreTitle( $this->sku );
 		$this->name = filtreTitle( $this->name );
 		$this->quantity = filtreEntier( $this->quantity );
 		$this->price = filtreFloat( $this->price );

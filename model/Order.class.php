@@ -244,8 +244,8 @@ class Order
 	
 	protected function setInfoWoocommerce() {
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php');
-		if ( is_plugin_active_custom( "woocommerce-sequential-order-numbers/woocommerce-sequential-order-numbers.php" ) 
-				&& is_numeric( getInformation( $this->row, '_order_number' ) ) ) {
+		if ( ( is_plugin_active_custom( "woocommerce-sequential-order-numbers/woocommerce-sequential-order-numbers.php") 
+				||  is_plugin_active_custom( "woocommerce-sequential-order-numbers-pro/woocommerce-sequential-order-numbers.php")  ) 				&& is_numeric( getInformation( $this->row, '_order_number' ) ) ) {
 			$this->id_order = getInformation( $this->row, '_order_number' );
 		} else {
 			$this->id_order = $this->row['ID'];
