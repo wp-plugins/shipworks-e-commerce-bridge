@@ -1,7 +1,7 @@
 === Shipworks WordPress by Advanced Creation ===
 Contributors: Olivier Volatier
 Donate link: http://www.advanced-creation.com
-Tags: shipworks, wordpress, ShipWorks bridge, shopp, shopperpress, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge
+Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge
 Requires at least: 3.0.1
 Tested up to: 3.6
 Stable tag: 2.5
@@ -56,7 +56,7 @@ scales, weighing your packages is always fast and accurate.
 
 == Installation ==
 
-1. Upload `ShipWorksBridge` folder to the `/wp-content/plugins/` directory
+1. Upload `shipworks-e-commerce-bridge` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Configure the plugin by going to the `ShipWorks Bridge` menu that appears in your admin menu
 
@@ -71,6 +71,10 @@ contact@advanced-creation.com.
 2. The ShipWorks software with a fiew orders.
 
 == Changelog ==
+
+= 2.5 =
+*Better compatibility with Woocommerce
+*Fixed some bugs
 
 = 2.4 =
 *Compatible with Jigoshop
@@ -98,6 +102,10 @@ contact@advanced-creation.com.
 First version
 
 == Upgrade Notice ==
+
+= 2.5 =
+This new version is now fully compatible with Woocommerce sequential order number.
+A bug for the shipping option on woocommerce has been deleted.
 
 = 2.4 =
 This new version is now fully compatible with Jigoshop.

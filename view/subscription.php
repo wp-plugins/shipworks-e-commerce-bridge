@@ -19,7 +19,7 @@
 		<p>But no payment will be done in the futur, and when the last payed month will be over the plugin will not be working anymore.</p>
 	  </div>
 	  <div class="modal-footer">
-	  	<form name="cancelSubscriptionForm" method="post" action="<?php PLUGIN_PATH_SHIPWORKSWORDPRESS . '../../ShipWorksBridge/view/control/controlSubscription.php'?>">
+	  	<form name="cancelSubscriptionForm" method="post" action="<?php PLUGIN_PATH_SHIPWORKSWORDPRESS . '../../shipworks-e-commerce-bridge/view/control/controlSubscription.php'?>">
 			<input type="submit" class="button-primary" value="Cancel Subscription" name="cancel-subscription">
 		</form>
 		<button class="button-primary" data-dismiss="modal" aria-hidden="true">Close</button>

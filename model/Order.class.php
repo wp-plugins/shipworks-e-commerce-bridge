@@ -9,7 +9,7 @@ class Order
 	protected $id_order;
 	protected $createdDate;
 	protected $modifiedDate;
-	protected $shipoption = "Flat Rate";
+	protected $shipoption;
 	protected $status;
 	protected $firstname;
 	protected $middlename;
@@ -244,10 +244,15 @@ class Order
 	
 	protected function setInfoWoocommerce() {
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php');
-		$this->id_order = $this->row['ID'];
+		if ( is_plugin_active_custom( "woocommerce-sequential-order-numbers/woocommerce-sequential-order-numbers.php" ) 
+				&& is_numeric( getInformation( $this->row, '_order_number' ) ) ) {
+			$this->id_order = getInformation( $this->row, '_order_number' );
+		} else {
+			$this->id_order = $this->row['ID'];
+		}
 		$this->createdDate = gmdate("Y-m-d\TH:i:s\Z", strtotime($this->row['post_date_gmt']));
 		$this->modifiedDate = gmdate("Y-m-d\TH:i:s\Z", strtotime($this->row['post_modified_gmt']));
-		/*$shipoption = $this->row['shipoption'];*/
+		$this->shipoption = getInformation( $this->row, '_shipping_method_title' ) ;
 		$this->status = getStatus( $this->row );
 		$this->firstname =  getInformation( $this->row, '_billing_first_name' );
 		$this->middlename = '';

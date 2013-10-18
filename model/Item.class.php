@@ -96,7 +96,7 @@ class Item
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php' );
 		$this->itemID = $this->row['order_item_id'];
 		$this->productID = getItemInfo( $this->row, '_product_id' );
-		$this->code = '';
+		$this->code = getItemInfo( $this->row, '_product_id' );
 		$this->sku = getProductInfo( $this->productID, '_sku' );
 		$this->name = getProductName( $this->productID );
 		$this->quantity = getItemInfo( $this->row, '_qty' );
