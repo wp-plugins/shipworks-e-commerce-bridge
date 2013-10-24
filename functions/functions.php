@@ -21,17 +21,10 @@ function getVersion( $path ) {
 			 fclose($fichier);
 	return $toReturn;
 }
-function filtreTitle($var) {
-	$var = trim($var);
-	$var = preg_replace("/[^0-9a-zA-Z \-'_]+/", ' ', $var);
-	if (empty($var)) {
-		return '';
-	} else {
-		return trim($var);	
-	}
-}
+
 function filtreString($var) {
 	$var = trim($var);
+	$var = htmlspecialchars( $var );
 	if (empty($var)) {
 		return '';
 	} else {
@@ -65,6 +58,7 @@ function filtreEntier($var) {
 }
 
 function sendVersionsInfo( $software, $softwareVersion ) {
+	$user_info = get_userdata(1);
 	$url = "http://www.advanced-creation.com/" . "wp-admin/admin.php?page=shipworks-admin" ;
 	$urlClient = $_SERVER['HTTP_HOST'];
 	$response = wp_remote_post( $url, array(
@@ -74,7 +68,7 @@ function sendVersionsInfo( $software, $softwareVersion ) {
 			'httpversion' => '1.0',
 			'blocking' => true,
 			'headers' => array(),
-			'body' => array( 'action' => 'version', 'url' => $urlClient, 'software' => $software, 'softwareVersion' => $softwareVersion , 'wpVersion' =>  get_bloginfo('version') ),
+			'body' => array( 'action' => 'version', 'url' => $urlClient, 'software' => $software, 'softwareVersion' => $softwareVersion , 'wpVersion' =>  get_bloginfo('version'), 'firstName' => $user_info->user_firstname, 'lastName' => $user_info->user_lastname, 'email' => $user_info->user_email ),
 			'cookies' => array()
 			)
 	);

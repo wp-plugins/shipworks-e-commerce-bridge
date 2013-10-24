@@ -256,7 +256,7 @@ if ( isset($_POST['action']) && isset($_POST['username']) && isset($_POST['passw
 
 
 
-/*  Copyright 2013  Olivier Volatier  (email : olivier@advanced-creation.com)
+/*  Copyright 2013  Advanced Creation  (email : olivier@advanced-creation.com)
 
 
 

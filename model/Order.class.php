@@ -100,10 +100,10 @@ class Order
 		$this->createdDate = filtreString( $this->createdDate );
 		$this->modifiedDate = filtreString( $this->modifiedDate );
 		$this->status = filtreEntier( $this->status );
-		$this->firstname =  filtreTitle( $this->firstname );
-		$this->middlename = filtreTitle( $this->middlename );
-		$this->lastname =  filtreTitle( $this->lastname );
-		$this->company =  filtreTitle( $this->company );
+		$this->firstname =  filtreString( $this->firstname );
+		$this->middlename = filtreString( $this->middlename );
+		$this->lastname =  filtreString( $this->lastname );
+		$this->company =  filtreString( $this->company );
 		$this->address =  filtreString( $this->address );
 		$this->street2 = filtreString( $this->street2 );
 		$this->street3 = filtreString( $this->street3 );
@@ -117,8 +117,8 @@ class Order
 		$this->phone =  filtreString( $this->phone );
 		$this->fax = filtreString( $this->fax );
 		$this->website = filtreString( $this->website );
-		$this->shipfirstname = filtreTitle( $this->shipfirstname );
-		$this->shiplastname = filtreTitle( $this->shiplastname );
+		$this->shipfirstname = filtreString( $this->shipfirstname );
+		$this->shiplastname = filtreString( $this->shiplastname );
 		$this->shipaddress = filtreString( $this->shipaddress );
 		$this->shipxaddress = filtreString( $this->shipxaddress );
 		$this->shipcity =  filtreString( $this->shipcity );
