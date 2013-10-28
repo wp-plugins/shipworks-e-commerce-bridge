@@ -3,8 +3,8 @@ Contributors: Olivier Volatier
 Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge
 Requires at least: 3.0.1
-Tested up to: 3.6
-Stable tag: 2.5
+Tested up to: 3.6.1
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,9 @@ contact@advanced-creation.com.
 
 == Changelog ==
 
+= 2.5.1 =
+*SKU number on invoices for easier management
+
 = 2.5 =
 *Better compatibility with Woocommerce
 *Fixed some bugs
@@ -102,6 +105,9 @@ contact@advanced-creation.com.
 First version
 
 == Upgrade Notice ==
+
+= 2.5.1 =
+Better support woocommerce invoice items.
 
 = 2.5 =
 This new version is now fully compatible with Woocommerce sequential order number.

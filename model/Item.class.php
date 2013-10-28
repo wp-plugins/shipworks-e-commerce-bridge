@@ -96,7 +96,7 @@ class Item
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php' );
 		$this->itemID = $this->row['order_item_id'];
 		$this->productID = getItemInfo( $this->row, '_product_id' );
-		$this->code = getItemInfo( $this->row, '_product_id' );
+		$this->code = getProductInfo( $this->productID, '_sku' );
 		$this->sku = getProductInfo( $this->productID, '_sku' );
 		$this->name = getProductName( $this->productID );
 		$this->quantity = getItemInfo( $this->row, '_qty' );
@@ -145,7 +145,7 @@ class Item
 	protected function filtre() {
 		$this->itemID = filtreEntier( $this->itemID );
 		$this->productID = filtreFloat( $this->productID );
-		$this->code = filtreFloat( $this->code );
+		$this->code = filtreString( $this->code );
 		$this->sku = filtreString( $this->sku );
 		$this->name = filtreString( $this->name );
 		$this->quantity = filtreEntier( $this->quantity );
