@@ -127,6 +127,16 @@ class StatusManager
 		global $wpdb;
 		$status = $this->status;
 		
+		// Avant de mettre à jour on veut retrouver le bon order_number et pas celui de sequential woocommerce
+		
+		if ( is_plugin_active_custom( "woocommerce-sequential-order-numbers/woocommerce-sequential-order-numbers.php") 
+				||  is_plugin_active_custom( "woocommerce-sequential-order-numbers-pro/woocommerce-sequential-order-numbers.php") ) {
+			$row = $wpdb->get_row(
+					"SELECT * FROM " . $wpdb->prefix . "postmeta WHERE meta_key = '_order_number' and meta_value = " . $this->order, ARRAY_A);
+			$id = $row['post_id'];
+			$this->order = $id;
+		}
+		
 		$table = $wpdb->prefix . "term_taxonomy";
 		$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE term_id = " . $status, ARRAY_A);
 		
