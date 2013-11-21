@@ -109,7 +109,7 @@ class Item
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/wpecommerce/functionsWPeCommerce.php' );
 		$this->itemID = $this->row['order_item_id'];
 		$this->productID = $this->row['prodid'];
-		$this->code = '';
+		$this->code = getSKU( $this->row );
 		$this->sku = getSKU( $this->row );
 		$this->name = $this->row['name'];
 		$this->quantity = $this->row['quantity'];
@@ -121,7 +121,7 @@ class Item
 	protected function setInfoCart66() {
 		$this->itemID = $this->row['id'];
 		$this->productID = $this->row['product_id'];
-		$this->code = '';
+		$this->code = $this->row['id'];
 		$this->sku = $this->row['id'];
 		$this->name = $this->row['description'];
 		$this->quantity = $this->row['quantity'];

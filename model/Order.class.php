@@ -14,7 +14,7 @@ class Order
 	protected $firstname;
 	protected $middlename;
 	protected $lastname;
-	protected $company; 
+	protected $company;
 	protected $address;
 	protected $street2;
 	protected $street3;
@@ -100,6 +100,7 @@ class Order
 		$this->createdDate = filtreString( $this->createdDate );
 		$this->modifiedDate = filtreString( $this->modifiedDate );
 		$this->status = filtreEntier( $this->status );
+		$this->shipoption = filtreString( $this->shipoption );
 		$this->firstname =  filtreString( $this->firstname );
 		$this->middlename = filtreString( $this->middlename );
 		$this->lastname =  filtreString( $this->lastname );
@@ -190,7 +191,7 @@ class Order
 		$this->id_order = $this->row['id'];
 		$this->createdDate = gmdate("Y-m-d\TH:i:s\Z", strtotime($this->row['created']));
 		$this->modifiedDate = gmdate("Y-m-d\TH:i:s\Z", strtotime($this->row['modified']));
-		/*$shipoption = $this->row['shipoption'];*/
+		$this->shipoption = $this->row['shipoption'];
 		$this->status = $this->row['status'];
 		$this->firstname = $this->row['firstname'];
 		$this->middlename = '';
@@ -307,12 +308,12 @@ class Order
 		$this->id_order = $this->row['id'];
 		$this->createdDate = gmdate("Y-m-d\TH:i:s\Z", $this->row['date'] );
 		$this->modifiedDate = gmdate("Y-m-d\TH:i:s\Z", $this->row['date'] );
-		/*$shipoption = $this->row['shipoption'];*/
+		$this->shipoption = $this->row['shipping_option'];
 		$this->status = $this->row['processed'];
 		$this->firstname =  getInformation( $this->row, 2);
 		$this->middlename = '';
 		$this->lastname = getInformation( $this->row, 3 );
-		$this->company = getInformation( $this->row, '_billing_company' );
+		/*$this->company = getInformation( $this->row, '_billing_company' );*/
 		$this->address = getInformation( $this->row, 4 );
 		$this->xaddress = '';
 		$this->street2 = '';
