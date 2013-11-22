@@ -4,7 +4,7 @@ Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge
 Requires at least: 3.0.1
 Tested up to: 3.6.1
-Stable tag: 2.6
+Stable tag: 2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,9 @@ contact@advanced-creation.com.
 
 == Changelog ==
 
+= 2.7 =
+Compatible with Cart66 Pro and Woocommerce Composite Products
+
 = 2.6 =
 *SKU number and Shipping option on invoices for WP eCommerce, Shopp, and Shopperpress.
 
@@ -111,6 +114,9 @@ contact@advanced-creation.com.
 First version
 
 == Upgrade Notice ==
+
+= 2.7 =
+Compatible with Cart66 Pro and Woocommerce Composite Products
 
 = 2.6 =
 This new version the are more informations displayed on ShipWorks invoices ( SKU and Shipping_option ) for the following softwares : WP eCommerce, Shopp,Shopperpress.
