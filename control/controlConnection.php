@@ -25,7 +25,7 @@ $goodCredentials = ( ( $_POST['username'] == $name ) && ( $_POST['password'] == 
 
 // On veut récupérer le logiciel installer et sa version
 
-$sofware = new Software();
+$software = new Software();
 
 // On commence le traitement si l'idification a été faite
 
@@ -38,13 +38,13 @@ if ( $goodCredentials ) {
 		include_once(PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/store.php');
 	}
 	// On continue le traitement si on a un logiciel de e-commerce reconnu
-	else if ( $sofware->isCompatible() ) {
+	else if ( $software->isCompatible() ) {
 		if ( 'getstatuscodes' == $action ) {
-			$statusCodes = new StatusCodes($sofware);
+			$statusCodes = new StatusCodes($software);
 			include_once(PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/statusCode.php');
 		} else if ( 'getcount' == $action ) {
 			// On regarde si le nombre de commande dépasse 30
-			$orderManager = new OrderManager( $sofware, $date );
+			$orderManager = new OrderManager( $software, $date );
 			// Si c'est free ca télécharge tout
 			// Si c'est pas free mais que client a payé ca télécharger tout
 			// Sinon on refuse
@@ -62,15 +62,15 @@ if ( $goodCredentials ) {
 			} else {
 				if ( isset($_POST['start']) ) {
 					$date = htmlspecialchars($_POST['start']);
-					$count = new Count( $sofware, $date );
+					$count = new Count( $software, $date );
 					include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/count.php' );
 				} else {
-					$count = new Count($sofware);
+					$count = new Count($software);
 					include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/count.php' );
 				}
 			}
 		} else if ( 'getorders' == $action ) {
-			$orderManager = new OrderManager( $sofware, $date );
+			$orderManager = new OrderManager( $software, $date );
 			if ( isset($_POST['start']) ) {
 					if ( !$orderManager->isFree() 
 							&& !$orderManager->hasPayed() 
@@ -87,17 +87,17 @@ if ( $goodCredentials ) {
 							include_once(PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/error.php');	
 						} else {
 							$date = htmlspecialchars($_POST['start']);
-							$orders = new Orders( $sofware, $date );
+							$orders = new Orders( $software, $date );
 							include_once(PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/orders.php');
 						}
 			} else {
-				$orders = new Orders($sofware);
+				$orders = new Orders($software);
 				include_once(PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/orders.php');
 			}
 		} else if ( 'updatestatus' == $action ) {
 			$order = htmlspecialchars( $_POST['order'] );
 			$status = htmlspecialchars( $_POST['status'] );
-			$statusManager = new StatusManager(  $sofware, $date, $order, $status );
+			$statusManager = new StatusManager(  $software, $date, $order, $status );
 			if ( $statusManager->getResult() ) {
 				include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/statusSuccess.php' );
 			} else {
@@ -106,7 +106,7 @@ if ( $goodCredentials ) {
 		} else if ( 'updateshipment' == $action ) {
 			$order = htmlspecialchars( $_POST['order'] );
 			$tracking = htmlspecialchars( $_POST['tracking'] );
-			$trackingManager = new TrackingManager(  $sofware, $date, $order, $tracking );
+			$trackingManager = new TrackingManager(  $software, $date, $order, $tracking );
 			if ( $trackingManager->getResult() ) {
 				include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/trackingSuccess.php' );
 			} else {

@@ -56,8 +56,14 @@ class StatusCodes
 								   4 => "Job Dispatched",
 								   5 => "Closed Order",
 								   6 => "Payment Declined");
-			} // Cas Cart66
+			} // Cas Cart66 Lite
 			else if ( 'Cart66 Lite' == $this->software->getSoftware() ) {
+					$this->status = Array( 	
+											1 => "checkout_pending",
+								   		 	2 => "new"
+								   	);
+			}// Cas Cart66 Pro
+			else if ( 'Cart66 Pro' == $this->software->getSoftware() ) {
 					$this->status = Array( 	
 											1 => "checkout_pending",
 								   		 	2 => "new"

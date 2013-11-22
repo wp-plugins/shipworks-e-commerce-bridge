@@ -40,6 +40,15 @@ function getItemInfo( $row, $field ) {
 	return $result['meta_value'];
 }
 
+function isComposed( $row ) {
+	global $wpdb;
+	$field = '_composite_item';
+	$table = $wpdb->prefix . "woocommerce_order_itemmeta";
+	$result = $wpdb->get_row("SELECT * FROM " . $table . " WHERE order_item_id = " . $row['order_item_id'] . " AND meta_key = '" . $field . "'", ARRAY_A);
+	
+	return $result != null ;
+}
+
 function getProductInfo( $id, $field ) {
 	global $wpdb;
 	$table = $wpdb->prefix . "postmeta";

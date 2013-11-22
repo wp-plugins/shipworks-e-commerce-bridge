@@ -33,8 +33,13 @@ class Orders
 			if ( $split[0] >= 3 ) {
 					$this->setOrdersWPeCommerce();
 			}
-		} // Cas Cart66
+		} // Cas Cart66 Lite
 		else if ( 'Cart66 Lite' == $this->software->getSoftware() ) {
+			if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
+					$this->setOrdersCart66();
+			}
+		}// Cas Cart66 Pro
+		else if ( 'Cart66 Pro' == $this->software->getSoftware() ) {
 			if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
 					$this->setOrdersCart66();
 			}

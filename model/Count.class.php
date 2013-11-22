@@ -60,8 +60,18 @@ class Count
 								$this->number++;
 							}
 						}
-			} // Cas Cart66
+			} // Cas Cart66 Lite
 			else if ( 'Cart66 Lite' == $this->software->getSoftware() ) {
+						$orders = $wpdb->get_results(
+						"SELECT * FROM " . $wpdb->prefix . "cart66_orders WHERE ordered_on > '" . $dateInLocal . "' order by ordered_on ASC", 
+						ARRAY_A);
+						foreach ( $orders as $order ) {
+							if ( $order['status'] != 'checkout_pending' ) {
+								$this->number++;
+							}
+						}
+			}// Cas Cart66 Pro
+			else if ( 'Cart66 Pro' == $this->software->getSoftware() ) {
 						$orders = $wpdb->get_results(
 						"SELECT * FROM " . $wpdb->prefix . "cart66_orders WHERE ordered_on > '" . $dateInLocal . "' order by ordered_on ASC", 
 						ARRAY_A);

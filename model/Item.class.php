@@ -49,12 +49,17 @@ class Item
 			if ( $split[0] >= 3 ) {
 					$this->setInfoWPeCommerce();
 			}
-		} // Cas Cart66
+		} // Cas Cart66 Lite
 		else if ( 'Cart66 Lite' == $this->software->getSoftware() ) {
 			if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
 					$this->setInfoCart66();
 			}
-		} // Cas Jigoshop
+		}  // Cas Cart66 Pro
+		else if ( 'Cart66 Pro' == $this->software->getSoftware() ) {
+			if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
+					$this->setInfoCart66();
+			}
+		}// Cas Jigoshop
 		else if ( 'Jigoshop' == $this->software->getSoftware() ) {
 			if ( $split[0] >= 1 ) {
 					$this->setInfoJigoshop();
@@ -100,8 +105,13 @@ class Item
 		$this->sku = getProductInfo( $this->productID, '_sku' );
 		$this->name = getProductName( $this->productID );
 		$this->quantity = getItemInfo( $this->row, '_qty' );
+		// Cas ou on a woocommerce Composite Products
 		$this->price = getItemInfo( $this->row, '_line_total' );
-		$this->unitprice = getProductInfo( $this->productID, '_price' );
+		if ( isComposed( $this->row ) ) {
+			$this->unitprice = 0;
+		} else {
+			$this->unitprice = getProductInfo( $this->productID, '_price' );	
+		}
 		$this->weight = getProductInfo( $this->productID, '_weight' );
 	}
 	
@@ -121,8 +131,8 @@ class Item
 	protected function setInfoCart66() {
 		$this->itemID = $this->row['id'];
 		$this->productID = $this->row['product_id'];
-		$this->code = $this->row['id'];
-		$this->sku = $this->row['id'];
+		$this->code = $this->row['item_number'];
+		$this->sku = $this->row['item_number'];
 		$this->name = $this->row['description'];
 		$this->quantity = $this->row['quantity'];
 		$this->price = '';

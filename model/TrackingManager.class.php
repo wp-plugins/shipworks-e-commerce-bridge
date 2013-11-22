@@ -51,6 +51,10 @@ class TrackingManager
 				if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
 					$this->setInfoCart66();
 				}
+			} else if ( 'Cart66 Pro' == $this->software->getSoftware() ) {
+				if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
+					$this->setInfoCart66();
+				}
 			} 
 		}
 		$this->filtre();

@@ -80,12 +80,17 @@ class Order
 			if ( $split[0] >= 3 ) {
 					$this->setInfoWPeCommerce();
 			}
-		} // Cas Cart66
+		} // Cas Cart66 Lite
 		else if ( 'Cart66 Lite' == $this->software->getSoftware() ) {
 			if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
 					$this->setInfoCart66();
 			}
-		} // Cas Jigoshop
+		} // Cas Cart66 Pro
+		else if ( 'Cart66 Pro' == $this->software->getSoftware() ) {
+			if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
+					$this->setInfoCart66();
+			}
+		}// Cas Jigoshop
 		else if ( 'Jigoshop' == $this->software->getSoftware() ) {
 			if ( $split[0] >= 1 ) {
 					$this->setInfoJigoshop();
@@ -363,7 +368,7 @@ class Order
 		$this->id_order = $this->row['id'];
 		$this->createdDate = gmdate("Y-m-d\TH:i:s\Z", strtotime( $this->row['ordered_on'] ) );
 		$this->modifiedDate = gmdate("Y-m-d\TH:i:s\Z", strtotime( $this->row['ordered_on'] ) );
-		/*$shipoption = $this->row['shipoption'];*/
+		$this->shipoption = $this->row['shipping_method'];
 		$this->status = getStatus( $this->row['status'] );
 		$this->firstname =  $this->row['bill_first_name'];
 		$this->middlename = '';

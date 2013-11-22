@@ -28,7 +28,10 @@ class Software
 		} else if ( is_plugin_active_custom( "cart66-lite/cart66.php" ) ) {
 			$this->software = "Cart66 Lite";
 			$this->setVersion();
-		} else if ( is_plugin_active_custom( "jigoshop/jigoshop.php" ) ) {
+		} else if ( is_plugin_active_custom( "cart66-pro/cart66.php" ) ) {
+			$this->software = "Cart66 Pro";
+			$this->setVersion();
+		}else if ( is_plugin_active_custom( "jigoshop/jigoshop.php" ) ) {
 			$this->software = "Jigoshop";
 			$this->setVersion();
 		}
@@ -98,7 +101,9 @@ class Software
 			 fclose($fichier);
 		} else if ( 'Cart66 Lite' == $this->getSoftware() ) {
 			$this->version = getVersion( "/cart66-lite/cart66.php" );
-		} else if ( 'Jigoshop' == $this->getSoftware() ) {
+		} else if ( 'Cart66 Pro' == $this->getSoftware() ) {
+			$this->version = getVersion( "/cart66-pro/cart66.php" );
+		}else if ( 'Jigoshop' == $this->getSoftware() ) {
 			$this->version = getVersion( "/jigoshop/jigoshop.php" );
 		}
 	}
@@ -123,6 +128,10 @@ class Software
 				$toReturn = true;
 			}
 		} else if ( 'Cart66 Lite' == $this->getSoftware() ) {
+			if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
+				$toReturn = true;
+			}
+		} else if ( 'Cart66 Pro' == $this->getSoftware() ) {
 			if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
 				$toReturn = true;
 			}

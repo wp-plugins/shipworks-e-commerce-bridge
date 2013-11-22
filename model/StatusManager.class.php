@@ -58,12 +58,17 @@ class StatusManager
 				if ( $split[0] >= 3 ) {
 					$this->setInfoWPeCommerce();
 				}
-			} // Cas Cart66
+			} // Cas Cart66 Lite
 			else if ( 'Cart66 Lite' == $this->software->getSoftware() ) {
 				if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
 					$this->setInfoCart66();
 				}
-			} // Cas Jigoshop
+			}  // Cas Cart66 Pro
+			else if ( 'Cart66 Pro' == $this->software->getSoftware() ) {
+				if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
+					$this->setInfoCart66();
+				}
+			}// Cas Jigoshop
 			else if ( 'Jigoshop' == $this->software->getSoftware() ) {
 				if ( $split[0] >= 1 ) {
 					$this->setInfoJigoshop();
