@@ -1,14 +1,14 @@
 === Shipworks WordPress by Advanced Creation ===
 Contributors: Olivier Volatier
 Donate link: http://www.advanced-creation.com
-Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge
+Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge
 Requires at least: 3.0.1
 Tested up to: 3.6.1
 Stable tag: 2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-== Description ==
+== Description =
 
 ShipWorks Bridge is a good plugin to improve your order management on based WordPress E-Commerce
 sites. ShipWorks for Wordpress build a bridge between your E-Commerce sites on Wordpress
@@ -18,17 +18,18 @@ and emails, and update the online status of each order.
 = Compatible E-Commmerce software =
 When you activate the plugin on your site it immediately says if you are running or not a compatible
 E-Commerce template/plugin. Here the list of the compatible products:
-	-Woocommerce ( 2.0++ )
-	-WP eCommerce ( 3.0++ )	
-	-Shopp ( 1.2.2++ )
-	-Shopperpress ( 7.1++ )
-	-Cart66 Lite ( 1.5++ )
-	-Jigoshop ( 1++ )
+
+* Woocommerce ( 2.0++ )
+* WP eCommerce ( 3.0++ )	
+* Shopp ( 1.2.2++ )
+* Shopperpress ( 7.1++ )
+* Cart66 Lite ( 1.5++ )
+* Jigoshop ( 1++ )
 	
 Requires:
-	-WordPress ( 3++ )
-	-ShipWorks ( 3++ )
-	-PHP ( 5++ )
+* WordPress ( 3++ )
+* ShipWorks ( 3++ )
+* PHP ( 5++ )
 
 = Ship faster with integrated shipping tools =
 With the most complete shipping integrations available, your shipments get done faster so you can focus 
