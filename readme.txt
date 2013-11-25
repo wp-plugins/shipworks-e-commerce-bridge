@@ -26,10 +26,11 @@ E-Commerce template/plugin. Here the list of the compatible products:
 * Cart66 Lite ( 1.5++ )
 * Jigoshop ( 1++ )
 	
-Requires:
-* WordPress ( 3++ )
-* ShipWorks ( 3++ )
-* PHP ( 5++ )
+Minimum Requires:
+
+* Wordpress 3.0
+* Shipworks 3.0 (or minimum version you have)
+* PHP 5.0
 
 = Ship faster with integrated shipping tools =
 With the most complete shipping integrations available, your shipments get done faster so you can focus 
