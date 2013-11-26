@@ -8,7 +8,7 @@ Plugin URI: http://www.advanced-creation.com
 
 Description: ShipWorks for Wordpress build a bridge between your E-Commerce sites on Wordpress (such as WooCommerce) and ShipWorks.
 
-Version: 2.7
+Version: 2.7.1
 
 Author: Advanced Creation
 

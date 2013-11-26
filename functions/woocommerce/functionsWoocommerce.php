@@ -49,6 +49,11 @@ function isComposed( $row ) {
 	return $result != null ;
 }
 
+function isWooSeqNumber( $row ) {
+	$result = getInformation( $row , '_order_number' );
+	return $result != null ;
+}
+
 function getProductInfo( $id, $field ) {
 	global $wpdb;
 	$table = $wpdb->prefix . "postmeta";

@@ -138,8 +138,10 @@ class StatusManager
 				||  is_plugin_active_custom( "woocommerce-sequential-order-numbers-pro/woocommerce-sequential-order-numbers.php") ) {
 			$row = $wpdb->get_row(
 					"SELECT * FROM " . $wpdb->prefix . "postmeta WHERE meta_key = '_order_number' and meta_value = " . $this->order, ARRAY_A);
-			$id = $row['post_id'];
-			$this->order = $id;
+			if ( $row != null ) {
+				$id = $row['post_id'];
+				$this->order = $id;
+			}
 		}
 		
 		$table = $wpdb->prefix . "term_taxonomy";
