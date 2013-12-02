@@ -4,7 +4,7 @@ Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge
 Requires at least: 3.0.1
 Tested up to: 3.6.1
-Stable tag: 2.7.1
+Stable tag: 2.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,50 +76,56 @@ contact@advanced-creation.com.
 == Changelog ==
 
 = 2.7 =
-Compatible with Cart66 Pro and Woocommerce Composite Products
+* Jigoshop displays better on the invoice. Shipping option and SKU number displayed.
+
+= 2.7 =
+* Compatible with Cart66 Pro and Woocommerce Composite Products
 
 = 2.6 =
-*SKU number and Shipping option on invoices for WP eCommerce, Shopp, and Shopperpress.
+* SKU number and Shipping option on invoices for WP eCommerce, Shopp, and Shopperpress.
 
 = 2.5.2 =
-*Better compatibility with Woocommerce
+* Better compatibility with Woocommerce
 
 = 2.5.1 =
-*SKU number on invoices for easier management
+* SKU number on invoices for easier management
 
 = 2.5 =
-*Better compatibility with Woocommerce
-*Fixed some bugs
+* Better compatibility with Woocommerce
+* Fixed some bugs
 
 = 2.4 =
-*Compatible with Jigoshop
-*Fixed some bugs
+* Compatible with Jigoshop
+* Fixed some bugs
 
 = 2.3 =
-*Compatible with Cart66 Lite
-*Fixed some bugs
+* Compatible with Cart66 Lite
+* Fixed some bugs
 
 = 2.2 =
-*Compatible with WP e-Commerce
-*Update for Shopp 1.2.9 version
-*Fixed some bugs
+* Compatible with WP e-Commerce
+* Update for Shopp 1.2.9 version
+* Fixed some bugs
 
 = 2.1 =
-*Compatible with Woocommerce
-*Fixed some bugs
+* Compatible with Woocommerce
+* Fixed some bugs
 
 = 2.0 =
-*Totally rebuilt
-*More stable
-*Compatible with shopperpress
+* Totally rebuilt
+* More stable
+* Compatible with shopperpress
 
 = 1.0 =
-First version
+* First version
 
 == Upgrade Notice ==
 
+= 2.7.2 =
+This new version has a better compatibility with Jigoshop.
+
 = 2.7 =
-Compatible with Cart66 Pro and Woocommerce Composite Products
+Compatible with Cart66 Pro and Woocommerce Composite Products.
 
 = 2.6 =
 This new version the are more informations displayed on ShipWorks invoices ( SKU and Shipping_option ) for the following softwares : WP eCommerce, Shopp,Shopperpress.
@@ -150,9 +156,9 @@ Update for the new Shopp 1.2.9 version.
 This new version is now fully compatible with woocommerce.
 
 = 2.0 =
-*Totally rebuilt
-*More stable
-*Compatible with Shopperpress
+* Totally rebuilt
+* More stable
+* Compatible with Shopperpress
 
 = 1.0 =
 Fist version

@@ -421,7 +421,7 @@ class Order
 		$this->id_order = $this->row['ID'];
 		$this->createdDate = gmdate("Y-m-d\TH:i:s\Z", strtotime($this->row['post_date_gmt']));
 		$this->modifiedDate = gmdate("Y-m-d\TH:i:s\Z", strtotime($this->row['post_modified_gmt']));
-		/*$shipoption = $this->row['shipoption'];*/
+		$this->shipoption = getInformation( $this->row, 'shipping_service' );
 		$this->status = getStatus( $this->row );
 		$this->firstname =  getInformation( $this->row, 'billing_first_name' );
 		$this->middlename = '';

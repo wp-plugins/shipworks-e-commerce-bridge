@@ -143,8 +143,8 @@ class Item
 	protected function setInfoJigoshop() {
 		$this->itemID = $this->k;
 		$this->productID = $this->row['id'];
-		$this->code = '';
-		$this->sku = '';
+		$this->code = getProductInfo( $this->row['id'], 'sku' );
+		$this->sku = getProductInfo( $this->row['id'], 'sku' );
 		$this->name = $this->row['name'];
 		$this->quantity = $this->row['qty'];
 		$this->price = '';
