@@ -4,7 +4,7 @@ Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge
 Requires at least: 3.0.1
 Tested up to: 3.6.1
-Stable tag: 2.7.2
+Stable tag: 2.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,6 @@ and emails, and update the online status of each order.
 = Compatible E-Commmerce software =
 When you activate the plugin on your site it immediately says if you are running or not a compatible
 E-Commerce template/plugin. Here the list of the compatible products:
-
 * Woocommerce ( 2.0++ )
 * WP eCommerce ( 3.0++ )	
 * Shopp ( 1.2.2++ )
@@ -28,7 +27,6 @@ E-Commerce template/plugin. Here the list of the compatible products:
 * Jigoshop ( 1++ )
 	
 Minimum Requires:
-
 * Wordpress 3.0
 * Shipworks 3.0 (or minimum version you have)
 * PHP 5.0
@@ -71,11 +69,14 @@ contact@advanced-creation.com.
 == Screenshots ==
 
 1. The Settings Page: enter your store address and the credentials that will be used by ShipWorks.
-2. The ShipWorks software with a fiew orders.
+2. The ShipWorks software with a fiew orders downloaded from the site.
 
 == Changelog ==
 
-= 2.7 =
+= 2.7.3 =
+* Better compatibility with every version of Cart66 Pro.
+
+= 2.7.2 =
 * Jigoshop displays better on the invoice. Shipping option and SKU number displayed.
 
 = 2.7 =
@@ -120,6 +121,9 @@ contact@advanced-creation.com.
 * First version
 
 == Upgrade Notice ==
+
+= 2.7.3 =
+This new version has a better compatibility with Cart66.
 
 = 2.7.2 =
 This new version has a better compatibility with Jigoshop.

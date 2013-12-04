@@ -1,6 +1,12 @@
 <?php // Cette fonction s'occupe de vérifier qu'une variable n'est pas vide et supprimme des espaces au début et à la fin de chaine
 
 function getVersion( $path ) {
+	$array = (array) get_option( 'active_plugins', array() );
+	foreach( $array as $el ) {
+		if( strpos( $el , $path) !== false ) {
+			$path = '/' . $el;
+		}
+	}
 	$fichier = fopen( PLUGINS_PATH . $path ,"r");
 			$trouve = false;
 			// On récupère la version
@@ -91,5 +97,13 @@ function sendVersionsInfo( $software, $softwareVersion ) {
 }
 
 function is_plugin_active_custom( $plugin ) {
-	return in_array( $plugin, (array) get_option( 'active_plugins', array() ) ) ;
+	$array = (array) get_option( 'active_plugins', array() );
+	$roReturn = false;
+	foreach( $array as $el ) {
+		if( strpos( $el , $plugin ) !== false ) {
+			$toReturn = true;
+		}
+	}
+	return $toReturn;
+	/*return in_array( $plugin, (array) get_option( 'active_plugins', array() ) ) ;*/
 }

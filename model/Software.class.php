@@ -28,7 +28,7 @@ class Software
 		} else if ( is_plugin_active_custom( "cart66-lite/cart66.php" ) ) {
 			$this->software = "Cart66 Lite";
 			$this->setVersion();
-		} else if ( is_plugin_active_custom( "cart66-pro/cart66.php" ) ) {
+		} else if ( is_plugin_active_custom( "cart66.php" ) ) {
 			$this->software = "Cart66 Pro";
 			$this->setVersion();
 		}else if ( is_plugin_active_custom( "jigoshop/jigoshop.php" ) ) {
@@ -102,7 +102,7 @@ class Software
 		} else if ( 'Cart66 Lite' == $this->getSoftware() ) {
 			$this->version = getVersion( "/cart66-lite/cart66.php" );
 		} else if ( 'Cart66 Pro' == $this->getSoftware() ) {
-			$this->version = getVersion( "/cart66-pro/cart66.php" );
+				$this->version = getVersion( "cart66.php" );
 		}else if ( 'Jigoshop' == $this->getSoftware() ) {
 			$this->version = getVersion( "/jigoshop/jigoshop.php" );
 		}
