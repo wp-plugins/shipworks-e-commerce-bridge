@@ -1,16 +1,16 @@
-=== Shipworks WordPress by Advanced Creation ===
-Contributors: Olivier Volatier
+=== ShipWorks Connector for WordPress  ===
+Contributors: Advanced Creation
 Donate link: http://www.advanced-creation.com
-Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge
+Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge, connect
 Requires at least: 3.0.1
-Tested up to: 3.6.1
+Tested up to: 3.7.1
 Stable tag: 2.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-ShipWorks Bridge is a good plugin to improve your order management on based WordPress E-Commerce
+ShipWorks Connect is a good plugin to improve your order management on based WordPress E-Commerce
 sites. ShipWorks for Wordpress build a bridge between your E-Commerce sites on Wordpress
 and ShipWorks. It downloads your orders and makes it easy to create shipping labels, manage customers
 and emails, and update the online status of each order.
@@ -18,6 +18,7 @@ and emails, and update the online status of each order.
 = Compatible E-Commmerce software =
 When you activate the plugin on your site it immediately says if you are running or not a compatible
 E-Commerce template/plugin. Here the list of the compatible products:
+
 * Woocommerce ( 2.0++ )
 * WP eCommerce ( 3.0++ )	
 * Shopp ( 1.2.2++ )
@@ -27,6 +28,7 @@ E-Commerce template/plugin. Here the list of the compatible products:
 * Jigoshop ( 1++ )
 	
 Minimum Requires:
+
 * Wordpress 3.0
 * Shipworks 3.0 (or minimum version you have)
 * PHP 5.0
@@ -59,7 +61,7 @@ scales, weighing your packages is always fast and accurate.
 
 1. Upload `shipworks-e-commerce-bridge` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Configure the plugin by going to the `ShipWorks Bridge` menu that appears in your admin menu
+1. Configure the plugin by going to the `ShipWorks Connect` menu that appears in your admin menu
 
 == Frequently Asked Questions ==
 

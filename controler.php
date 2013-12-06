@@ -2,7 +2,7 @@
 
 /*
 
-Plugin Name: ShipWorks Bridge
+Plugin Name: ShipWorks Connector
 
 Plugin URI: http://www.advanced-creation.com 
 
