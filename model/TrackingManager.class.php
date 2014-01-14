@@ -67,12 +67,14 @@ class TrackingManager
 		
 		//checking the identify shipping company
 		$usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
-		//$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
+		$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
 		$fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
 		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
 			$tracking_name = 'fedex';
+		} elseif( preg_match( $ups_pattern, $tracking_number ) ) { //test Fedex
+			$tracking_name = 'ups';
 		}
 		
 		// Cheking if the order is in the database
@@ -82,7 +84,7 @@ class TrackingManager
 			$this->result = false;
 			$this->code = 'ERR004';
 			$this->description = 'The order is not in the Database';
-		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps') {
+		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups') {
 			$this->result = false;
 			$this->code = 'ERR005';
 			$this->description = "Carrier Company didn't find";
@@ -140,12 +142,14 @@ class TrackingManager
 		
 		//checking the identify shipping company
 		$usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
-		//$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
+		$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
 		$fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
 		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
 			$tracking_name = 'fedex';
+		} elseif( preg_match( $ups_pattern, $tracking_number ) ) { //test Ups
+			$tracking_name = 'ups';
 		}
 		
 		// Cheking if the order is in the database
@@ -155,7 +159,7 @@ class TrackingManager
 			$this->result = false;
 			$this->code = 'ERR004';
 			$this->description = 'The order is not in the Database';
-		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps') {
+		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups') {
 			$this->result = false;
 			$this->code = 'ERR005';
 			$this->description = "Carrier Company didn't find";
@@ -182,12 +186,14 @@ class TrackingManager
 		
 		//checking the identify shipping company
 		$usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
-		//$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
+		$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
 		$fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
 		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
 			$tracking_name = 'fedex';
+		} elseif( preg_match( $ups_pattern, $tracking_number ) ) { //test Ups
+			$tracking_name = 'ups';
 		}
 		
 		// Cheking if the order is in the database
@@ -197,7 +203,7 @@ class TrackingManager
 			$this->result = false;
 			$this->code = 'ERR004';
 			$this->description = 'The order is not in the Database';
-		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps') {
+		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups' ) {
 			$this->result = false;
 			$this->code = 'ERR005';
 			$this->description = "Carrier Company didn't find";
