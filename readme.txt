@@ -4,7 +4,7 @@ Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge, connect
 Requires at least: 3.0.1
 Tested up to: 3.8
-Stable tag: 2.7.4
+Stable tag: 2.7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,9 @@ contact@advanced-creation.com.
 
 == Changelog ==
 
+= 2.7.5 =
+* Better communication with ShipWorks on tracking numbers.
+
 = 2.7.4 =
 * Accept UPS tracking number.
 
@@ -126,6 +129,9 @@ contact@advanced-creation.com.
 * First version
 
 == Upgrade Notice ==
+
+= 2.7.5 =
+A fiew bugs have been fixed on the communication with ShipWorks for tracking numbers.
 
 = 2.7.4 =
 Now accept UPS tracking numbers.

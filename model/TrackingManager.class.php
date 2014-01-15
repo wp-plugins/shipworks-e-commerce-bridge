@@ -111,7 +111,7 @@ class TrackingManager
 								'name' => 'shipped'
 						 )
 				);
-				if ( !$this->result ) {
+				if ( $this->result === false ) {
 					$this->code = 'ERR009';
 					$this->description = "The tracking number coudn't be update in the database";
 				}
@@ -127,7 +127,7 @@ class TrackingManager
 								'modified' => $dateInLocal
 							)
 						);
-				if ( !$this->result ) {
+				if ( $this->result === false ) {
 					$this->code = 'ERR010';
 					$this->description = "The tracking number coudn't be insert in the database";
 				}
@@ -171,7 +171,7 @@ class TrackingManager
 						array( 	'id' => $this->order
 						 )
 			);
-			if ( !$this->result ) {
+			if ( $this->result === false ) {
 				$this->code = 'ERR010';
 				$this->description = "The tracking number coudn't be insert in the database";
 			}
@@ -210,14 +210,14 @@ class TrackingManager
 		} else {
 			$this->result = $wpdb->update( $table, 
 						array( 
-								'tracking_number' => $tracking_number,
+								'tracking_number' => $tracking_number . '' . 1,
 							), 
 						array( 	'id' => $this->order
 						 )
 			);
-			if ( !$this->result ) {
+			if ( $this->result === false ) {
 				$this->code = 'ERR010';
-				$this->description = "The tracking number coudn't be insert in the database";
+				$this->description = "The tracking number coudn't be insert in the database.";
 			}
 		}
 		
