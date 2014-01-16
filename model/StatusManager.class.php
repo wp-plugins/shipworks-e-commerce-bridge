@@ -106,7 +106,7 @@ class StatusManager
 					), 
 				array( 'autoid' => $this->order )
 		);
-		if ( !$this->result ) {
+		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		}
@@ -122,7 +122,7 @@ class StatusManager
 					), 
 				array( 'id' => $this->order )
 		);
-		if ( !$this->result ) {
+		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		}
@@ -154,7 +154,7 @@ class StatusManager
 					), 
 				array( 'object_id' => $this->order )
 		);
-		if ( !$this->result ) {
+		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		}
@@ -171,7 +171,7 @@ class StatusManager
 					), 
 				array( 'id' => $this->order )
 		);
-		if ( !$this->result ) {
+		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		}
@@ -180,8 +180,25 @@ class StatusManager
 	protected function setInfoCart66() {
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/cart66/functionsCart66.php');
 		global $wpdb;
-		$status = getStatusName( $this->status );
-		
+		$table = $wpdb->prefix . "cart66_cart_settings";
+		$rows = $wpdb->get_results("SELECT * FROM " . $table, ARRAY_A);
+		foreach( $rows as $line ) {
+			if( $line['key'] == 'status_options' ) {
+				$val = $line['value'];
+			}
+		}
+		$status = preg_split("/,/", $val);
+		if( $val != null ) {
+			$tab = Array();
+			$i = 1;
+			foreach( $status as $stat ) {
+				$tab[$i] = trim( $stat );
+				$i++;
+			}
+			$status = $tab[$this->status];
+		} else {
+			$status = getStatusName( $this->status );
+		}
 		$table = $wpdb->prefix . "cart66_orders";
 		$this->result = $wpdb->update( $table, 
 				array( 
@@ -189,7 +206,7 @@ class StatusManager
 					), 
 				array( 'id' => $this->order )
 		);
-		if ( !$this->result ) {
+		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		}
@@ -209,7 +226,7 @@ class StatusManager
 					), 
 				array( 'object_id' => $this->order )
 		);
-		if ( !$this->result ) {
+		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		}

@@ -105,8 +105,10 @@ if ( $goodCredentials ) {
 			}
 		} else if ( 'updateshipment' == $action ) {
 			$order = htmlspecialchars( $_POST['order'] );
+			$date = htmlspecialchars( $_POST['shippingdate'] );
+			$carrier = htmlspecialchars( $_POST['carrier'] );
 			$tracking = htmlspecialchars( $_POST['tracking'] );
-			$trackingManager = new TrackingManager(  $software, $date, $order, $tracking );
+			$trackingManager = new TrackingManager(  $software, $date,  $carrier, $order, $tracking );
 			if ( $trackingManager->getResult() ) {
 				include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/trackingSuccess.php' );
 			} else {

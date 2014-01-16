@@ -3,14 +3,17 @@ class TrackingManager
 {
 	protected $software;
 	protected $date;
+	protected $carrier;
 	protected $order;
 	protected $tracking;
 	protected $result;
 	protected $code;
 	protected $description;
 
-	public function __construct( $software, $date, $order = '', $tracking = '') {
+	public function __construct( $software, $date, $carrier, $order = '', $tracking = '') {
 		$this->software = $software;
+		$this->date = $date;
+		$this->carrier = $carrier;
 		$this->order = $order;
 		$this->tracking = $tracking;
         $this->setInformations();
@@ -54,6 +57,10 @@ class TrackingManager
 			} else if ( 'Cart66 Pro' == $this->software->getSoftware() ) {
 				if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 5 ) ) {
 					$this->setInfoCart66();
+				}
+			} else if ( 'Woocommerce' == $this->software->getSoftware() ) {
+				if ( $split[0] >= 2 ) {
+					$this->setInfoWoocommerce();
 				}
 			} 
 		}
@@ -220,7 +227,65 @@ class TrackingManager
 				$this->description = "The tracking number coudn't be insert in the database.";
 			}
 		}
+	}
+	
+	protected function setInfoWoocommerce() {
+		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php');
+		$time = strtotime($this->date.' UTC');
+		$this->date = date("y-m-d", $time);
+		global $wpdb;
+		$table = $wpdb->prefix . "posts";
+		$tracking_number = $this->tracking;
 		
+		//checking the identify shipping company
+		$usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
+		$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
+		$fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
+		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
+			$tracking_name = 'usps';
+		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
+			$tracking_name = 'fedex';
+		} elseif( preg_match( $ups_pattern, $tracking_number ) ) { //test Ups
+			$tracking_name = 'ups';
+		}
+		
+		// Avant de mettre à jour on veut retrouver le bon order_number et pas celui de sequential woocommerce
+		
+		if ( is_plugin_active_custom( "woocommerce-sequential-order-numbers/woocommerce-sequential-order-numbers.php") 
+				||  is_plugin_active_custom( "woocommerce-sequential-order-numbers-pro/woocommerce-sequential-order-numbers.php") ) {
+			$row = $wpdb->get_row(
+					"SELECT * FROM " . $wpdb->prefix . "postmeta WHERE meta_key = '_order_number' and meta_value = " . $this->order, ARRAY_A);
+			if ( $row == null ) {
+				$this->result = false;
+				$this->code = 'ERR004';
+				$this->description = 'The order is not in the Database';
+			} else {
+				$id = $row['post_id'];
+				$this->order = $id;
+			}
+		}
+		
+		// Cheking if the order is in the database
+
+		$row= $wpdb->get_row( "SELECT * FROM " . $table . " WHERE id = " . $this->order, ARRAY_A);
+		if ( !$row ) {
+			$this->result = false;
+			$this->code = 'ERR004';
+			$this->description = 'The order is not in the Database';
+		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups' ) {
+			$this->result = false;
+			$this->code = 'ERR005';
+			$this->description = "Carrier Company didn't find";
+		} else {
+			
+			$note = "Your order was shipped on " . $this->date . " via " . $this->carrier . ". Tracking number is " . $this->tracking . ".";
+			$this->result = add_customer_note( $note, $this->order );
+			
+			if ( $id == 0 ) {
+				$this->code = 'ERR010';
+				$this->description = "The tracking number coudn't be insert in the database.";
+			}
+		}
 	}
 	
 	protected function filtre() {

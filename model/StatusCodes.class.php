@@ -58,16 +58,53 @@ class StatusCodes
 								   6 => "Payment Declined");
 			} // Cas Cart66 Lite
 			else if ( 'Cart66 Lite' == $this->software->getSoftware() ) {
-					$this->status = Array( 	
+					$table = $wpdb->prefix . "cart66_cart_settings";
+					$rows = $wpdb->get_results("SELECT * FROM " . $table, ARRAY_A);
+					foreach( $rows as $line ) {
+						if( $line['key'] == 'status_options' ) {
+							$val = $line['value'];
+						}
+					}
+					$status = preg_split("/,/", $val);
+					if( $val != null ) {
+						$tab = Array();
+						$i = 1;
+						foreach( $status as $stat ) {
+							$tab[$i] = trim( $stat );
+							$i++;
+						}
+						$this->status = $tab;
+					} else {
+						$this->status = Array( 	
 											1 => "checkout_pending",
 								   		 	2 => "new"
 								   	);
+					}
 			}// Cas Cart66 Pro
 			else if ( 'Cart66 Pro' == $this->software->getSoftware() ) {
-					$this->status = Array( 	
+					$table = $wpdb->prefix . "cart66_cart_settings";
+					$rows = $wpdb->get_results("SELECT * FROM " . $table, ARRAY_A);
+					foreach( $rows as $line ) {
+						if( $line['key'] == 'status_options' ) {
+							$val = $line['value'];
+						}
+					}
+					$status = preg_split("/,/", $val);
+					if( $val != null ) {
+						$tab = Array();
+						$i = 1;
+						foreach( $status as $stat ) {
+							$tab[$i] = trim( $stat );
+							$i++;
+						}
+						$this->status = $tab;
+					} else {
+						$this->status = Array( 	
 											1 => "checkout_pending",
 								   		 	2 => "new"
 								   	);
+					}
+					
 			}// Cas Jigoshop
 			else if ( 'Jigoshop' == $this->software->getSoftware() ) {
 					$table = $wpdb->prefix . "term_taxonomy";
