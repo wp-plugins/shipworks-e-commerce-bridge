@@ -101,18 +101,27 @@ class Item
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php' );
 		$this->itemID = $this->row['order_item_id'];
 		$this->productID = getItemInfo( $this->row, '_product_id' );
-		$this->code = getProductInfo( $this->productID, '_sku' );
-		$this->sku = getProductInfo( $this->productID, '_sku' );
-		$this->name = getProductName( $this->productID );
+		if ( null == getItemInfo( $this->row, '_variation_id' ) ) {
+			// Dans ce cas le variation Id vaut l'id du produit ce qui est bon
+			$variationId = getItemInfo( $this->row, '_product_id' );
+		} else {
+			// Dans ce cas l'id est celui de la variation qui va permettre d'aller cherche le sku et le prix
+			$variationId = getItemInfo( $this->row, '_variation_id' );	
+		}
+		// On veut dans tous les cas enregistrer l'id du produit original pour avoir le bon nom
+		$productId = getItemInfo( $this->row, '_product_id' );
+		$this->code = getProductInfo( $variationId, '_sku' );
+		$this->sku = getProductInfo( $variationId, '_sku' );
+		$this->name = getProductName( $productId );
 		$this->quantity = getItemInfo( $this->row, '_qty' );
 		// Cas ou on a woocommerce Composite Products
 		$this->price = getItemInfo( $this->row, '_line_total' );
 		if ( isComposed( $this->row ) ) {
 			$this->unitprice = 0;
 		} else {
-			$this->unitprice = getProductInfo( $this->productID, '_price' );	
+			$this->unitprice = getProductInfo( $variationId, '_price' );	
 		}
-		$this->weight = getProductInfo( $this->productID, '_weight' );
+		$this->weight = getProductInfo( $variationId, '_weight' );
 	}
 	
 	protected function setInfoWPeCommerce() {
