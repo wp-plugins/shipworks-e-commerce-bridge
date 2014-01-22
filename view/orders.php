@@ -70,6 +70,27 @@
 					<Image>0</Image>
 					<ThumbnailImage>0</ThumbnailImage>
 					<Weight><?php echo $item->getWeight(); ?></Weight>
+					<?php if( $item->getAttributes() != null ) { ?>
+					<Attributes>
+					<?php		foreach( $item->getAttributes() as $i => $attribute ) { ?>
+						<Attribute>
+							<AttributeID>
+							<?php echo $i; ?>
+							</AttributeID>
+							<Name>
+							<?php echo $attribute->getName(); ?>
+							</Name>
+							<Value>
+							<?php echo $attribute->getValue(); ?>
+							</Value>
+							<Price>
+							<?php echo $attribute->getPrice(); ?>
+							</Price>
+						</Attribute>
+					
+					<?php } ?>
+					</Attributes>
+					<?php } ?>
 				</Item>
 			<?php } ?>
 			</Items>

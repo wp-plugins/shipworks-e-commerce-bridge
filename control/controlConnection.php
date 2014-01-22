@@ -8,6 +8,7 @@ include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'model/Count.class.php' ) ;
 include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'model/Order.class.php' ) ;
 include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'model/Orders.class.php' ) ;
 include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'model/Item.class.php' ) ;
+include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'model/Attribute.class.php' ) ;
 include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'model/StatusManager.class.php' ) ;
 include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'model/OrderManager.class.php' ) ;
 include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'model/TrackingManager.class.php' ) ;

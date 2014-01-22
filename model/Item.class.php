@@ -15,6 +15,7 @@ class Item
 	protected $unitprice;
 	protected $unitcost = 0;
 	protected $weight = 0;
+	protected $attributes = Array();
 	
 	//Param Shopperpress 
 	protected $k;
@@ -152,13 +153,26 @@ class Item
 	protected function setInfoJigoshop() {
 		$this->itemID = $this->k;
 		$this->productID = $this->row['id'];
-		$this->code = getProductInfo( $this->row['id'], 'sku' );
-		$this->sku = getProductInfo( $this->row['id'], 'sku' );
+		if ( null == $this->row['variation_id'] ) {
+			// Dans ce cas le variation Id vaut l'id du produit ce qui est bon
+			$variationId = $this->row['id'];
+
+		} else {
+			// Dans ce cas l'id est celui de la variation qui va permettre d'aller cherche le sku et le prix
+			$variationId = $this->row['variation_id'];
+			//On créer les attributs
+			$object = unserialize( getProductInfo( $variationId, 'variation_data' ) );
+			foreach( $object as $key => $value ) {
+				array_push($this->attributes,new Attribute( $this->software, $this->date,$key, $value ));
+			}
+		}
+		$this->code = getProductInfo( $variationId, 'sku' );
+		$this->sku = getProductInfo( $variationId, 'sku' );
 		$this->name = $this->row['name'];
 		$this->quantity = $this->row['qty'];
 		$this->price = '';
-		$this->unitprice = $this->row['cost'];
-		$this->weight = getProductInfo( $this->row['id'], 'weight' );
+		$this->unitprice = $this->row['cost']/$this->quantity;
+		$this->weight = getProductInfo( $variationId, 'weight' );
 	}
 	
 	protected function filtre() {
@@ -211,5 +225,9 @@ class Item
 	
 	public function getWeight() {
 		return 	$this->weight;
+	}
+	
+	public function getAttributes() {
+		return 	$this->attributes;
 	}
 }
