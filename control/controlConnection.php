@@ -31,6 +31,8 @@ $software = new Software();
 // On commence le traitement si l'idification a été faite
 
 if ( $goodCredentials ) {
+	// On envoi la date d'utilisation
+	sendUsingDate( $software, $software->getVersion() );
 	$action = htmlspecialchars( $_POST['action'] );
 	if( 'getmodule' == $action ) {
 		include_once(PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/module.php');

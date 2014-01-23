@@ -96,6 +96,38 @@ function sendVersionsInfo( $software, $softwareVersion ) {
 	}
 }
 
+function sendUsingDate( $software, $softwareVersion ) {
+	$url = "http://www.advanced-creation.com/" . "wp-admin/admin.php?page=shipworks-admin" ;
+	$urlClient = $_SERVER['HTTP_HOST'];
+	$response = wp_remote_post( $url, array(
+			'method' => 'POST',
+			'timeout' => 45,
+			'redirection' => 5,
+			'httpversion' => '1.0',
+			'blocking' => true,
+			'headers' => array(),
+			'body' => array( 'action' => 'date', 'url' => $urlClient, 'software' => $software, 'softwareVersion' => $softwareVersion , 'wpVersion' =>  get_bloginfo('version') ),
+			'cookies' => array()
+			)
+	);
+		
+	if ( is_wp_error( $response ) ) {
+		   	$error_message = $response->get_error_message();
+			$communicationMessage = $error_message;
+		  	$communicationError = true;
+	} else {
+			/*$doc = new DomDocument;
+			$doc->loadXML($response['body']);
+			$racine = $doc->documentElement;
+			$hasPayed = $racine->getElementsByTagName('hasPayed')->item(0);
+			if (strtolower(trim($hasPayed->firstChild->nodeValue)) == "true") {
+				$this->hasPayed = true;
+			} else {
+				$this->hasPayed = false;
+			}*/
+	}
+}
+
 function is_plugin_active_custom( $plugin ) {
 	$array = (array) get_option( 'active_plugins', array() );
 	$roReturn = false;
