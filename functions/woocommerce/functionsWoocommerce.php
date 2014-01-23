@@ -96,3 +96,90 @@ function add_customer_note( $note, $id ) {
 
 		return $comment_id;	
 }
+
+/**
+ * 
+ * Normalise dimensions, unify to cm then convert to wanted unit value
+ * $unit: 'inch', 'm', 'cm', 'm'
+ * Usage: wooDimNormal(55, 'inch');
+ * 
+ */
+function wooDimNormal($dim, $unit) {
+ 
+	$wooDimUnit = strtolower($current_unit = get_option('woocommerce_dimension_unit'));
+	$unit = strtolower($unit);
+ 
+	if ($wooDimUnit !== $unit) {
+		//Unify all units to cm first
+		switch ($wooDimUnit) {
+			case 'inch':
+				$dim *= 2.54;
+				break;
+			case 'm':
+				$dim *= 100;
+				break;
+			case 'mm':
+				$dim *= 0.1;
+				break;
+		}
+ 
+		//Output desired unit
+		switch ($unit) {
+			case 'inch':
+				$dim *= 0.3937;
+				break;
+			case 'm':
+				$dim *= 0.01;
+				break;
+			case 'mm':
+				$dim *= 10;
+				break;
+		}
+	}
+	return $dim;
+}
+ 
+/**
+ * 
+ * Normalise weight, unify to kg then convert to wanted to unit
+ * $unit: 'g', 'kg', 'lbs', 'oz'
+ * Useage: wooWeightNormal(55,'lbs');
+ * 
+ */
+function wooWeightNormal($weight, $unit) {
+ 
+	$wooWeightUnit = strtolower($current_unit = get_option('woocommerce_weight_unit'));
+	$unit = strtolower($unit);
+ 
+	if ($wooWeightUnit !== $unit) {
+		//Unify all units to kg first
+		switch ($wooWeightUnit) {
+			case 'g':
+				$weight *= 0.001;
+				break;
+			case 'lbs':
+				$weight *= 0.4535;
+				break;
+			case 'oz':
+                $weight *= 0.0283;
+            break;
+
+		}
+ 
+		//Output desired unit
+		switch ($unit) {
+			case 'g':
+				$weight *= 1000;
+				break;
+			case 'lbs':
+				$weight *= 2.204;
+				break;
+			case 'oz':
+                $weight *= 35.274;
+            break;
+
+		}
+	}
+	return $weight;
+}
+

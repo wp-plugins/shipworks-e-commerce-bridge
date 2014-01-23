@@ -4,7 +4,7 @@ Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge, connect
 Requires at least: 3.0.1
 Tested up to: 3.8
-Stable tag: 2.9.1
+Stable tag: 2.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,10 @@ contact@advanced-creation.com.
 
 == Changelog ==
 
+= 2.9.2 =
+This new version supports variable products in Woocommerce including attributes.
+It also converts the weight in lbs for ShipWorks on Woocommerce. 
+
 = 2.9.1 =
 This new version supports variable products in Jigoshop, and some issues were fixed.
 
@@ -139,6 +143,10 @@ This new version supports variable products in Woocommerce.
 * First version
 
 == Upgrade Notice ==
+
+= 2.9.2 =
+This new version supports variable products in Woocommerce including attributes.
+It also converts the weight in lbs for ShipWorks on Woocommerce. 
 
 = 2.9.1 =
 This new version supports variable products in Jigoshop, and some issues were fixed.

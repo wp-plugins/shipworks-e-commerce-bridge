@@ -43,10 +43,10 @@ class Count
 						$orders = $wpdb->get_results(
 						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_date_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_date_gmt ASC", ARRAY_A
 						);
-						foreach ( $orders as $order ) {
+						foreach ( $orders as $order ) { 
 							if( getStatusName( $order ) == 'on-hold' 
 									|| getStatusName( $order ) == 'processing' 
-											|| getStatusName( $order ) == 'completed' ) {
+										|| getStatusName( $order ) == 'completed' ) {
 								$this->number++;
 							}
 						}

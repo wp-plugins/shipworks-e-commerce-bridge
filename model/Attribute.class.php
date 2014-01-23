@@ -14,10 +14,9 @@ class Attribute
 		$this->software = $software;
 		$this->date = $date;
 		$this->row = $row;
-		$this->name = ucfirst( substr( $key, 4, strlen( $key )-1 ) );
+		$this->name = $key;
 		$this->value = $value;
-       	// Pour l'instant on s'en fou de la version
-		// $this->setInformations();
+		$this->setInformations();
 		// On filtre les champs
 		$this->filtre();
     }
@@ -76,12 +75,13 @@ class Attribute
 	
 	protected function setInfoWoocommerce() {
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php' );
-		
+		$this->name = ucfirst( $this->name );
+		$this->value = ucfirst( $this->value );
 	}
 	
 	protected function setInfoWPeCommerce() {
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/wpecommerce/functionsWPeCommerce.php' );
-		
+			
 	}
 	
 	protected function setInfoCart66() {
@@ -89,7 +89,8 @@ class Attribute
 	}
 	
 	protected function setInfoJigoshop() {
-		
+		$this->name = ucfirst( substr( $this->name, 4, strlen( $this->name ) - 1 ) );
+		$this->value = ucfirst( $this->value );
 	}
 	
 	protected function filtre() {

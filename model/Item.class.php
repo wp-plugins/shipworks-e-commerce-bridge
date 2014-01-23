@@ -15,6 +15,8 @@ class Item
 	protected $unitprice;
 	protected $unitcost = 0;
 	protected $weight = 0;
+	protected $image;
+	protected $imageThumbnail;
 	protected $attributes = Array();
 	
 	//Param Shopperpress 
@@ -109,6 +111,15 @@ class Item
 			// Dans ce cas l'id est celui de la variation qui va permettre d'aller cherche le sku et le prix
 			$variationId = getItemInfo( $this->row, '_variation_id' );	
 		}
+		// On ajoute les attributs
+		global $wpdb;
+		$table = $wpdb->prefix . "woocommerce_order_itemmeta";
+		$results = $wpdb->get_results("SELECT * FROM " . $table . " WHERE order_item_id = " . $this->row['order_item_id'] , ARRAY_A);
+		foreach( $results as $row ) {
+			if ( substr( $row['meta_key'], 0, 1 ) != "_" ) {
+				array_push($this->attributes,new Attribute( $this->software, $this->date, $row['meta_key'], $row['meta_value']));
+			}
+		}
 		// On veut dans tous les cas enregistrer l'id du produit original pour avoir le bon nom
 		$productId = getItemInfo( $this->row, '_product_id' );
 		$this->code = getProductInfo( $variationId, '_sku' );
@@ -122,7 +133,20 @@ class Item
 		} else {
 			$this->unitprice = getProductInfo( $variationId, '_price' );	
 		}
-		$this->weight = getProductInfo( $variationId, '_weight' );
+		$this->weight = wooWeightNormal( getProductInfo( $variationId, '_weight' ), 'lbs');
+		// Les images
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $variationId ), 'Single Thumbs' );
+		$imageThumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $variationId ), 'Product Thumbs' );
+		if( $image[0] == null ) {
+			// Cas ou on a pas d'image pour le variation product
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $this->productID ), 'Single Thumbs' );
+		}
+		if( $imageThumbnail[0] == null ) {
+			// Cas ou on a pas d'image pour le variation product
+			$imageThumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $this->productID ), 'Product Thumbs' );
+		}
+		$this->image = $image[0];
+		$this->imageThumbnail = $imageThumbnail[0];
 	}
 	
 	protected function setInfoWPeCommerce() {
@@ -185,6 +209,8 @@ class Item
 		$this->price = filtreFloat( $this->price );
 		$this->unitprice = filtreFloat( $this->unitprice );
 		$this->weight = filtreFloat( $this->weight );
+		$this->image = filtreString( $this->image );
+		$this->imageThumbnail = filtreString( $this->imageThumbnail );
 	}
 	
 	public function getItemID() {
@@ -229,5 +255,13 @@ class Item
 	
 	public function getAttributes() {
 		return 	$this->attributes;
+	}
+	
+	public function getImage() {
+		return 	$this->image;
+	}
+	
+	public function getImageThumbnail() {
+		return 	$this->imageThumbnail;
 	}
 }

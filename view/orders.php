@@ -67,8 +67,8 @@
 					<Quantity><?php echo $item->getQuantity(); ?></Quantity>
 					<UnitPrice><?php echo $item->getUnitPrice(); ?></UnitPrice>
 					<UnitCost><?php echo $item->getUnitCost(); ?></UnitCost>
-					<Image>0</Image>
-					<ThumbnailImage>0</ThumbnailImage>
+					<Image><?php echo $item->getImage(); ?></Image>
+					<ThumbnailImage><?php echo $item->getImageThumbnail(); ?></ThumbnailImage>
 					<Weight><?php echo $item->getWeight(); ?></Weight>
 					<?php if( $item->getAttributes() != null ) { ?>
 					<Attributes>
