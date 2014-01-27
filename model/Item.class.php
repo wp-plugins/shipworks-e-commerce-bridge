@@ -208,6 +208,7 @@ class Item
 		$this->quantity = filtreEntier( $this->quantity );
 		$this->price = filtreFloat( $this->price );
 		$this->unitprice = filtreFloat( $this->unitprice );
+		$this->unitcost = filtreFloat( $this->unitcost );
 		$this->weight = filtreFloat( $this->weight );
 		$this->image = filtreString( $this->image );
 		$this->imageThumbnail = filtreString( $this->imageThumbnail );

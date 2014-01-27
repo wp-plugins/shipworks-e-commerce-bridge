@@ -3,8 +3,9 @@
 	<StatusCodes>
 	<?php $status = $statusCodes->getStatus(); ?>
 		<?php foreach ($status as $i => $statu ) { ?>
-		<StatusCode><Code><?php echo $i ?></Code>
-			<Name><?php echo $status[$i] ?></Name>
+		<StatusCode>
+			<Code><?php echo $i ?></Code>
+			<Name><?php echo $status[$i]; ?></Name>
 		</StatusCode>
 		<?php } ?>
 	</StatusCodes>

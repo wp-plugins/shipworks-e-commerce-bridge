@@ -8,10 +8,17 @@ class StatusCodes
 	public function __construct($software) {
 		$this->software = $software;
         $this->setStatus();
+		$this->filtre();
     }
 	
 	public function getStatus() {
 		return $this->status;	
+	}
+	
+	protected function filtre() {
+		foreach( $this->status as $key => $el ) {
+			$this->status[$key] = filtreString( $el );
+		}
 	}
 	
 	protected function setStatus() {

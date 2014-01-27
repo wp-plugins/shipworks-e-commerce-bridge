@@ -106,6 +106,12 @@ class Software
 		}else if ( 'Jigoshop' == $this->getSoftware() ) {
 			$this->version = getVersion( "/jigoshop/jigoshop.php" );
 		}
+		$this->filtre();
+	}
+	
+	protected function filtre() {
+		$this->software = filtreString( $this->software );
+		$this->version = filtreString( $this->version );	
 	}
 	
 	public function isCompatible() {

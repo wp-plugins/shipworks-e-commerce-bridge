@@ -126,6 +126,7 @@ class Order
 		$this->shipfirstname = filtreString( $this->shipfirstname );
 		$this->shiplastname = filtreString( $this->shiplastname );
 		$this->shipaddress = filtreString( $this->shipaddress );
+		$this->shipstreet2 = filtreString( $this->shipstreet2 );
 		$this->shipxaddress = filtreString( $this->shipxaddress );
 		$this->shipcity =  filtreString( $this->shipcity );
 		$this->shipstate =  filtreString( $this->shipstate );
