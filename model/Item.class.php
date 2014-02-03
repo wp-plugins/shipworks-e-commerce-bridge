@@ -133,7 +133,12 @@ class Item
 		} else {
 			$this->unitprice = getProductInfo( $variationId, '_price' );	
 		}
-		$this->weight = wooWeightNormal( getProductInfo( $variationId, '_weight' ), 'lbs');
+		// Si le poid du variation vaut 0 on prend celui du parent
+		if ( 0 != getProductInfo( $variationId, '_weight' ) ) {
+			$this->weight = wooWeightNormal( getProductInfo( $variationId, '_weight' ), 'lbs');
+		} else {
+			$this->weight = wooWeightNormal( getProductInfo( $productId, '_weight' ), 'lbs');
+		}
 		// Les images
 		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $variationId ), 'Single Thumbs' );
 		$imageThumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $variationId ), 'Product Thumbs' );
