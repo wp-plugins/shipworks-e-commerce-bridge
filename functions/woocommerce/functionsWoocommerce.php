@@ -32,6 +32,15 @@ function getStatusName( $row ) {
 	return $results['slug'];
 }
 
+function getAttributeValue( $slug ) {
+	global $wpdb;
+	
+	$table = $wpdb->prefix . "terms";
+	$results = $wpdb->get_row("SELECT * FROM " . $table . " WHERE slug = '" . $slug . "'", ARRAY_A);
+	
+	return $results['name'];
+}
+
 function getItemInfo( $row, $field ) {
 	global $wpdb;
 	$table = $wpdb->prefix . "woocommerce_order_itemmeta";

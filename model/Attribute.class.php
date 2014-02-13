@@ -78,6 +78,7 @@ class Attribute
 		// Pour les attributs qu'on rentre à partir de Products -> attributes, quand le slug est custom un préfix pa_ est ajouté devant le nom
 		if( strlen( $this->name ) > 3 && substr( $this->name, 0, 3) == 'pa_' ) {
 			$this->name = substr( $this->name, 3, strlen( $this->name ) - 1 );
+			$this->value = ucfirst( getAttributeValue( $this->value ) );
 		}
 		$this->name = ucfirst( $this->name );
 		$this->value = ucfirst( $this->value );

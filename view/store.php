@@ -12,6 +12,6 @@
 		<PostalCode><?php echo $user->getZip(); ?></PostalCode>
 		<Country><?php echo $user->getCountry(); ?></Country>
 		<Phone><?php echo $user->getPhone(); ?></Phone>
-		<Website>www.advanced-creation.com</Website>
+		<Website><?php echo get_home_url(); ?></Website>
 	</Store>
 </ShipWorks>
