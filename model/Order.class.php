@@ -259,7 +259,13 @@ class Order
 		}
 		$this->createdDate = gmdate("Y-m-d\TH:i:s\Z", strtotime($this->row['post_date_gmt']));
 		$this->modifiedDate = gmdate("Y-m-d\TH:i:s\Z", strtotime($this->row['post_modified_gmt']));
+		$split = explode( '.' , $this->software->getVersion() );
 		$this->shipoption = getInformation( $this->row, '_shipping_method_title' ) ;
+		if ( $split[0] >= 2 && $split[1] >= 1 && $split[2] >= 2 ) {
+			if ( null != getShippingInfo( $this->row ) ) {
+				$this->shipoption = getShippingInfo( $this->row ) ;
+			}
+		}
 		$this->status = getStatus( $this->row );
 		$this->firstname =  getInformation( $this->row, '_billing_first_name' );
 		$this->middlename = '';

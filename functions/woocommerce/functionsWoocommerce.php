@@ -49,6 +49,14 @@ function getItemInfo( $row, $field ) {
 	return $result['meta_value'];
 }
 
+function getShippingInfo( $row ) {
+	global $wpdb;
+	$table = $wpdb->prefix . "woocommerce_order_items";
+	$result = $wpdb->get_row("SELECT * FROM " . $table . " WHERE order_id = " . $row['ID'] . " AND order_item_type = 'shipping'", ARRAY_A);
+	
+	return $result['order_item_name'];
+}
+
 function isComposed( $row ) {
 	global $wpdb;
 	$field = '_composite_item';

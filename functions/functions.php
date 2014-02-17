@@ -38,6 +38,15 @@ function filtreString($var) {
 	}
 }
 
+function filtreAttribut($var) {
+	$var = trim($var);
+	if (empty($var)) {
+		return '';
+	} else {
+		return trim($var);	
+	}
+}
+
 function filtreFloat($var) {
 	$var = trim($var);
 	if (empty($var)) {
@@ -106,7 +115,7 @@ function sendUsingDate( $software, $softwareVersion ) {
 			'httpversion' => '1.0',
 			'blocking' => true,
 			'headers' => array(),
-			'body' => array( 'action' => 'date', 'url' => $urlClient, 'software' => $software, 'softwareVersion' => $softwareVersion , 'wpVersion' =>  get_bloginfo('version') ),
+			'body' => array( 'action' => 'date', 'url' => $urlClient, 'software' => $software->getSoftware(), 'softwareVersion' => $softwareVersion , 'wpVersion' =>  get_bloginfo('version') ),
 			'cookies' => array()
 			)
 	);
