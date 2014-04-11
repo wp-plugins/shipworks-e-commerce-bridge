@@ -15,6 +15,8 @@ sites. ShipWorks for Wordpress build a bridge between your E-Commerce sites on W
 and ShipWorks. It downloads your orders and makes it easy to create shipping labels, manage customers
 and emails, and update the online status of each order.
 
+[youtube https://www.youtube.com/watch?v=ECTyDJvfPRs#t=130]
+
 = Compatible E-Commmerce software =
 When you activate the plugin on your site it immediately says if you are running or not a compatible
 E-Commerce template/plugin. Here the list of the compatible products:
