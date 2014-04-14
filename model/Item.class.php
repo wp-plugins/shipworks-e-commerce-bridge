@@ -122,8 +122,13 @@ class Item
 		}
 		// On veut dans tous les cas enregistrer l'id du produit original pour avoir le bon nom
 		$productId = getItemInfo( $this->row, '_product_id' );
-		$this->code = getProductInfo( $variationId, '_sku' );
-		$this->sku = getProductInfo( $variationId, '_sku' );
+		if( null != getProductInfo( $variationId, '_sku' ) ) {
+			$this->code = getProductInfo( $variationId, '_sku' );
+			$this->sku = getProductInfo( $variationId, '_sku' );
+		} else {
+			$this->code = getProductInfo( $productId, '_sku' );
+			$this->sku = getProductInfo( $productId, '_sku' );
+		}
 		$this->name = getProductName( $productId );
 		$this->quantity = getItemInfo( $this->row, '_qty' );
 		// Cas ou on a woocommerce Composite Products
