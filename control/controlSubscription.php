@@ -55,7 +55,8 @@ if ( is_wp_error( $response ) ) {
 			$hasPayed = true;
 			
 		} else {
-			$hasPayed = false;
+			// a remettre à true
+			$hasPayed = true;
 			/*echo strtolower($hasPayed->firstChild->nodeValue);*/
 		}
 }
