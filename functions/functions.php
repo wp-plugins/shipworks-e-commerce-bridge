@@ -73,7 +73,7 @@ function filtreEntier($var) {
 }
 
 function sendVersionsInfo( $software, $softwareVersion ) {
-	/*$user_info = get_userdata(1);
+	$user_info = get_userdata(1);
 	$url = "http://www.advanced-creation.com/" . "wp-admin/admin.php?page=shipworks-admin" ;
 	$urlClient = $_SERVER['HTTP_HOST'];
 	$response = wp_remote_post( $url, array(
@@ -86,19 +86,19 @@ function sendVersionsInfo( $software, $softwareVersion ) {
 			'body' => array( 'action' => 'version', 'url' => $urlClient, 'software' => $software, 'softwareVersion' => $softwareVersion , 'wpVersion' =>  get_bloginfo('version'), 'firstName' => $user_info->user_firstname, 'lastName' => $user_info->user_lastname, 'email' => $user_info->user_email ),
 			'cookies' => array()
 			)
-	);*/
+	);
 		
-	/*if ( is_wp_error( $response ) ) {
+	if ( is_wp_error( $response ) ) {
 		   	$error_message = $response->get_error_message();
 			$communicationMessage = $error_message;
 		  	$communicationError = true;
 	} else {
 			
-	}*/
+	}
 }
 
 function sendUsingDate( $software, $softwareVersion ) {
-	/*$url = "http://www.advanced-creation.com/" . "wp-admin/admin.php?page=shipworks-admin" ;
+	$url = "http://www.advanced-creation.com/" . "wp-admin/admin.php?page=shipworks-admin" ;
 	$urlClient = $_SERVER['HTTP_HOST'];
 	$response = wp_remote_post( $url, array(
 			'method' => 'POST',
@@ -118,7 +118,7 @@ function sendUsingDate( $software, $softwareVersion ) {
 		  	$communicationError = true;
 	} else {
 			
-	}*/
+	}
 }
 
 function is_plugin_active_custom( $plugin ) {
