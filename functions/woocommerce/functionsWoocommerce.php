@@ -57,6 +57,14 @@ function getShippingInfo( $row ) {
 	return $result['order_item_name'];
 }
 
+function getCoupons( $row ) {
+	global $wpdb;
+	$table = $wpdb->prefix . "woocommerce_order_items";
+	$results = $wpdb->get_results("SELECT * FROM " . $table . " WHERE order_id = " . $row['ID'] . " AND order_item_type = 'coupon'", ARRAY_A);
+	
+	return $results;
+}
+
 function isComposed( $row ) {
 	global $wpdb;
 	$field = '_composite_item';

@@ -9,7 +9,6 @@
 			<LastModified><?php echo $order->getModifiedDate() ?></LastModified>
 			<ShippingMethod><?php echo $order->getShippingOption() ?></ShippingMethod>
 			<StatusCode><?php echo $order->getStatus() ?></StatusCode>
-			<Notes/>
 			<ShippingAddress>
 				<FirstName><?php echo $order->getShipFirstname() ?></FirstName>
 				<MiddleName><?php echo $order->getMiddleName() ?></MiddleName>
@@ -47,16 +46,18 @@
 				<Website><?php echo $order->getWebsite() ?></Website>
 			</BillingAddress>
 			<Payment>
-				<Method></Method>
-				<CreditCard>
-					<Type></Type>
-					<Owner></Owner>
-					<Number></Number>
-					<Expires>0000-00-00</Expires>
-					<CCV></CCV>
-				</CreditCard>
+				
 			</Payment>
+			<?php if ( $order->getCoupons() != null ) { ?>
+			<Notes>
+				<?php foreach( $order->getCoupons() as $coupon ) { ?>
+				<Note public="true">
+					Coupon : <?php echo $coupon;?> 
+				</Note>
+				<?php } ?>		
+			</Notes>
 			<Items>
+			<?php } ?>
 			<?php foreach( $order->getItems() as $item ) { ?>
 				<Item>
 					<ItemID><?php echo $item->getItemID(); ?></ItemID>

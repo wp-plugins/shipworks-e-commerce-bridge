@@ -1,4 +1,7 @@
 <?php
+// On désactive les erreurs
+error_reporting(0);
+
 // On récupère les données
 
 include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'model/User.class.php' ) ;
@@ -21,6 +24,7 @@ $user = new User();
 $name = $user->getUsername();
 $pass = $user->getPassword();
 $goodCredentials = false;
+$date = null;
 
 $goodCredentials = ( ( $_POST['username'] == $name ) && ( $_POST['password'] == $pass ) );
 

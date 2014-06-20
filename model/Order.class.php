@@ -44,6 +44,8 @@ class Order
 	protected $discount;
 	protected $fee;
 	
+	protected $coupons = Array();
+	
 	protected $items = Array();
 
 	public function __construct( $software, $date, $row) {
@@ -301,6 +303,13 @@ class Order
 		$this->tax = ((float)getInformation( $this->row, '_order_tax' ))+((float)getInformation( $this->row, '_order_shipping_tax' )); //Tax Fee
 		$this->discount = ((float)getInformation( $this->row, '_order_discount' ))+((float)getInformation( $this->row, '_cart_discount' )); // Discount
 		$this->fees = ''; // Add Fee
+		if ( getCoupons( $this->row ) != null ) {
+			$coupons = getCoupons( $this->row );
+			foreach( $coupons as $coupon ) {
+				/*var_dump( $coupon );*/
+				array_push($this->coupons, $coupon['order_item_name']);	
+			}
+		}
 		
 		global $wpdb;
 		$time = strtotime( $this->date . ' UTC' );
@@ -619,5 +628,9 @@ class Order
 	
 	public function getFee() {
 		return $this->fee;	
+	}
+	
+	public function getCoupons() {
+		return $this->coupons;	
 	}
 }
