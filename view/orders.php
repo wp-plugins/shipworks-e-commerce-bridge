@@ -56,8 +56,8 @@
 				</Note>
 				<?php } ?>		
 			</Notes>
-			<Items>
 			<?php } ?>
+			<Items>			
 			<?php foreach( $order->getItems() as $item ) { ?>
 				<Item>
 					<ItemID><?php echo $item->getItemID(); ?></ItemID>
