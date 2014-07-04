@@ -89,15 +89,42 @@ class Item
 	
 	protected function setInfoShopp() {
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/shopp/functionsShopp.php' );
-		$this->itemID = $this->row['sku'];
-		$this->productID = $this->row['product'];
-		$this->code = $this->row['sku'];
-		$this->sku = $this->row['sku'];
-		$this->name = $this->row['name'];
-		$this->quantity = $this->row['quantity'];
-		$this->price = $this->row['price'];
-		$this->unitprice = $this->row['unitprice'];
-		$this->weight = getWeight($this->price);
+		if ( $this->row['type'] == 'addon' ) {
+			$this->itemID = getAddonSku( $this->row );
+			$this->productID = $this->row['product'];
+			$this->code = getAddonSku( $this->row );
+			$this->sku = getAddonSku( $this->row );
+			$this->name = $this->row['name'];
+			$this->quantity = $this->row['quantity'];
+			$this->price = $this->row['price'];
+			$this->unitprice = getAddonPrice( $this->row );
+			$this->weight = weightFilter( getAddonWeight( $this->row ) );
+		} else if ( isVariation( $this->row['price'] ) ) {
+			$this->itemID = getProductSku( $this->row['price'] );
+			$this->productID = $this->row['price'];
+			$this->code = getProductSku( $this->row['price'] );
+			$this->sku = getProductSku( $this->row['price'] );
+			$this->name = $this->row['name'];
+			$this->quantity = $this->row['quantity'];
+			$this->price = $this->row['price'];
+			$this->unitprice = getProductPrice( $this->row['price'] );
+			$this->weight = weightFilter( getWeight($this->price) );
+			// On ajoute les attributs
+			$attributes = getAttributes( $this->row['price'] );
+			foreach( $attributes as $key => $attribute ) {
+					array_push($this->attributes,new Attribute( $this->software, $this->date, 'Attribute', $attribute ));
+			}
+		} else {
+			$this->itemID = getProductSku( $this->row['price'] );
+			$this->productID = $this->row['price'];
+			$this->code = getProductSku( $this->row['price'] );
+			$this->sku = getProductSku( $this->row['price'] );
+			$this->name = $this->row['name'];
+			$this->quantity = $this->row['quantity'];
+			$this->price = $this->row['price'];
+			$this->unitprice = getProductPrice( $this->row['price'] );
+			$this->weight = weightFilter( getWeight($this->price) );	
+		}
 	}
 	
 	protected function setInfoWoocommerce() {

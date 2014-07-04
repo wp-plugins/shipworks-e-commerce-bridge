@@ -245,10 +245,21 @@ class Order
 						, ARRAY_A);
 
 		for($k = 0; $k < count( $rows );$k ++){
-			/*if ( $rows[$k]['quantity'] != null ) {*/
-				array_push($this->items,new Item($this->software, $this->date,$rows[$k]));
-			/*}*/
+			array_push($this->items,new Item($this->software, $this->date,$rows[$k]));
+			
+			if ( $rows[$k]['addons'] == 'yes' ) {
+				// On ajoute les Addons
+				global $wpdb;
+				$table = $wpdb->prefix . "shopp_meta";
+				$addons = $wpdb->get_results("SELECT * FROM " . $table . " WHERE parent = " . $rows[$k]['id'] . " and type = 'addon'" , ARRAY_A);
+				foreach( $addons as $addon ) {
+					$addon['product'] = $rows[$k]['product'];
+					$addon['quantity'] = $rows[$k]['quantity'];
+					array_push($this->items,new Item($this->software, $this->date,$addon));
+				}
+			}
 		}
+		
 	}
 	
 	protected function setInfoWoocommerce() {
