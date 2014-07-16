@@ -81,7 +81,7 @@ class Orders
 		$dateInLocal = date("Y-m-d H:i:s", $time);
 		global $wpdb;
 		$rows = $wpdb->get_results(
-						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_date_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_date_gmt ASC" , ARRAY_A
+						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC" , ARRAY_A
 						);
 		foreach ( $rows as $row ) {
 			if( getStatusName( $row ) == 'on-hold' || getStatusName( $row ) == 'processing' || getStatusName( $row ) == 'completed' ) {
@@ -115,6 +115,11 @@ class Orders
 					array_push($this->orders,new Order($this->software, $this->date,$row));
 				}
 		}
+
+		/*$sql2 =  "ALTER TABLE " . $table2 . " ADD 
+					modified_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                                            ON UPDATE CURRENT_TIMESTAMP";*/
+		
 	}
 	
 	protected function setOrdersJigoshop() {
@@ -123,7 +128,7 @@ class Orders
 		$dateInLocal = date("Y-m-d H:i:s", $time);
 		global $wpdb;
 		$rows = $wpdb->get_results(
-						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_date_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_date_gmt ASC" , ARRAY_A
+						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC" , ARRAY_A
 						);
 		foreach ( $rows as $row ) {
 			if( getStatusName( $row ) == 'on-hold' || getStatusName( $row ) == 'processing' || getStatusName( $row ) == 'completed' ) {

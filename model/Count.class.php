@@ -41,7 +41,7 @@ class Count
 			else if ( 'Woocommerce' == $this->software->getSoftware() ) {
 						include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php');
 						$orders = $wpdb->get_results(
-						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_date_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_date_gmt ASC", ARRAY_A
+						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC", ARRAY_A
 						);
 						foreach ( $orders as $order ) { 
 							if( getStatusName( $order ) == 'on-hold' 
@@ -84,7 +84,7 @@ class Count
 			else if ( 'Jigoshop' == $this->software->getSoftware() ) {
 						include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/jigoshop/functionsJigoshop.php');
 						$orders = $wpdb->get_results(
-						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_date_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_date_gmt ASC", ARRAY_A
+						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC", ARRAY_A
 						);
 						foreach ( $orders as $order ) {
 							if( getStatusName( $order ) == 'on-hold' 

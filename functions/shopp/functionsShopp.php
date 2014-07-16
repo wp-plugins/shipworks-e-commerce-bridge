@@ -131,3 +131,10 @@ function isVariation( $id ) {
 		return false;
 	}
 }
+
+function getCoupons( $row ) {
+	$string = $row['promos'];
+	$tab = unserialize( $string );
+	
+	return $tab;
+}

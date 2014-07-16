@@ -123,7 +123,7 @@ function sendUsingDate( $software, $softwareVersion ) {
 
 function is_plugin_active_custom( $plugin ) {
 	$array = (array) get_option( 'active_plugins', array() );
-	$roReturn = false;
+	$toReturn = false;
 	foreach( $array as $el ) {
 		if( strpos( $el , $plugin ) !== false ) {
 			$toReturn = true;

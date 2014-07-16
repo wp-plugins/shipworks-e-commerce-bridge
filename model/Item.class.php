@@ -192,7 +192,24 @@ class Item
 		$this->productID = $this->row['prodid'];
 		$this->code = getSKU( $this->row );
 		$this->sku = getSKU( $this->row );
-		$this->name = $this->row['name'];
+		/* Les attributs sont dans le nom */
+		$word = explode('(',trim($this->row['name']));
+		global $wpdb;
+		$table = $wpdb->prefix . "term_relationships";
+		$rows = $wpdb->get_results("SELECT * FROM " . $table . " WHERE object_id = " . $this->row['prodid'] , ARRAY_A);
+		// On ajoute les attributs
+		if( $rows != null ) {
+			foreach( $rows as $attribute ) {
+				/*echo isVariation( $attribute['term_taxonomy_id'] ) . $attribute['term_taxonomy_id'] ;*/
+				if( isVariation( $attribute['term_taxonomy_id'] ) ) {
+					$key = getVariation( $attribute['term_taxonomy_id'] );
+					$value = getVariationValue( $attribute['term_taxonomy_id'] );
+					/*echo $attribute['term_taxonomy_id'];*/
+					array_push($this->attributes,new Attribute( $this->software, $this->date, $key, $value));
+				}
+			}
+		}
+		$this->name = $word[0];
 		$this->quantity = $this->row['quantity'];
 		$this->price = '';
 		$this->unitprice = $this->row['price'];

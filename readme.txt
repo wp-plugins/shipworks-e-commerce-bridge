@@ -4,7 +4,7 @@ Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge, connect
 Requires at least: 3.0.1
 Tested up to: 3.9
-Stable tag: 2.9.16
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,14 @@ contact@advanced-creation.com.
 2. The ShipWorks software with a fiew orders downloaded from the site.
 
 == Changelog ==
+
+= 3.0.1 =
+This new version enable you to do the following :
+	-Orders download by modified time for Woocommerce, Jigoshop, Shopp.
+	-Better support for coupons for every frameworks.
+	-Better support for SKU for every frameworks.
+	-Better support for variation in every frameworks including Shopp.
+	-Better support for weight unit conversion.
 
 = 2.9.16 =
 Support for addons and variable products on Shopp.
@@ -157,6 +165,14 @@ This new version supports variable products in Woocommerce.
 * First version
 
 == Upgrade Notice ==
+
+= 3.0.1 =
+This new version enable you to do the following :
+	-Orders download by modified time for Woocommerce, Jigoshop, Shopp.
+	-Better support for coupons for every frameworks.
+	-Better support for SKU for every frameworks.
+	-Better support for variation in every frameworks including Shopp.
+	-Better support for weight unit conversion.
 
 = 2.9.16 =
 This new version enable you to use variable products and addons with ShipWorks. 

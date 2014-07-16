@@ -136,6 +136,10 @@ class Order
 		$this->shipcountry = filtreString( $this->shipcountry );
 		$this->cardtype = filtreString( $this->cardtype );
 		
+		foreach( $this->coupons as $key => $coupon ) {
+			$this->coupons[$key] = filtreString( $coupon );
+		}
+		
 		$this->freight = filtreFloat( $this->freight );
 		$this->tax = filtreFloat( $this->tax );
 		$this->discount = filtreFloat( $this->discount );
@@ -257,6 +261,15 @@ class Order
 					$addon['quantity'] = $rows[$k]['quantity'];
 					array_push($this->items,new Item($this->software, $this->date,$addon));
 				}
+			}
+		}
+		
+		// Ajout des coupons
+		if ( $this->row['promos'] != null ) {
+			$coupons = getCoupons( $this->row );
+			foreach( $coupons as $coupon ) {
+				/*var_dump( $coupon );*/
+				array_push( $this->coupons, $coupon );	
 			}
 		}
 		
@@ -388,6 +401,12 @@ class Order
 				/*$this->tax += (float)$rows[$k]['tax_charged'];*/ // On ajoute pas les taxes si elles sont inclues dans le prix de l'article
 				array_push($this->items,new Item($this->software, $this->date,$rows[$k]));
 		}
+		
+		if ( $this->row['discount_data'] != null ) {
+			// On ne peut avoir qu'un seul coupon sur WPeCommerce
+			array_push($this->coupons, $this->row['discount_data'] );	
+		}
+		
 	}
 	
 	protected function setInfoCart66() {
@@ -440,6 +459,11 @@ class Order
 
 		for ($k = 0; $k < count( $rows );$k ++) {
 				array_push($this->items,new Item($this->software, $this->date,$rows[$k]));
+		}
+		
+		// On ajoute les coupons
+		if ( $this->row['coupon'] != null ) {
+			array_push($this->coupons, $this->row['coupon']);
 		}
 	}
 	
@@ -494,6 +518,14 @@ class Order
 		$object = unserialize( $result['meta_value'] );
 		foreach( $object as $key => $value ) {
 				array_push($this->items,new Item( $this->software, $this->date,$value, $result['meta_id'] ));
+		}
+		
+		/* Les coupons */
+		if ( getCoupons( $this->row['ID'] ) != null ) {
+			$coupons = getCoupons( $this->row['ID'] );
+			foreach( $coupons as $coupon ) {
+				array_push($this->coupons, $coupon['code']);	
+			}
 		}
 	}
 	

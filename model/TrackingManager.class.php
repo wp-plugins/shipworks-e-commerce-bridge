@@ -28,17 +28,17 @@ class TrackingManager
 			if ($order == '' and $tracking == '') {
 				$this->result = false;
 				$this->code = 'ERR001';
-				$this->description = 'Order and Tracking not communicate correctly';
+				$this->description = 'Order and Tracking did not communicate correctly';
 			}
 			else if ($order == '' and $tracking != '') {
 				$this->result = false;
 				$this->code = 'ERR002';
-				$this->description = 'Order not communicate correctly';
+				$this->description = 'Order did not communicate correctly';
 			}
 			else if ($order != '' and $tracking == '') {
 				$this->result = false;
 				$this->code = 'ERR003';
-				$this->description = 'Tracking not communicate correctly';
+				$this->description = 'Tracking did not communicate correctly';
 			}
 		}	else {
 			// Cas Shopp ( on a pas de shopperpress )
@@ -62,7 +62,11 @@ class TrackingManager
 				if ( $split[0] >= 2 ) {
 					$this->setInfoWoocommerce();
 				}
-			} 
+			} else if ( 'Jigoshop' == $this->software->getSoftware() ) {
+					if ( $split[0] >= 1 ) {
+							$this->setInfoJigoshop();
+					}
+				}
 		}
 		$this->filtre();
 	}
@@ -106,18 +110,21 @@ class TrackingManager
 			$rowTracking = $wpdb->get_row( "SELECT * FROM " . $wpdb->prefix . "shopp_meta WHERE parent  = '" . $this->order . "' and context = 'purchase' and name = 'shipped'" );
 			$time = strtotime("now");
 			$dateInLocal = date("Y-m-d H:i:s", $time);
-			if ( $rowTracking ) { // On update
+			/*var_dump( $rowTracking === 'true' );*/
+			if ( $rowTracking === 'true' ) { // On update
 				$table = $wpdb->prefix . "shopp_meta";
 				$this->result = $wpdb->update( $table, 
 						array( 
 								'value' => $tracking,
-								'modified' => $dateInLocal
+								'modified' => $dateInLocal,
+								'type' => 'event'
 							), 
 						array( 	'parent' => $this->order,
 								'context' => 'purchase',
 								'name' => 'shipped'
 						 )
-				);
+				);		
+				
 				if ( $this->result === false ) {
 					$this->code = 'ERR009';
 					$this->description = "The tracking number coudn't be update in the database";
@@ -129,11 +136,13 @@ class TrackingManager
 								'parent' => $this->order,
 								'context' => 'purchase',
 								'name' => 'shipped',
+								'type' => 'event',
 								'value' => $tracking,
 								'created' => $dateInLocal,
 								'modified' => $dateInLocal
 							)
 						);
+				/*var_dump( $this->result );*/
 				if ( $this->result === false ) {
 					$this->code = 'ERR010';
 					$this->description = "The tracking number coudn't be insert in the database";
@@ -281,7 +290,49 @@ class TrackingManager
 			$note = "Your order was shipped on " . $this->date . " via " . $this->carrier . ". Tracking number is " . $this->tracking . ".";
 			$this->result = add_customer_note( $note, $this->order );
 			
-			if ( $id == 0 ) {
+			if ( $this->result === false ) {
+				$this->code = 'ERR010';
+				$this->description = "The tracking number coudn't be insert in the database.";
+			}
+		}
+	}
+	
+	protected function setInfoJigoshop() {
+		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/jigoshop/functionsJigoshop.php' );
+		$time = strtotime($this->date.' UTC');
+		$this->date = date("y-m-d", $time);
+		global $wpdb;
+		$table = $wpdb->prefix . "posts";
+		$tracking_number = $this->tracking;
+		
+		//checking the identify shipping company
+		$usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
+		$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
+		$fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
+		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
+			$tracking_name = 'usps';
+		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
+			$tracking_name = 'fedex';
+		} elseif( preg_match( $ups_pattern, $tracking_number ) ) { //test Ups
+			$tracking_name = 'ups';
+		}
+		// Cheking if the order is in the database
+
+		$row= $wpdb->get_row( "SELECT * FROM " . $table . " WHERE id = " . $this->order, ARRAY_A);
+		if ( !$row ) {
+			$this->result = false;
+			$this->code = 'ERR004';
+			$this->description = 'The order is not in the Database';
+		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups' ) {
+			$this->result = false;
+			$this->code = 'ERR005';
+			$this->description = "Carrier Company didn't find";
+		} else {
+			
+			$note = "Your order was shipped on " . $this->date . " via " . $this->carrier . ". Tracking number is " . $this->tracking . ".";
+			$this->result = add_note( $note, $this->order );
+			
+			if ( $this->result === false ) {
 				$this->code = 'ERR010';
 				$this->description = "The tracking number coudn't be insert in the database.";
 			}

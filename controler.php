@@ -8,7 +8,7 @@ Plugin URI: http://www.advanced-creation.com
 
 Description: ShipWorks for Wordpress build a bridge between your E-Commerce sites on Wordpress (such as WooCommerce) and ShipWorks.
 
-Version: 2.9.16
+Version: 3.0.1
 
 Author: Advanced Creation
 
@@ -71,8 +71,8 @@ function db_shipworks_install() {
 
 
    $table = $wpdb->prefix . "shipworks_bridge";
-
-      
+   
+       
 
    $sql = "CREATE TABLE IF NOT EXISTS $table (
 
