@@ -48,15 +48,19 @@
 			<Payment>
 				
 			</Payment>
-			<?php if ( $order->getCoupons() != null ) { ?>
 			<Notes>
+			<?php if ( $order->getCoupons() != null ) { ?>
 				<?php foreach( $order->getCoupons() as $coupon ) { ?>
-				<Note public="true">
-					Coupon : <?php echo $coupon;?> 
-				</Note>
-				<?php } ?>		
+				<Note public="true"><?php echo $coupon;?></Note>
+				<?php } 
+				}
+				?>
+			<?php if ( $order->getPrivateNotes() != null ) { ?>
+				<?php foreach( $order->getPrivateNotes() as $note ) { ?>
+				<Note public="false"><?php echo $note;?></Note>
+				<?php } 
+				}?>		
 			</Notes>
-			<?php } ?>
 			<Items>			
 			<?php foreach( $order->getItems() as $item ) { ?>
 				<Item>
@@ -73,22 +77,13 @@
 					<Weight><?php echo $item->getWeight(); ?></Weight>
 					<?php if( $item->getAttributes() != null ) { ?>
 					<Attributes>
-					<?php		foreach( $item->getAttributes() as $i => $attribute ) { ?>
+					<?php foreach( $item->getAttributes() as $i => $attribute ) { ?>
 						<Attribute>
-							<AttributeID>
-							<?php echo $i; ?>
-							</AttributeID>
-							<Name>
-							<?php echo $attribute->getName(); ?>
-							</Name>
-							<Value>
-							<?php echo $attribute->getValue(); ?>
-							</Value>
-							<Price>
-							<?php echo $attribute->getPrice(); ?>
-							</Price>
+							<AttributeID><?php echo $i; ?></AttributeID>
+							<Name><?php echo $attribute->getName(); ?></Name>
+							<Value><?php echo $attribute->getValue(); ?></Value>
+							<Price><?php echo $attribute->getPrice(); ?></Price>
 						</Attribute>
-					
 					<?php } ?>
 					</Attributes>
 					<?php } ?>

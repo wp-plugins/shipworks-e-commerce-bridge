@@ -120,6 +120,30 @@ function getAttributes( $id ) {
 	return $attributes;
 }
 
+function getAttributeParent( $id, $value ) {
+	global $wpdb;
+	$table = $wpdb->prefix . "shopp_meta";
+	$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE context = 'product' AND type = 'meta' AND name = 'options' and parent = " . $id , ARRAY_A);
+	
+	$str = $row['value'];
+	$tab = unserialize( $str );
+	
+	/*var_dump( $tab );*/
+	
+	$toReturn = '';
+	
+	foreach( $tab["v"] as $options ) {
+		foreach( $options["options"] as $option ) {
+			if( $option['name'] == $value ) {
+				$toReturn = $options['name'];
+			}
+		}
+	}
+	
+	return $toReturn;
+		
+}
+
 function isVariation( $id ) {
 	global $wpdb;
 	$table = $wpdb->prefix . "shopp_price";
@@ -137,4 +161,34 @@ function getCoupons( $row ) {
 	$tab = unserialize( $string );
 	
 	return $tab;
+}
+
+function getNotes( $id ) {
+	global $wpdb;
+	$table = $wpdb->prefix . "shopp_meta";
+	$results = $wpdb->get_results("SELECT * FROM " . $table . " WHERE parent = " . $id . " and type = 'order_note'", ARRAY_A);
+	
+	return $results;
+}
+
+function addComment( $comment, $id ) {
+	global $wpdb;
+	$table = $wpdb->prefix . "shopp_meta";
+	$value = new stdClass;
+	$value->author = 1;
+	$value->message = $comment;
+	$value->sent = false;
+	$results = $wpdb->insert( $table,
+				array( 
+					'parent' => $id,
+					'context' => 'purchase',
+					'type' => 'order_note',
+					'name' => 'note',
+					'value' => serialize( $value ),
+					'created' => '',
+					'modified' => ''
+					)
+				);
+	
+	return $results;
 }

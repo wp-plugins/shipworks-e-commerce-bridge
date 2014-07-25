@@ -79,6 +79,22 @@ function isVariation( $attributeid ) {
 	return $row['taxonomy'] == 'wpsc-variation';
 }
 
+function add_comment( $comment, $id ) {
+	global $wpdb;
+	$table = $wpdb->prefix . "wpsc_purchase_logs";
+
+	$row= $wpdb->get_row( "SELECT * FROM " . $table . " WHERE id = " . $id, ARRAY_A);
+	$result = $wpdb->update( $table, 
+						array( 
+								'notes' => $row['notes'] . '&#10;' . $comment
+							), 
+						array( 	'id' => $id
+						 )
+			);
+			
+	return $result;
+}
+
 function WeightNormal($weight, $unit) {
 	
 	$unitWanted = 'pounds';

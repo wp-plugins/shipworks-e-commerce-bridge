@@ -104,7 +104,8 @@ if ( $goodCredentials ) {
 		} else if ( 'updatestatus' == $action ) {
 			$order = htmlspecialchars( $_POST['order'] );
 			$status = htmlspecialchars( $_POST['status'] );
-			$statusManager = new StatusManager(  $software, $date, $order, $status );
+			$comment = htmlspecialchars( $_POST['comments'] );
+			$statusManager = new StatusManager(  $software, $date, $order, $status, $comment );
 			if ( $statusManager->getResult() ) {
 				include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'view/statusSuccess.php' );
 			} else {

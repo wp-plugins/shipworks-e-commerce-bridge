@@ -8,11 +8,13 @@ class StatusManager
 	protected $result;
 	protected $code;
 	protected $description;
+	protected $comment;
 
-	public function __construct( $software, $date, $order = '', $status = '') {
+	public function __construct( $software, $date, $order = '', $status = '', $comment = '') {
 		$this->software = $software;
 		$this->order = $order;
 		$this->status = $status;
+		$this->comment = $comment;
         $this->setInformations();
     }
 	
@@ -113,6 +115,7 @@ class StatusManager
 	}
 	
 	protected function setInfoShopp() {
+		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/shopp/functionsShopp.php');
 		global $wpdb;
 		$table = $wpdb->prefix . "shopp_purchase";
 		$status = $this->status;
@@ -125,10 +128,13 @@ class StatusManager
 		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
+		} else if ( $this->comment != '' ) {
+			addComment( $this->comment, $this->order );
 		}
 	}
 	
 	protected function setInfoWoocommerce() {
+		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php');
 		global $wpdb;
 		$status = $this->status;
 		
@@ -157,10 +163,13 @@ class StatusManager
 		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
+		} else if ( $this->comment != '' ) {
+			add_private_note( $this->comment, $this->order );
 		}
 	}
 	
 	protected function setInfoWPeCommerce() {
+		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/wpecommerce/functionsWPeCommerce.php');
 		global $wpdb;
 		$status = $this->status;
 		
@@ -174,6 +183,10 @@ class StatusManager
 		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
+		} else if ( $this->comment != '' ) {
+		
+			add_comment( $this->comment, $this->order );
+		
 		}
 	}
 	
@@ -209,10 +222,13 @@ class StatusManager
 		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
+		} else if ( $this->comment != '' ) {
+			add_comment( $this->comment, $this->order );
 		}
 	}
 	
 	protected function setInfoJigoshop() {
+		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/jigoshop/functionsJigoshop.php' );
 		global $wpdb;
 		$status = $this->status;
 		
@@ -229,12 +245,15 @@ class StatusManager
 		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
+		} else if ( $this->comment != '' ) {
+			add_comment( $this->comment, $this->order );
 		}
 	}
 	
 	protected function filtre() {
 		$this->description = filtreString( $this->description );
 		$this->code = filtreString( $this->code );
+		$this->comment = filtreString( $this->comment );
 	}
 	
 	public function getResult() {
@@ -247,5 +266,9 @@ class StatusManager
 	
 	public function getDescription() {
 		return $this->description;	
+	}
+	
+	public function getComment() {
+		return $this->comment;	
 	}
 }

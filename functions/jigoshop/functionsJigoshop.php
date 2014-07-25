@@ -135,3 +135,23 @@ function add_note( $note, $id ) {
 		
 	return $result; 
 }
+
+function add_comment( $comment, $id ) {
+		$is_customer_note = intval( 0 );
+
+		$comment_post_ID 		= $id;
+		$comment_author 		= 'ShipWorks';
+		$comment_author_url 	= '';
+		$comment_content 		= $comment;
+		$comment_agent			= 'Jigoshop';
+		$comment_type			= '';
+		$comment_parent			= 0;
+		$comment_approved 		= 1;
+		$commentdata 			= compact( 'comment_post_ID', 'comment_author', 'comment_author_url', 'comment_content', 'comment_agent', 'comment_type', 'comment_parent', 'comment_approved' );
+
+		$comment_id = wp_insert_comment( $commentdata );
+
+		/*add_comment_meta( $comment_id, 'is_customer_note', $is_customer_note );*/
+
+		return $comment_id;
+}

@@ -45,6 +45,7 @@ class Order
 	protected $fee;
 	
 	protected $coupons = Array();
+	protected $privateNotes = Array();
 	
 	protected $items = Array();
 
@@ -138,6 +139,10 @@ class Order
 		
 		foreach( $this->coupons as $key => $coupon ) {
 			$this->coupons[$key] = filtreString( $coupon );
+		}
+		
+		foreach( $this->privateNotes as $key => $note ) {
+			$this->privateNotes[$key] = filtreString( $note );
 		}
 		
 		$this->freight = filtreFloat( $this->freight );
@@ -269,7 +274,17 @@ class Order
 			$coupons = getCoupons( $this->row );
 			foreach( $coupons as $coupon ) {
 				/*var_dump( $coupon );*/
-				array_push( $this->coupons, $coupon );	
+				array_push( $this->coupons, 'Coupon : ' . $coupon );	
+			}
+		}
+		
+		// Ajout des notes
+		if ( getNotes( $this->row['id'] ) != null ) {
+			$notes = getNotes( $this->row['id'] );
+			foreach( $notes as $note ) {
+				$content = unserialize( $note['value'] );
+				
+				array_push( $this->privateNotes, $content->message );	
 			}
 		}
 		
@@ -327,11 +342,24 @@ class Order
 		$this->tax = ((float)getInformation( $this->row, '_order_tax' ))+((float)getInformation( $this->row, '_order_shipping_tax' )); //Tax Fee
 		$this->discount = ((float)getInformation( $this->row, '_order_discount' ))+((float)getInformation( $this->row, '_cart_discount' )); // Discount
 		$this->fees = ''; // Add Fee
+		
+		// Ajout des coupons
 		if ( getCoupons( $this->row ) != null ) {
 			$coupons = getCoupons( $this->row );
 			foreach( $coupons as $coupon ) {
 				/*var_dump( $coupon );*/
-				array_push($this->coupons, $coupon['order_item_name']);	
+				array_push($this->coupons, 'Coupon : ' . $coupon['order_item_name']);	
+			}
+		}
+		
+		// Ajout des notes
+		$notes = getOrderNotes( $this->row['ID'] );
+		foreach ( $notes as $note ) {
+			if ( getNotePrivacy( $note['comment_ID'] ) == 1 ) {
+				/*echo 'ok' . $note['comment_ID'] . $note['comment_content'];*/
+				array_push($this->coupons, $note['comment_content']);
+			} else if ( getNotePrivacy( $note['comment_ID'] ) == 0  ) {
+				array_push($this->privateNotes, $note['comment_content']);
 			}
 		}
 		
@@ -404,7 +432,12 @@ class Order
 		
 		if ( $this->row['discount_data'] != null ) {
 			// On ne peut avoir qu'un seul coupon sur WPeCommerce
-			array_push($this->coupons, $this->row['discount_data'] );	
+			array_push($this->coupons, 'Coupon : ' . $this->row['discount_data'] );	
+		}
+		
+		if ( $this->row['notes'] != null ) {
+			// On ne peut avoir qu'un seul coupon sur WPeCommerce
+			array_push($this->privateNotes, $this->row['notes'] );	
 		}
 		
 	}
@@ -462,8 +495,13 @@ class Order
 		}
 		
 		// On ajoute les coupons
-		if ( $this->row['coupon'] != null ) {
-			array_push($this->coupons, $this->row['coupon']);
+		if ( $this->row['coupon'] != 'none' ) {
+			array_push($this->coupons, 'Coupon : ' . $this->row['coupon']);
+		}
+		
+		// Ajout des notes
+		if ( $this->row['notes'] != null ) {
+			array_push($this->privateNotes, $this->row['notes']);
 		}
 	}
 	
@@ -524,8 +562,13 @@ class Order
 		if ( getCoupons( $this->row['ID'] ) != null ) {
 			$coupons = getCoupons( $this->row['ID'] );
 			foreach( $coupons as $coupon ) {
-				array_push($this->coupons, $coupon['code']);	
+				array_push($this->coupons, 'Coupon : ' . $coupon['code']);	
 			}
+		}
+		
+		// La note customer
+		if ( $this->row['post_excerpt'] != null ) {
+			array_push($this->coupons, $this->row['post_excerpt']);
 		}
 	}
 	
@@ -675,5 +718,9 @@ class Order
 	
 	public function getCoupons() {
 		return $this->coupons;	
+	}
+	
+	public function getPrivateNotes() {
+		return $this->privateNotes;	
 	}
 }

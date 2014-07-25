@@ -112,7 +112,7 @@ class Item
 			// On ajoute les attributs
 			$attributes = getAttributes( $this->row['price'] );
 			foreach( $attributes as $key => $attribute ) {
-					array_push($this->attributes,new Attribute( $this->software, $this->date, 'Attribute', $attribute ));
+					array_push($this->attributes,new Attribute( $this->software, $this->date, getAttributeParent( $this->row['product'], trim( $attribute ) ), $attribute ));
 			}
 		} else {
 			$this->itemID = getProductSku( $this->row['price'] );
@@ -224,6 +224,16 @@ class Item
 		$this->name = $this->row['description'];
 		$this->quantity = $this->row['quantity'];
 		$this->price = '';
+		
+		if ( substr( $this->row['description'], -1 ) == ")" ) {
+			$tab = explode( '(', $this->row['description'] );
+			$this->name = $tab[0];
+			$attributes = explode( ',', str_replace( ')', '', $tab[1] ) );
+			foreach( $attributes as $attribute ) {
+				array_push($this->attributes,new Attribute( $this->software, $this->date,'Attribute', $attribute ));
+			}
+		}
+		
 		$this->unitprice = $this->row['product_price'];
 		$this->weight = getWeight( $this->row );
 	}

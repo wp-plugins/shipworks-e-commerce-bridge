@@ -95,6 +95,30 @@ function getProductName( $id ) {
 	return $result['post_title'];
 }
 
+function getOrderNotes( $id ) {
+	global $wpdb;
+	$table = $wpdb->prefix . "comments";
+	$results = $wpdb->get_results("SELECT * FROM " . $table . " WHERE comment_post_ID = " . $id . " and comment_type = 'order_note'", ARRAY_A);
+	
+	return $results;
+}
+
+function getNotePrivacy( $id ) {
+	global $wpdb;
+	$table = $wpdb->prefix . "commentmeta";
+	$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE comment_id = " . $id , ARRAY_A);
+	
+	return $row['meta_value'];
+}
+
+function getOrderComments( $id ) {
+	global $wpdb;
+	$table = $wpdb->prefix . "posts";
+	$result = $wpdb->get_row("SELECT * FROM " . $table . " WHERE ID = " . $id, ARRAY_A);
+	
+	return $result['post_title'];
+}
+
 function add_customer_note( $note, $id ) {
 	$is_customer_note = intval( 1 );
 
@@ -118,6 +142,26 @@ function add_customer_note( $note, $id ) {
 		add_comment_meta( $comment_id, 'is_customer_note', $is_customer_note );
 
 		if ($is_customer_note) do_action( 'woocommerce_new_customer_note', array( 'order_id' => $id, 'customer_note' => $note ) );
+
+		return $comment_id;	
+}
+
+function add_private_note( $note, $id ) {
+	$is_customer_note = intval( 0 );
+
+		$comment_post_ID 		= $id;
+		$comment_author 		= __( 'WooCommerce', 'woocommerce' );
+		$comment_author_url 	= '';
+		$comment_content 		= $note;
+		$comment_agent			= 'WooCommerce';
+		$comment_type			= 'order_note';
+		$comment_parent			= 0;
+		$comment_approved 		= 1;
+		$commentdata 			= compact( 'comment_post_ID', 'comment_author', 'comment_author_url', 'comment_content', 'comment_agent', 'comment_type', 'comment_parent', 'comment_approved' );
+
+		$comment_id = wp_insert_comment( $commentdata );
+
+		add_comment_meta( $comment_id, 'is_customer_note', $is_customer_note );
 
 		return $comment_id;	
 }

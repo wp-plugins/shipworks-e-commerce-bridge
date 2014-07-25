@@ -9,6 +9,10 @@ class TrackingManager
 	protected $result;
 	protected $code;
 	protected $description;
+	
+	protected $ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
+	protected $usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
+	protected $fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
 
 	public function __construct( $software, $date, $carrier, $order = '', $tracking = '') {
 		$this->software = $software;
@@ -77,9 +81,9 @@ class TrackingManager
 		$tracking_number = $this->tracking;
 		
 		//checking the identify shipping company
-		$usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
-		$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
-		$fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
+		$usps_pattern = $this->usps_pattern;
+		$ups_pattern = $this->ups_pattern;
+		$fedex_pattern = $this->fedex_pattern;
 		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
@@ -110,7 +114,7 @@ class TrackingManager
 			$rowTracking = $wpdb->get_row( "SELECT * FROM " . $wpdb->prefix . "shopp_meta WHERE parent  = '" . $this->order . "' and context = 'purchase' and name = 'shipped'" );
 			$time = strtotime("now");
 			$dateInLocal = date("Y-m-d H:i:s", $time);
-			/*var_dump( $rowTracking === 'true' );*/
+			
 			if ( $rowTracking === 'true' ) { // On update
 				$table = $wpdb->prefix . "shopp_meta";
 				$this->result = $wpdb->update( $table, 
@@ -142,7 +146,7 @@ class TrackingManager
 								'modified' => $dateInLocal
 							)
 						);
-				/*var_dump( $this->result );*/
+			
 				if ( $this->result === false ) {
 					$this->code = 'ERR010';
 					$this->description = "The tracking number coudn't be insert in the database";
@@ -157,9 +161,9 @@ class TrackingManager
 		$tracking_number = $this->tracking;
 		
 		//checking the identify shipping company
-		$usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
-		$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
-		$fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
+		$usps_pattern = $this->usps_pattern;
+		$ups_pattern = $this->ups_pattern;
+		$fedex_pattern = $this->fedex_pattern;
 		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
@@ -183,6 +187,7 @@ class TrackingManager
 			$this->result = $wpdb->update( $table, 
 						array( 
 								'track_id' => $tracking_number,
+								'notes' => $row['notes'] . '&#10;' . 'Your order was shipped on ' . $this->date . " via " . $this->carrier . ". Tracking number is " . $this->tracking . "."
 							), 
 						array( 	'id' => $this->order
 						 )
@@ -201,9 +206,10 @@ class TrackingManager
 		$tracking_number = $this->tracking;
 		
 		//checking the identify shipping company
-		$usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
-		$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
-		$fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
+		$usps_pattern = $this->usps_pattern;
+		$ups_pattern = $this->ups_pattern;
+		$fedex_pattern = $this->fedex_pattern;
+		 
 		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
@@ -226,7 +232,8 @@ class TrackingManager
 		} else {
 			$this->result = $wpdb->update( $table, 
 						array( 
-								'tracking_number' => $tracking_number . '' . 1,
+								'tracking_number' => $tracking_number ,
+								'notes' => $row['notes'] . '&#10;' . 'Your order was shipped on ' . $this->date . " via " . $this->carrier . ". Tracking number is " . $this->tracking . "."
 							), 
 						array( 	'id' => $this->order
 						 )
@@ -247,9 +254,9 @@ class TrackingManager
 		$tracking_number = $this->tracking;
 		
 		//checking the identify shipping company
-		$usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
-		$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
-		$fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
+		$usps_pattern = $this->usps_pattern;
+		$ups_pattern = $this->ups_pattern;
+		$fedex_pattern = $this->fedex_pattern;
 		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
@@ -306,9 +313,9 @@ class TrackingManager
 		$tracking_number = $this->tracking;
 		
 		//checking the identify shipping company
-		$usps_pattern = "/^\D{2}\d{9}\D{2}$|^9\d{15,21}$/";
-		$ups_pattern = '/(\b\d{9}\b)|(\b1Z\d+\b)/';
-		$fedex_pattern = '/(\b96\d{20}\b)|(\b\d{15}\b)|(\b\d{12}\b)/';
+		$usps_pattern = $this->usps_pattern;
+		$ups_pattern = $this->ups_pattern;
+		$fedex_pattern = $this->fedex_pattern;
 		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
