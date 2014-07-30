@@ -6,7 +6,7 @@
 		<Capabilities>
 			<DownloadStrategy>ByModifiedTime</DownloadStrategy>
 			<OnlineCustomerID supported="false" dataType="numeric"/>
-			<OnlineStatus supported="true" dataType="numeric" supportsComments="true"/>
+			<OnlineStatus supported="true" dataType="numeric" supportsComments="<?php echo $software->getSupportComments(); ?>"/>
 			<OnlineShipmentUpdate supported="true"/>
 		</Capabilities>
 		<Communications>

@@ -436,7 +436,6 @@ class Order
 		}
 		
 		if ( $this->row['notes'] != null ) {
-			// On ne peut avoir qu'un seul coupon sur WPeCommerce
 			array_push($this->privateNotes, $this->row['notes'] );	
 		}
 		

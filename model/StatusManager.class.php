@@ -129,7 +129,7 @@ class StatusManager
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		} else if ( $this->comment != '' ) {
-			addComment( $this->comment, $this->order );
+			/*addComment( $this->comment, $this->order );*/
 		}
 	}
 	
@@ -185,7 +185,7 @@ class StatusManager
 			$this->description = "The Status coudn't be update in the database";
 		} else if ( $this->comment != '' ) {
 		
-			add_comment( $this->comment, $this->order );
+			/*add_comment( $this->comment, $this->order );*/
 		
 		}
 	}
@@ -223,7 +223,7 @@ class StatusManager
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		} else if ( $this->comment != '' ) {
-			add_comment( $this->comment, $this->order );
+			/*add_comment( $this->comment, $this->order );*/
 		}
 	}
 	

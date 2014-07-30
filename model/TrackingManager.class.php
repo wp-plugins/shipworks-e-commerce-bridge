@@ -84,13 +84,17 @@ class TrackingManager
 		$usps_pattern = $this->usps_pattern;
 		$ups_pattern = $this->ups_pattern;
 		$fedex_pattern = $this->fedex_pattern;
-		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
+		/*if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
 			$tracking_name = 'fedex';
 		} elseif( preg_match( $ups_pattern, $tracking_number ) ) { //test Fedex
 			$tracking_name = 'ups';
-		}
+		}*/
+		
+		$tracking_name = strtolower( $this->carrier );
+		
+		// On ne veut plus utiliser les filtres, on va directement récupérer le nom du carier depuis la requete
 		
 		// Cheking if the order is in the database
 		
@@ -99,7 +103,7 @@ class TrackingManager
 			$this->result = false;
 			$this->code = 'ERR004';
 			$this->description = 'The order is not in the Database';
-		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups') {
+		} else if ( strpos($tracking_name, 'fedex') === false & strpos($tracking_name, 'usps') === false & strpos($tracking_name, 'ups') === false ) {
 			$this->result = false;
 			$this->code = 'ERR005';
 			$this->description = "Carrier Company didn't find";
@@ -164,13 +168,18 @@ class TrackingManager
 		$usps_pattern = $this->usps_pattern;
 		$ups_pattern = $this->ups_pattern;
 		$fedex_pattern = $this->fedex_pattern;
-		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
+		/*if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
 			$tracking_name = 'fedex';
 		} elseif( preg_match( $ups_pattern, $tracking_number ) ) { //test Ups
 			$tracking_name = 'ups';
-		}
+		}*/
+		
+		
+		$tracking_name = strtolower( $this->carrier );
+		
+		// On ne veut plus utiliser les filtres, on va directement récupérer le nom du carier depuis la requete
 		
 		// Cheking if the order is in the database
 
@@ -179,7 +188,7 @@ class TrackingManager
 			$this->result = false;
 			$this->code = 'ERR004';
 			$this->description = 'The order is not in the Database';
-		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups') {
+		} else if ( /*$tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups'*/ false ) {
 			$this->result = false;
 			$this->code = 'ERR005';
 			$this->description = "Carrier Company didn't find";
@@ -210,13 +219,17 @@ class TrackingManager
 		$ups_pattern = $this->ups_pattern;
 		$fedex_pattern = $this->fedex_pattern;
 		 
-		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
+		/*if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
 			$tracking_name = 'fedex';
 		} elseif( preg_match( $ups_pattern, $tracking_number ) ) { //test Ups
 			$tracking_name = 'ups';
-		}
+		}*/
+		
+		$tracking_name = strtolower( $this->carrier );
+		
+		// On ne veut plus utiliser les filtres, on va directement récupérer le nom du carier depuis la requete
 		
 		// Cheking if the order is in the database
 
@@ -225,7 +238,7 @@ class TrackingManager
 			$this->result = false;
 			$this->code = 'ERR004';
 			$this->description = 'The order is not in the Database';
-		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups' ) {
+		} else if ( /*$tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups'*/ false ) {
 			$this->result = false;
 			$this->code = 'ERR005';
 			$this->description = "Carrier Company didn't find";
@@ -257,13 +270,17 @@ class TrackingManager
 		$usps_pattern = $this->usps_pattern;
 		$ups_pattern = $this->ups_pattern;
 		$fedex_pattern = $this->fedex_pattern;
-		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
+		/*if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
 			$tracking_name = 'fedex';
 		} elseif( preg_match( $ups_pattern, $tracking_number ) ) { //test Ups
 			$tracking_name = 'ups';
-		}
+		}*/
+		
+		$tracking_name = strtolower( $this->carrier );
+		
+		// On ne veut plus utiliser les filtres, on va directement récupérer le nom du carier depuis la requete
 		
 		// Avant de mettre à jour on veut retrouver le bon order_number et pas celui de sequential woocommerce
 		
@@ -288,7 +305,7 @@ class TrackingManager
 			$this->result = false;
 			$this->code = 'ERR004';
 			$this->description = 'The order is not in the Database';
-		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups' ) {
+		} else if ( /*$tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups'*/ false ) {
 			$this->result = false;
 			$this->code = 'ERR005';
 			$this->description = "Carrier Company didn't find";
@@ -316,13 +333,18 @@ class TrackingManager
 		$usps_pattern = $this->usps_pattern;
 		$ups_pattern = $this->ups_pattern;
 		$fedex_pattern = $this->fedex_pattern;
-		if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
+		/*if ( preg_match( $usps_pattern, $tracking_number ) ) { //test USPS
 			$tracking_name = 'usps';
 		} elseif( preg_match( $fedex_pattern, $tracking_number ) ) { //test Fedex
 			$tracking_name = 'fedex';
 		} elseif( preg_match( $ups_pattern, $tracking_number ) ) { //test Ups
 			$tracking_name = 'ups';
-		}
+		}*/
+		
+		$tracking_name = strtolower( $this->carrier );
+		
+		// On ne veut plus utiliser les filtres, on va directement récupérer le nom du carier depuis la requete
+		
 		// Cheking if the order is in the database
 
 		$row= $wpdb->get_row( "SELECT * FROM " . $table . " WHERE id = " . $this->order, ARRAY_A);
@@ -330,7 +352,7 @@ class TrackingManager
 			$this->result = false;
 			$this->code = 'ERR004';
 			$this->description = 'The order is not in the Database';
-		} else if ( $tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups' ) {
+		} else if ( /*$tracking_name != 'fedex' & $tracking_name != 'usps' & $tracking_name != 'ups'*/ false ) {
 			$this->result = false;
 			$this->code = 'ERR005';
 			$this->description = "Carrier Company didn't find";

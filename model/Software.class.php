@@ -3,6 +3,7 @@ class Software
 {
 	protected $software = 'unknown';
 	protected $version;
+	protected $supportComments;
 	
 	public function __construct()
     {
@@ -16,24 +17,31 @@ class Software
 		if ( 'shopperpress' == $theme['option_value'] ) {
 			$this->software = $theme['option_value'];
 			$this->setVersion();
+			$this->supportComments = false;
 		} else if ( is_plugin_active_custom( "woocommerce/woocommerce.php" ) ) {
 			$this->software = "Woocommerce";
 			$this->setVersion();
+			$this->supportComments = true;
 		} else if ( is_plugin_active_custom( "shopp/Shopp.php" ) ) {
 			$this->software = "Shopp";
 			$this->setVersion();
+			$this->supportComments = false;
 		} else if ( is_plugin_active_custom( "wp-e-commerce/wp-shopping-cart.php" ) ) {
 			$this->software = "WP eCommerce";
 			$this->setVersion();
+			$this->supportComments = false;
 		} else if ( is_plugin_active_custom( "cart66-lite/cart66.php" ) ) {
 			$this->software = "Cart66 Lite";
 			$this->setVersion();
+			$this->supportComments = false;
 		} else if ( is_plugin_active_custom( "cart66.php" ) ) {
 			$this->software = "Cart66 Pro";
 			$this->setVersion();
+			$this->supportComments = false;
 		}else if ( is_plugin_active_custom( "jigoshop/jigoshop.php" ) ) {
 			$this->software = "Jigoshop";
 			$this->setVersion();
+			$this->supportComments = true;
 		}
     }
 	
@@ -43,6 +51,11 @@ class Software
 	
 	public function getVersion() {
 		return $this->version;
+	}
+	
+	public function getSupportComments() {
+		$converted_res = ($this->supportComments) ? 'true' : 'false';
+		return $converted_res;
 	}
 	
 	protected function setVersion() {
