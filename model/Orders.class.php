@@ -84,7 +84,7 @@ class Orders
 						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC" , ARRAY_A
 						);
 		foreach ( $rows as $row ) {
-			if( getStatusName( $row ) == 'on-hold' || getStatusName( $row ) == 'processing' || getStatusName( $row ) == 'completed' ) {
+			if( getStatusName( $this->software, $row ) == 'on-hold' || getStatusName( $this->software, $row ) == 'processing' || getStatusName( $this->software, $row ) == 'completed' ) {
 				array_push($this->orders,new Order($this->software, $this->date,$row));
 			}
 		}

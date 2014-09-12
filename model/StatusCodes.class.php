@@ -46,13 +46,27 @@ class StatusCodes
 			}
 			// Cas Woocommerce
 			else if ( 'Woocommerce' == $this->software->getSoftware() ) {
-					$table = $wpdb->prefix . "term_taxonomy";
-					$statusIds = $wpdb->get_results("SELECT * FROM " . $table . " WHERE taxonomy = 'shop_order_status'", ARRAY_A);
-					foreach ( $statusIds as $statusId ) {
-							$table = $wpdb->prefix . "terms";
-							$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE term_id = " . $statusId['term_id'], ARRAY_A);
-							
-							$this->status[ $statusId['term_id'] ] = $row['name'];
+			
+					$split = explode( '.' , $this->software->getVersion() );
+				
+					if ( $split[0] >= 2 && $split[1] >= 2 ) {
+						$this->status = Array( 0 => "pending",
+									   1 => "failed",
+									   2 => "on-hold",
+									   3 => "processing",
+									   4 => "completed",
+									   5 => "refunded",
+									   6=>  "cancelled");	
+					} else {
+			
+						$table = $wpdb->prefix . "term_taxonomy";
+						$statusIds = $wpdb->get_results("SELECT * FROM " . $table . " WHERE taxonomy = 'shop_order_status'", ARRAY_A);
+						foreach ( $statusIds as $statusId ) {
+								$table = $wpdb->prefix . "terms";
+								$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE term_id = " . $statusId['term_id'], ARRAY_A);
+								
+								$this->status[ $statusId['term_id'] ] = $row['name'];
+						}
 					}
 			}
 			// Cas WP eCommerce

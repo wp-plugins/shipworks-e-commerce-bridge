@@ -52,7 +52,9 @@ class StatusManager
 				} 
 			}// Cas Woocommerce
 			else if ( 'Woocommerce' == $this->software->getSoftware() ) {
-				if ( $split[0] >= 2 ) {
+				if ( $split[0] >= 2 && $split[1] >= 2 ) {
+					$this->setInfoWoocommerce2v2();
+				} else {
 					$this->setInfoWoocommerce();
 				}
 			}// Cas WP eCommerce
@@ -159,6 +161,45 @@ class StatusManager
 						'term_taxonomy_id' => $row['term_taxonomy_id']
 					), 
 				array( 'object_id' => $this->order )
+		);
+		if ( $this->result === 0 ) {
+			$this->code = 'ERR004';
+			$this->description = "The Status coudn't be update in the database";
+		} else if ( $this->comment != '' ) {
+			add_private_note( $this->comment, $this->order );
+		}
+	}
+	
+	protected function setInfoWoocommerce2v2() {
+
+		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php');
+		global $wpdb;
+		$status = $this->status;
+		
+		// Avant de mettre à jour on veut retrouver le bon order_number et pas celui de sequential woocommerce
+		
+		if ( is_plugin_active_custom( "woocommerce-sequential-order-numbers/woocommerce-sequential-order-numbers.php") 
+				||  is_plugin_active_custom( "woocommerce-sequential-order-numbers-pro/woocommerce-sequential-order-numbers.php") ) {
+			$row = $wpdb->get_row(
+					"SELECT * FROM " . $wpdb->prefix . "postmeta WHERE meta_key = '_order_number' and meta_value = " . $this->order, ARRAY_A);
+			if ( $row != null ) {
+				$id = $row['post_id'];
+				$this->order = $id;
+			}
+		}	
+		$table = $wpdb->prefix . "posts";
+		$tab = Array( 0 => "pending",
+								   1 => "failed",
+								   2 => "on-hold",
+								   3 => "processing",
+								   4 => "completed",
+								   5 => "refunded",
+								   6=>  "cancelled");
+		$this->result = $wpdb->update( $table, 
+				array( 
+						'post_status' => 'wc-' . $tab[$this->status]
+					), 
+				array( 'ID' => $this->order )
 		);
 		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';

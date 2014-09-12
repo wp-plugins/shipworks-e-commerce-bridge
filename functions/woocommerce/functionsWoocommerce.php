@@ -8,28 +8,50 @@ function getInformation( $row, $field) {
 }
 
 function getStatus( $row ) {
-	global $wpdb;
+	/*global $wpdb;
 	$table = $wpdb->prefix . "term_relationships";
 	$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE object_id = " . $row['ID'], ARRAY_A);
 	
 	$table = $wpdb->prefix . "term_taxonomy";
 	$result = $wpdb->get_row("SELECT * FROM " . $table . " WHERE term_taxonomy_id = " . $row['term_taxonomy_id'], ARRAY_A);
 	
-	return $result['term_id'];
+	return $result['term_id'];*/
+	
+	$tab = Array( 0 => "pending",
+				1 => "failed",
+				2 => "on-hold",
+				3 => "processing",
+				4 => "completed",
+				5 => "refunded",   
+				6=>  "cancelled");
+								   
+	foreach( $tab as $key => $el ) {
+		if( $el == substr( $row["post_status"], 3 ) ) {			
+			return $key;
+		}
+	}
 }
 
-function getStatusName( $row ) {
+function getStatusName( $software, $row ) {
+
+	$split = explode( '.' , $software->getVersion() );
 	global $wpdb;
-	$table = $wpdb->prefix . "term_relationships";
-	$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE object_id = " . $row['ID'], ARRAY_A);
-	
-	$table = $wpdb->prefix . "term_taxonomy";
-	$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE term_taxonomy_id = " . $row['term_taxonomy_id'], ARRAY_A);
-	
-	$table = $wpdb->prefix . "terms";
-	$results = $wpdb->get_row("SELECT * FROM " . $table . " WHERE term_id = " . $row['term_id'], ARRAY_A);
-	
-	return $results['slug'];
+	if ( $split[0] >= 2 && $split[1] >= 2 ) {
+		return substr( $row["post_status"], 3 );
+	} else {
+
+		global $wpdb;
+		$table = $wpdb->prefix . "term_relationships";
+		$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE object_id = " . $row['ID'], ARRAY_A);
+		
+		$table = $wpdb->prefix . "term_taxonomy";
+		$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE term_taxonomy_id = " . $row['term_taxonomy_id'], ARRAY_A);
+		
+		$table = $wpdb->prefix . "terms";
+		$results = $wpdb->get_row("SELECT * FROM " . $table . " WHERE term_id = " . $row['term_id'], ARRAY_A);
+		
+		return $results['slug'];
+	}
 }
 
 function getAttributeValue( $slug ) {

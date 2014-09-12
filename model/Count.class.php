@@ -44,9 +44,9 @@ class Count
 						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC", ARRAY_A
 						);
 						foreach ( $orders as $order ) { 
-							if( getStatusName( $order ) == 'on-hold' 
-									|| getStatusName( $order ) == 'processing' 
-										|| getStatusName( $order ) == 'completed' ) {
+							if( getStatusName( $this->software, $order ) == 'on-hold' 
+									|| getStatusName( $this->software, $order ) == 'processing' 
+										|| getStatusName( $this->software, $order ) == 'completed' ) {
 								$this->number++;
 							}
 						}
