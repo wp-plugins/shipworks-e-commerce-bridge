@@ -307,7 +307,7 @@ class Order
 				$this->shipoption = getShippingInfo( $this->row ) ;
 			}
 		}
-		$this->status = getStatus( $this->row );
+		$this->status = getStatus( $this->software, $this->row );
 		$this->firstname =  getInformation( $this->row, '_billing_first_name' );
 		$this->middlename = '';
 		$this->lastname = getInformation( $this->row, '_billing_last_name' );

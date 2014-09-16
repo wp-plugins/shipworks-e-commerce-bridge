@@ -156,12 +156,14 @@ class StatusManager
 		$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE term_id = " . $status, ARRAY_A);
 		
 		$table = $wpdb->prefix . "term_relationships";
-		$this->result = $wpdb->update( $table, 
-				array( 
-						'term_taxonomy_id' => $row['term_taxonomy_id']
-					), 
-				array( 'object_id' => $this->order )
-		);
+		if ( $row['term_taxonomy_id'] != null ) {
+			$this->result = $wpdb->update( $table, 
+					array( 
+							'term_taxonomy_id' => $row['term_taxonomy_id']
+						), 
+					array( 'object_id' => $this->order )
+			);
+		}
 		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
@@ -195,12 +197,14 @@ class StatusManager
 								   4 => "completed",
 								   5 => "refunded",
 								   6=>  "cancelled");
-		$this->result = $wpdb->update( $table, 
-				array( 
-						'post_status' => 'wc-' . $tab[$this->status]
-					), 
-				array( 'ID' => $this->order )
-		);
+		if ( $tab[$this->status] != null ) {
+			$this->result = $wpdb->update( $table, 
+					array( 
+							'post_status' => 'wc-' . $tab[$this->status]
+						), 
+					array( 'ID' => $this->order )
+			);
+		}
 		if ( $this->result === 0 ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
