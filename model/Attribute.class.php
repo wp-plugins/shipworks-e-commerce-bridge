@@ -101,7 +101,7 @@ class Attribute
 	protected function filtre() {
 		$this->attributeID = filtreEntier( $this->attributeID );
 		$this->name = filtreString( $this->name );
-		$this->value = filtreAttribut( $this->value );
+		$this->value = filtreString( $this->value );
 		$this->price = filtreFloat( $this->price );
 	}
 	
