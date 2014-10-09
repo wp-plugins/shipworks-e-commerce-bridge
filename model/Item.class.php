@@ -131,13 +131,14 @@ class Item
 		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/woocommerce/functionsWoocommerce.php' );
 		$this->itemID = $this->row['order_item_id'];
 		$this->productID = getItemInfo( $this->row, '_product_id' );
-		if ( null == getItemInfo( $this->row, '_variation_id' ) ) {
+		if ( null == ( int ) getItemInfo( $this->row, '_variation_id' ) ) {
 			// Dans ce cas le variation Id vaut l'id du produit ce qui est bon
 			$variationId = getItemInfo( $this->row, '_product_id' );
 		} else {
 			// Dans ce cas l'id est celui de la variation qui va permettre d'aller cherche le sku et le prix
 			$variationId = getItemInfo( $this->row, '_variation_id' );	
 		}
+		
 		// On ajoute les attributs
 		global $wpdb;
 		$table = $wpdb->prefix . "woocommerce_order_itemmeta";
@@ -163,7 +164,7 @@ class Item
 		if ( isComposed( $this->row ) ) {
 			$this->unitprice = 0;
 		} else {
-			$this->unitprice = getProductInfo( $variationId, '_price' );	
+			$this->unitprice = getProductInfo( $variationId, '_price' );
 		}
 		// Si le poid du variation vaut 0 on prend celui du parent
 		if ( 0 != getProductInfo( $variationId, '_weight' ) ) {
