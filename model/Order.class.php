@@ -205,6 +205,7 @@ class Order
 	}
 	
 	protected function setInfoShopp() {
+		include_once( PLUGIN_PATH_SHIPWORKSWORDPRESS . 'functions/shopp/functionsShopp.php');
 		$this->id_order = $this->row['id'];
 		$this->createdDate = gmdate("Y-m-d\TH:i:s\Z", strtotime($this->row['created']));
 		$this->modifiedDate = gmdate("Y-m-d\TH:i:s\Z", strtotime($this->row['modified']));
@@ -254,17 +255,20 @@ class Order
 						, ARRAY_A);
 
 		for($k = 0; $k < count( $rows );$k ++){
-			array_push($this->items,new Item($this->software, $this->date,$rows[$k]));
-			
-			if ( $rows[$k]['addons'] == 'yes' ) {
-				// On ajoute les Addons
-				global $wpdb;
-				$table = $wpdb->prefix . "shopp_meta";
-				$addons = $wpdb->get_results("SELECT * FROM " . $table . " WHERE parent = " . $rows[$k]['id'] . " and type = 'addon'" , ARRAY_A);
-				foreach( $addons as $addon ) {
-					$addon['product'] = $rows[$k]['product'];
-					$addon['quantity'] = $rows[$k]['quantity'];
-					array_push($this->items,new Item($this->software, $this->date,$addon));
+			// On ne veut pas prendre en compte les item downloadable
+			if ( !($rows[$k]["type"] == "Download") ) {
+				array_push($this->items,new Item($this->software, $this->date,$rows[$k]));
+				
+				if ( $rows[$k]['addons'] == 'yes' ) {
+					// On ajoute les Addons
+					global $wpdb;
+					$table = $wpdb->prefix . "shopp_meta";
+					$addons = $wpdb->get_results("SELECT * FROM " . $table . " WHERE parent = " . $rows[$k]['id'] . " and type = 'addon'" , ARRAY_A);
+					foreach( $addons as $addon ) {
+						$addon['product'] = $rows[$k]['product'];
+						$addon['quantity'] = $rows[$k]['quantity'];
+						array_push($this->items,new Item($this->software, $this->date,$addon));
+					}
 				}
 			}
 		}

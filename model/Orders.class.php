@@ -71,7 +71,11 @@ class Orders
 					"SELECT * FROM " . $wpdb->prefix . "shopp_purchase WHERE modified > '" . $dateInLocal . "' and (txnstatus = 'authed' or txnstatus = 'captured') order by modified ASC"
 						, ARRAY_A);
 		foreach ( $rows as $row ) {
-			array_push($this->orders,new Order($this->software, $this->date,$row));
+			$orderObj = new Order($this->software, $this->date,$row);
+			$array = $orderObj->getItems();
+			if( !empty( $array ) ) {
+				array_push($this->orders,new Order($this->software, $this->date,$row));
+			}
 		}
 	}
 	

@@ -312,7 +312,46 @@ class TrackingManager
 		} else {
 			
 			$note = "Your order was shipped on " . $this->date . " via " . $this->carrier . ". Tracking number is " . $this->tracking . ".";
-			$this->result = add_customer_note( $note, $this->order );
+			// On regarde si le plugin Tracking Shipments est actif ou pas, auquel cas on doit insérer le tracking number à un autre endroit que dans les notes
+			if( is_plugin_active_custom( "woocommerce-shipment-tracking/shipment-tracking.php" ) ) {
+				$newDate = date("y-m-d", strtotime($this->date));
+				$table = $wpdb->prefix . "postmeta";
+				$this->result = $wpdb->update( $table, 
+						array( 
+								'meta_value' => $tracking_number 
+							), 
+						array( 	'post_id' => $id,
+								'meta_key' => '_tracking_number'
+						 )
+				);
+				$wpdb->update( $table, 
+						array( 
+								'meta_value' => $this->carrier
+							), 
+						array( 	'post_id' => $id,
+								'meta_key' => '_tracking_provider'
+						 )
+				);
+				$wpdb->update( $table, 
+						array( 
+								'meta_value' => $this->carrier
+							), 
+						array( 	'post_id' => $id,
+								'meta_key' => '_custom_tracking_provider'
+						 )
+				);
+				$wpdb->update( $table, 
+						array( 
+								'meta_value' => strtotime($this->date)
+							), 
+						array( 	'post_id' => $id,
+								'meta_key' => '_date_shipped'
+						 )
+				);
+			} else {
+				$this->result = add_customer_note( $note, $this->order );
+			}
+			//$this->result = add_customer_note( $note, $this->order );
 			
 			if ( $this->result === false ) {
 				$this->code = 'ERR010';

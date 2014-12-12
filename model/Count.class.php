@@ -31,11 +31,16 @@ class Count
 			} // Cas Shopp
 			else if ( 'Shopp' == $this->software->getSoftware() ) {
 						$orders = $wpdb->get_results(
-						"SELECT * FROM " . $wpdb->prefix . "shopp_purchase WHERE modified > '" . $dateInLocal . "' and (txnstatus = 'authed' or txnstatus = 'captured') order by modified ASC"
+						"SELECT * FROM " . $wpdb->prefix . "shopp_purchase WHERE modified > '" . $dateInLocal . "' and (txnstatus = 'authed' or txnstatus = 'captured') order by modified ASC", ARRAY_A
 						);
 						
 						foreach ( $orders as $order ) {
-							$this->number++;
+							$orderObj = new Order($this->software, $date,$order);
+							$array = $orderObj->getItems();
+							if( !empty( $array ) ) {
+								$this->number++;
+							} 
+							/*$this->number++;*/
 						}
 			} // Cas Woocommerce
 			else if ( 'Woocommerce' == $this->software->getSoftware() ) {

@@ -1,6 +1,6 @@
 <?php
 // On désactive les erreurs
-error_reporting(0);
+error_reporting(1);
 
 // On récupère les données
 
