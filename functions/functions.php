@@ -31,6 +31,7 @@ function getVersion( $path ) {
 function filtreString($var) {
 	$var = trim($var);
 	$var = htmlspecialchars( $var );
+	$var = strip_tags( $var );
 	if (empty($var)) {
 		return '';
 	} else {
