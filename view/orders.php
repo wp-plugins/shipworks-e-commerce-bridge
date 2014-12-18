@@ -13,7 +13,7 @@
 				<FirstName><?php echo $order->getShipFirstname() ?></FirstName>
 				<MiddleName><?php echo $order->getMiddleName() ?></MiddleName>
 				<LastName><?php echo $order->getShipLastname() ?></LastName>
-				<Company><?php echo $order->getCompany() ?></Company>
+				<Company><?php echo $order->getShipCompany() ?></Company>
 				<Street1><?php echo $order->getShipAddress() ?></Street1>
 				<Street2><?php echo $order->getShipStreet2() ?></Street2>
 				<Street3></Street3>

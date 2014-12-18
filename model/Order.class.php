@@ -15,7 +15,7 @@ class Order
 	protected $middlename;
 	protected $lastname;
 	protected $company;
-	protected $billCompany;
+	protected $shipCompany;
 	protected $address;
 	protected $street2;
 	protected $street3;
@@ -114,6 +114,11 @@ class Order
 		$this->middlename = filtreString( $this->middlename );
 		$this->lastname =  filtreString( $this->lastname );
 		$this->company =  filtreString( $this->company );
+		// En attendant que tout soit implémenté pour chaque software
+		if( empty( $this->shipCompany ) ) {
+			$this->shipCompany = $this->company;
+		}
+		$this->shipCompany =  filtreString( $this->shipCompany );
 		$this->address =  filtreString( $this->address );
 		$this->street2 = filtreString( $this->street2 );
 		$this->street3 = filtreString( $this->street3 );
@@ -334,6 +339,7 @@ class Order
 		$this->website = '';
 		$this->shipfirstname = getInformation( $this->row, '_shipping_first_name' );
 		$this->shiplastname = getInformation( $this->row, '_shipping_last_name' );
+		$this->shipCompany = getInformation( $this->row, '_shipping_company' );
 		$this->shipaddress = getInformation( $this->row, '_shipping_address_1' );
 		$this->shipstreet2 = getInformation( $this->row, '_shipping_address_2' );
 		$this->shipxaddress = getInformation( $this->row, '_shipping_address_1' );
@@ -612,8 +618,8 @@ class Order
 		return $this->company;	
 	}
 	
-	public function getBillCompany() {
-		return $this->billCompany;	
+	public function getShipCompany() {
+		return $this->shipCompany;	
 	}
 	
 	public function getAddress() {
