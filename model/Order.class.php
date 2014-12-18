@@ -15,6 +15,7 @@ class Order
 	protected $middlename;
 	protected $lastname;
 	protected $company;
+	protected $billCompany;
 	protected $address;
 	protected $street2;
 	protected $street3;
@@ -609,6 +610,10 @@ class Order
 	
 	public function getCompany() {
 		return $this->company;	
+	}
+	
+	public function getBillCompany() {
+		return $this->billCompany;	
 	}
 	
 	public function getAddress() {

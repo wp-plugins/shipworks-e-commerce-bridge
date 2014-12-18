@@ -316,13 +316,25 @@ class TrackingManager
 			if( is_plugin_active_custom( "woocommerce-shipment-tracking/shipment-tracking.php" ) ) {
 				$newDate = date("y-m-d", strtotime($this->date));
 				$table = $wpdb->prefix . "postmeta";
-				$this->result = $wpdb->update( $table, 
+				$this->result = $wpdb->replace( $table, 
+						array( 	'post_id' => $id,
+								'meta_key' => '_tracking_number',
+								'meta_value' => $tracking_number 
+							)
+				);
+				$wpdb->update( $table, 
 						array( 
 								'meta_value' => $tracking_number 
 							), 
 						array( 	'post_id' => $id,
 								'meta_key' => '_tracking_number'
 						 )
+				);
+				$wpdb->replace( $table, 
+						array( 	'post_id' => $id,
+								'meta_key' => '_tracking_provider',
+								'meta_value' => $this->carrier
+							)
 				);
 				$wpdb->update( $table, 
 						array( 
@@ -332,6 +344,12 @@ class TrackingManager
 								'meta_key' => '_tracking_provider'
 						 )
 				);
+				$wpdb->replace( $table, 
+						array( 	'post_id' => $id,
+								'meta_key' => '_custom_tracking_provider',
+								'meta_value' => $this->carrier
+							)
+				);
 				$wpdb->update( $table, 
 						array( 
 								'meta_value' => $this->carrier
@@ -339,6 +357,12 @@ class TrackingManager
 						array( 	'post_id' => $id,
 								'meta_key' => '_custom_tracking_provider'
 						 )
+				);
+				$wpdb->replace( $table, 
+						array( 	'post_id' => $id,
+								'meta_key' => '_date_shipped',
+								'meta_value' => strtotime($this->date)
+							)
 				);
 				$wpdb->update( $table, 
 						array( 
