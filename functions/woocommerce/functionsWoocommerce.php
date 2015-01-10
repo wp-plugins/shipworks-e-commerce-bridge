@@ -104,6 +104,41 @@ function isComposed( $row ) {
 	return $result != null ;
 }
 
+function isAttributeTMOption( $id ) {
+	global $wpdb;
+	$id = $id - 1;
+	$field = "'_tmcartepo_data'";
+	$table = $wpdb->prefix . "woocommerce_order_itemmeta";
+	$result = $wpdb->get_row("SELECT * FROM " . $table . " WHERE meta_id = " . $id . " AND meta_key = " . $field . " ", ARRAY_A);
+	
+	return $result != null ;
+}
+
+function getTMOptionPrice( $id ) {
+	global $wpdb;
+	$id = $id - 1;
+	$field = '_tmcartepo_data';
+	$table = $wpdb->prefix . "woocommerce_order_itemmeta";
+	$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE meta_id = " . $id . " AND meta_key = '" . $field . "'", ARRAY_A);
+	
+	$str = $row['meta_value'];
+	$tab = unserialize( $str );
+	
+	/*var_dump( $tab );*/
+	
+	$toReturn = 0;
+	
+	foreach( $tab as $option ) {
+		foreach( $option as $key => $value ) {
+			if ( $key == 'price' ) {
+				$toReturn += $value;
+			}
+		}
+	}
+	
+	return $toReturn;
+}
+
 function isWooSeqNumber( $row ) {
 	$result = getInformation( $row , '_order_number' );
 	return $result != null ;

@@ -236,8 +236,14 @@ class Order
 		$this->email = $this->row['email'];
 		$this->fax = '';
 		$this->website = '';
-		$this->shipfirstname = $this->row['shipname'];
-		$this->shiplastname = '';
+		//if ( empty( $this->row['shipxaddress'] ) ) {
+		
+		$parts = explode(" ", $this->row['shipname']);
+		$lastname = array_pop($parts);
+		$firstname = implode(" ", $parts);
+		$this->shipfirstname = $firstname;
+		$this->shiplastname = $lastname;
+			
 		$this->shipaddress = $this->row['shipaddress'];
 		$this->shipxaddress = $this->row['shipxaddress'];
 		$this->shipstreet2 = $this->row['shipxaddress']; // add to correct no address line 2 billing on shopp

@@ -4,7 +4,7 @@ Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge, connect
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 3.3.8
+Stable tag: 3.3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,9 @@ contact@advanced-creation.com.
 2. The ShipWorks software with a fiew orders downloaded from the site.
 
 == Changelog ==
+
+= 3.3.9 =
+Compatible with TM Extra Procut Options.
 
 = 3.3.5 =
 Bugs were fixed, and compatible with Shipment Tracking plugin.
@@ -163,6 +166,9 @@ This new version supports variable products in Woocommerce.
 * First version
 
 == Upgrade Notice ==
+
+= 3.3.9 =
+This new version works better with the TM Extra Product Options plugin.
 
 = 3.3.5 =
 This new version works better with shopp and is compatible with the Woocommerce Shipment Tracking plugin.

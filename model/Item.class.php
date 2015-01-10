@@ -99,6 +99,7 @@ class Item
 			$this->price = $this->row['price'];
 			$this->unitprice = getAddonPrice( $this->row );
 			$this->weight = weightFilter( getAddonWeight( $this->row ) );
+			$this->unitcost = $this->row['cost'];
 		} else if ( isVariation( $this->row['price'] ) ) {
 			$this->itemID = getProductSku( $this->row['price'] );
 			$this->productID = $this->row['price'];
@@ -109,6 +110,7 @@ class Item
 			$this->price = $this->row['price'];
 			$this->unitprice = getProductPrice( $this->row['price'] );
 			$this->weight = weightFilter( getWeight($this->price) );
+			$this->unitcost = $this->row['cost'];
 			// On ajoute les attributs
 			$attributes = getAttributes( $this->row['price'] );
 			foreach( $attributes as $key => $attribute ) {
@@ -122,6 +124,7 @@ class Item
 			$this->name = $this->row['name'];
 			$this->quantity = $this->row['quantity'];
 			$this->price = $this->row['price'];
+			$this->unitcost = $this->row['cost'];
 			$this->unitprice = getProductPrice( $this->row['price'] );
 			$this->weight = weightFilter( getWeight($this->price) );	
 		}
@@ -145,7 +148,7 @@ class Item
 		$results = $wpdb->get_results("SELECT * FROM " . $table . " WHERE order_item_id = " . $this->row['order_item_id'] , ARRAY_A);
 		foreach( $results as $row ) {
 			if ( substr( $row['meta_key'], 0, 1 ) != "_" ) {
-				array_push($this->attributes,new Attribute( $this->software, $this->date, $row['meta_key'], $row['meta_value']));
+				array_push($this->attributes,new Attribute( $this->software, $this->date, $row['meta_key'], $row['meta_value'], $row['meta_id']));
 			}
 		}
 		// On veut dans tous les cas enregistrer l'id du produit original pour avoir le bon nom
