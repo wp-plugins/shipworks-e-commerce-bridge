@@ -106,37 +106,28 @@ function isComposed( $row ) {
 
 function isAttributeTMOption( $id ) {
 	global $wpdb;
-	$id = $id - 1;
 	$field = "'_tmcartepo_data'";
 	$table = $wpdb->prefix . "woocommerce_order_itemmeta";
-	$result = $wpdb->get_row("SELECT * FROM " . $table . " WHERE meta_id = " . $id . " AND meta_key = " . $field . " ", ARRAY_A);
-	
-	return $result != null ;
+	$result = $wpdb->get_row("SELECT * FROM " . $table . " WHERE order_item_id = " . $id . " AND meta_key = " . $field . " ", ARRAY_A);
+	if ( $result != null ) {
+		return $result['meta_id'];
+	} else {
+		return 0;
+	}
 }
 
-function getTMOptionPrice( $id ) {
+function getTMOptionTab( $id ) {
 	global $wpdb;
-	$id = $id - 1;
 	$field = '_tmcartepo_data';
 	$table = $wpdb->prefix . "woocommerce_order_itemmeta";
-	$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE meta_id = " . $id . " AND meta_key = '" . $field . "'", ARRAY_A);
+	$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE order_item_id = " . $id . " AND meta_key = '" . $field . "'", ARRAY_A);
 	
 	$str = $row['meta_value'];
 	$tab = unserialize( $str );
 	
 	/*var_dump( $tab );*/
 	
-	$toReturn = 0;
-	
-	foreach( $tab as $option ) {
-		foreach( $option as $key => $value ) {
-			if ( $key == 'price' ) {
-				$toReturn += $value;
-			}
-		}
-	}
-	
-	return $toReturn;
+	return $tab;
 }
 
 function isWooSeqNumber( $row ) {

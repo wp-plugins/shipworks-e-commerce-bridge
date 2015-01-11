@@ -148,8 +148,24 @@ class Item
 		$results = $wpdb->get_results("SELECT * FROM " . $table . " WHERE order_item_id = " . $this->row['order_item_id'] , ARRAY_A);
 		foreach( $results as $row ) {
 			if ( substr( $row['meta_key'], 0, 1 ) != "_" ) {
-				array_push($this->attributes,new Attribute( $this->software, $this->date, $row['meta_key'], $row['meta_value'], $row['meta_id']));
+				// On regarde si pour cet item il existe des extra options : différent de 0
+				// Si oui on enlève les champs qui on un id supérieur à celui de la ligne _tmcartepo_data : le plugin est vraiment mal fichu en base de donnée
+				if ( isAttributeTMOption( $this->row['order_item_id'] ) != 0 ) {
+					if ( $row['meta_id'] < isAttributeTMOption( $this->row['order_item_id'] ) ) {
+						array_push($this->attributes,new Attribute( $this->software, $this->date, $row['meta_key'], $row['meta_value']));
+					}
+				} else {
+					array_push($this->attributes,new Attribute( $this->software, $this->date, $row['meta_key'], $row['meta_value']));
+				}
 			}
+		}
+		// On ajoute les attributs dans le cas ou on a des Extra product Options
+		if (  isAttributeTMOption( $this->row['order_item_id'] ) != 0 ) {
+			$tab = getTMOptionTab( $this->row['order_item_id'] );
+			foreach( $tab as $option ) {
+				array_push($this->attributes,new Attribute( $this->software, $this->date, $option['value'], 'Extra Options(s)', $option['price']));
+			}
+			
 		}
 		// On veut dans tous les cas enregistrer l'id du produit original pour avoir le bon nom
 		$productId = getItemInfo( $this->row, '_product_id' );

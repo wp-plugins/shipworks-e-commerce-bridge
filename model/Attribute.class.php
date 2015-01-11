@@ -10,11 +10,11 @@ class Attribute
 	protected $value;
 	protected $price;
 
-	public function __construct( $software, $date, $key, $value, $attributeID) {
+	public function __construct( $software, $date, $key, $value, $price = 0) {
 		$this->software = $software;
 		$this->date = $date;
 		$this->row = $row;
-		$this->attributeID = $attributeID;
+		$this->price = $price;
 		$this->name = $key;
 		$this->value = $value;
 		$this->setInformations();
@@ -80,12 +80,6 @@ class Attribute
 		if( strlen( $this->name ) > 3 && substr( $this->name, 0, 3) == 'pa_' ) {
 			$this->name = substr( $this->name, 3, strlen( $this->name ) - 1 );
 			$this->value = ucfirst( getAttributeValue( $this->value ) );
-		}
-		// On regarde si on a un TM extra Option plugin pour cet attribut, dans ce cas on doit mettre le prix
-		if ( isAttributeTMOption( $this->attributeID ) ) {
-			//echo 'ok1' . $this->attributeID;
-			$this->name = 'Extra Options(s)';
-			$this->price = getTMOptionPrice( $this->attributeID );
 		}
 		// Les majuscules
 		$this->name = ucfirst( $this->name );
