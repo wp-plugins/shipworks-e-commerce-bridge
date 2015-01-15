@@ -110,7 +110,7 @@ class StatusManager
 					), 
 				array( 'autoid' => $this->order )
 		);
-		if ( $this->result === 0 ) {
+		if ( $this->result === false ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		}
@@ -127,7 +127,7 @@ class StatusManager
 					), 
 				array( 'id' => $this->order )
 		);
-		if ( $this->result === 0 ) {
+		if ( $this->result === false ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		} else if ( $this->comment != '' ) {
@@ -141,7 +141,6 @@ class StatusManager
 		$status = $this->status;
 		
 		// Avant de mettre à jour on veut retrouver le bon order_number et pas celui de sequential woocommerce
-		
 		if ( is_plugin_active_custom( "woocommerce-sequential-order-numbers/woocommerce-sequential-order-numbers.php") 
 				||  is_plugin_active_custom( "woocommerce-sequential-order-numbers-pro/woocommerce-sequential-order-numbers.php") ) {
 			$row = $wpdb->get_row(
@@ -163,8 +162,13 @@ class StatusManager
 						), 
 					array( 'object_id' => $this->order )
 			);
+			if ( $this->result === 0 ) {
+				$this->result = true;
+			}
 		}
-		if ( $this->result === 0 ) {
+		// Si on a 0 ca veut just dire que la base de donnée était déjà à jour et qu'on avait rien à updater
+		// Du coup on veut checker $this->result === false et pas $this->result === 0 car ca donnera false alors que c'est bon
+		if ( $this->result === false ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		} else if ( $this->comment != '' ) {
@@ -205,7 +209,9 @@ class StatusManager
 					array( 'ID' => $this->order )
 			);
 		}
-		if ( $this->result === 0 ) {
+		// Si on a 0 ca veut just dire que la base de donnée était déjà à jour et qu'on avait rien à updater
+		// Du coup on veut checker $this->result === false et pas $this->result === 0 car ca donnera false alors que c'est bon
+		if ( $this->result === false ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		} else if ( $this->comment != '' ) {
@@ -225,7 +231,7 @@ class StatusManager
 					), 
 				array( 'id' => $this->order )
 		);
-		if ( $this->result === 0 ) {
+		if ( $this->result === false ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		} else if ( $this->comment != '' ) {
@@ -264,7 +270,7 @@ class StatusManager
 					), 
 				array( 'id' => $this->order )
 		);
-		if ( $this->result === 0 ) {
+		if ( $this->result === false ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		} else if ( $this->comment != '' ) {
@@ -287,7 +293,7 @@ class StatusManager
 					), 
 				array( 'object_id' => $this->order )
 		);
-		if ( $this->result === 0 ) {
+		if ( $this->result === false ) {
 			$this->code = 'ERR004';
 			$this->description = "The Status coudn't be update in the database";
 		} else if ( $this->comment != '' ) {
@@ -296,6 +302,10 @@ class StatusManager
 	}
 	
 	protected function filtre() {
+		// Cas ou la valeur était deja a jour sur woocommerce mais pas sur shipworks, 0 lignes ont été updatées
+		if ( $this->result === 0 ) {
+				$this->result = true;
+		}
 		$this->description = filtreString( $this->description );
 		$this->code = filtreString( $this->code );
 		$this->comment = filtreString( $this->comment );
