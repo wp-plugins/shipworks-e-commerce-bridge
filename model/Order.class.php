@@ -153,7 +153,8 @@ class Order
 		
 		$this->freight = filtreFloat( $this->freight );
 		$this->tax = filtreFloat( $this->tax );
-		$this->discount = filtreFloat( $this->discount );
+		// On met une valeur absolue car les ShipWorks veut une valeur positive pour les discount
+		$this->discount = abs( filtreFloat( $this->discount ) );
 		$this->fee = filtreFloat( $this->fee);
 	}
 	

@@ -4,7 +4,7 @@ Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge, connect
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 3.3.11
+Stable tag: 3.3.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,15 @@ Minimum Requires:
 * Wordpress 3.0
 * Shipworks 3.0 (or minimum version you have)
 * PHP 5.0
+
+= Plugins Compatible With =
+
+* Woocommerce Composite Products
+* Woocommerce Sequential Order Numbers
+* Woocommerce Shipment Tracking
+* TM Extra Product Options plugin
+
+There is a plugin you would like to add to this list? Contact us at contact@advanced-creation.com.
 
 = Ship faster with integrated shipping tools =
 With the most complete shipping integrations available, your shipments get done faster so you can focus 
@@ -66,6 +75,11 @@ scales, weighing your packages is always fast and accurate.
 1. Configure the plugin by going to the `ShipWorks Connect` menu that appears in your admin menu
 
 == Frequently Asked Questions ==
+
+1. If your in trouble with online status, if they are wrong or if the value is not good you need to check a few things with your SHipWorks software.
+* First in ShipWorks go into the menu in Manage -> Actions.
+* A window opens and there should be an action which is running when "A shipment is processed" and which task is "Upload the shipment details".
+* If not create one with the appropiate store. So that shipments details are automatically updated online when you ship your product.
 
 If you have any questions or issues about the plugin don't hesitate to contact us :
 contact@advanced-creation.com.
