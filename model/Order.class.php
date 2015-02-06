@@ -381,6 +381,21 @@ class Order
 			}
 		}
 		
+		//Ajout les champs du custom checkout field si le plugin est la
+		if ( is_plugin_active_custom( "woocommerce-checkout-field-editor/checkout-field-editor.php" ) ) {
+			global $wpdb;
+			$table = $wpdb->prefix . "options";
+			// On list les champs additionnels qui existent
+			$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE option_name = 'wc_fields_additional'", ARRAY_A);
+			$fields = unserialize( $row["option_value"] );
+			$table = $wpdb->prefix . "postmeta";
+			foreach( $fields as $key => $value ) {
+				$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE post_id = " . $this->row['ID'] . " AND meta_key = '" . $key . "'", ARRAY_A);
+				$value = $row["meta_value"];
+				array_push($this->coupons, $value);
+			}
+		}
+		
 		global $wpdb;
 		$time = strtotime( $this->date . ' UTC' );
 		$dateInLocal = date( "Y-m-d H:i:s", $time );
