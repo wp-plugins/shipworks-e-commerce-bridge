@@ -4,7 +4,7 @@ Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge, connect
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 3.3.13
+Stable tag: 3.3.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,7 @@ Minimum Requires:
 * Woocommerce Shipment Tracking
 * Woocommerce Checkout Field Editor
 * TM Extra Product Options plugin
+* Woocommerce Bulk Discount
 
 There is a plugin you would like to add to this list? Contact us at contact@advanced-creation.com.
 

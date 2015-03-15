@@ -183,7 +183,27 @@ class Item
 		if ( isComposed( $this->row ) ) {
 			$this->unitprice = 0;
 		} else {
-			$this->unitprice = getProductInfo( $variationId, '_price' );
+			// On regarde si il y a le plugin woocommerce-bulk-discount woocommerce-bulk-discount.php
+			if ( is_plugin_active_custom( "woocommerce-bulk-discount/woocommerce-bulk-discount.php" ) ) {
+				//$this->unitprice = getProductInfo( $variationId, '_price' );
+				// On met le prix au cas où le variation id ne soit pas présent dans le champ
+				$this->unitprice = getProductInfo( $variationId, '_price' );
+				$bulkInfo = getProductInfo( $this->row['order_id'], '_woocommerce_t4m_discount_coeffs' );
+				if ( $bulkInfo ) {
+					$bulkData = json_decode($bulkInfo);
+					foreach( $bulkData as $key => $value ) {
+						if ( $key == $variationId && $value->coeff != 1 ) {
+								// Si le variation id est présent on remplace le prix
+								$this->unitprice = $value->coeff * $value->orig_price;
+								//var_dump( $value->coeff );
+						}
+					}
+					//var_dump( $bulkData );
+				}
+				//echo 'nico' . $bulkInfo;
+			} else {
+				$this->unitprice = getProductInfo( $variationId, '_price' );
+			}
 		}
 		// Si le poid du variation vaut 0 on prend celui du parent
 		if ( 0 != getProductInfo( $variationId, '_weight' ) ) {
