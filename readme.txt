@@ -96,7 +96,11 @@ You can find it on internet by clicking on this link: http://www.whatismyip.com/
 
 If you are trying to import more than 1000 orders for your first connection and you got the error 504, please import manually a xls file into shipworks
 
-5.What to do If I have a bug on my order (in shipworks) ?
+5.You have an error "Reference to undeclared entity 'rsaquo'" ?
+
+Please change url module (when setup shipworks) starting by https (replace http by https)
+
+6.What to do If I have a bug on my order (in shipworks) ?
 
 Please contact us at contact@advanced-creation.com, we will fix the bug as soon as possible. (Most of the time we are fixing bugs in less than 24h)
 If you have any questions or issues about the plugin don't hesitate to contact us :
