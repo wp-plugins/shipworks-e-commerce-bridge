@@ -37,10 +37,7 @@ class Count
 						foreach ( $orders as $order ) {
 							$orderObj = new Order($this->software, $date,$order);
 							$array = $orderObj->getItems();
-							if( !empty( $array ) ) {
-								$this->number++;
-							} 
-							/*$this->number++;*/
+							$this->number++;
 						}
 			} // Cas Woocommerce
 			else if ( 'Woocommerce' == $this->software->getSoftware() ) {
@@ -49,11 +46,7 @@ class Count
 						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC", ARRAY_A
 						);
 						foreach ( $orders as $order ) { 
-							if( getStatusName( $this->software, $order ) == 'on-hold' 
-									|| getStatusName( $this->software, $order ) == 'processing' 
-										|| getStatusName( $this->software, $order ) == 'completed' ) {
-								$this->number++;
-							}
+							$this->number++;
 						}
 			} // Cas WP eCommerce
 			else if ( 'WP eCommerce' == $this->software->getSoftware() ) {
@@ -61,9 +54,7 @@ class Count
 						"SELECT * FROM " . $wpdb->prefix . "wpsc_purchase_logs WHERE date > '" . $time . "' order by date ASC", 
 						ARRAY_A);
 						foreach ( $orders as $order ) {
-							if ( $order['processed'] == 2 || $order['processed'] == 3 ) {
-								$this->number++;
-							}
+							$this->number++;
 						}
 			} // Cas Cart66 Lite
 			else if ( 'Cart66 Lite' == $this->software->getSoftware() ) {
@@ -71,9 +62,7 @@ class Count
 						"SELECT * FROM " . $wpdb->prefix . "cart66_orders WHERE ordered_on > '" . $dateInLocal . "' order by ordered_on ASC", 
 						ARRAY_A);
 						foreach ( $orders as $order ) {
-							if ( $order['status'] != 'checkout_pending' ) {
-								$this->number++;
-							}
+							$this->number++;
 						}
 			}// Cas Cart66 Pro
 			else if ( 'Cart66 Pro' == $this->software->getSoftware() ) {
@@ -81,9 +70,7 @@ class Count
 						"SELECT * FROM " . $wpdb->prefix . "cart66_orders WHERE ordered_on > '" . $dateInLocal . "' order by ordered_on ASC", 
 						ARRAY_A);
 						foreach ( $orders as $order ) {
-							if ( $order['status'] != 'checkout_pending' ) {
-								$this->number++;
-							}
+							$this->number++;
 						}
 			} // Cas Jigoshop
 			else if ( 'Jigoshop' == $this->software->getSoftware() ) {
@@ -92,11 +79,7 @@ class Count
 						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC", ARRAY_A
 						);
 						foreach ( $orders as $order ) {
-							if( getStatusName( $order ) == 'on-hold' 
-									|| getStatusName( $order ) == 'processing' 
-											|| getStatusName( $order ) == 'completed' ) {
-								$this->number++;
-							}
+							$this->number++;
 						}
 			}
 		}

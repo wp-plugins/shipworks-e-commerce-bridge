@@ -67,8 +67,11 @@ class Orders
 		$time = strtotime($this->date.' UTC');
 		$dateInLocal = date("Y-m-d H:i:s", $time);
 		global $wpdb;
-		$rows = $wpdb->get_results(
+		/*$rows = $wpdb->get_results(
 					"SELECT * FROM " . $wpdb->prefix . "shopp_purchase WHERE modified > '" . $dateInLocal . "' and (txnstatus = 'authed' or txnstatus = 'captured') order by modified ASC"
+						, ARRAY_A);*/
+		$rows = $wpdb->get_results(
+					"SELECT * FROM " . $wpdb->prefix . "shopp_purchase WHERE modified > '" . $dateInLocal . "' order by modified ASC"
 						, ARRAY_A);
 		foreach ( $rows as $row ) {
 			$orderObj = new Order($this->software, $this->date,$row);
@@ -88,9 +91,9 @@ class Orders
 						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC" , ARRAY_A
 						);
 		foreach ( $rows as $row ) {
-			if( getStatusName( $this->software, $row ) == 'on-hold' || getStatusName( $this->software, $row ) == 'processing' || getStatusName( $this->software, $row ) == 'completed' ) {
+			//*if( getStatusName( $this->software, $row ) == 'on-hold' || getStatusName( $this->software, $row ) == 'processing' || getStatusName( $this->software, $row ) == 'completed' ) {
 				array_push($this->orders,new Order($this->software, $this->date,$row));
-			}
+			//}//*/
 		}
 	}
 	
@@ -101,9 +104,9 @@ class Orders
 		$rows = $wpdb->get_results(
 						"SELECT * FROM " . $wpdb->prefix . "wpsc_purchase_logs WHERE date > '" . $time . "' order by date ASC" , ARRAY_A );
 		foreach ( $rows as $row ) {
-			if( $row['processed'] == 2 || $row['processed'] == 3 ) {
+			//if( $row['processed'] == 2 || $row['processed'] == 3 ) {
 				array_push($this->orders,new Order($this->software, $this->date,$row));
-			}
+			//}
 		}
 	}
 	
@@ -115,9 +118,9 @@ class Orders
 						"SELECT * FROM " . $wpdb->prefix . "cart66_orders WHERE ordered_on > '" . $dateInLocal . "' order by ordered_on ASC", 
 						ARRAY_A);
 		foreach ( $rows as $row ) {
-				if ( $row['status'] != 'checkout_pending' ) {
+				//if ( $row['status'] != 'checkout_pending' ) {
 					array_push($this->orders,new Order($this->software, $this->date,$row));
-				}
+				//}
 		}
 
 		/*$sql2 =  "ALTER TABLE " . $table2 . " ADD 
@@ -135,9 +138,9 @@ class Orders
 						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC" , ARRAY_A
 						);
 		foreach ( $rows as $row ) {
-			if( getStatusName( $row ) == 'on-hold' || getStatusName( $row ) == 'processing' || getStatusName( $row ) == 'completed' ) {
+			//if( getStatusName( $row ) == 'on-hold' || getStatusName( $row ) == 'processing' || getStatusName( $row ) == 'completed' ) {
 				array_push($this->orders,new Order($this->software, $this->date,$row));
-			}
+			//}
 		}
 	}
 	

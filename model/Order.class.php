@@ -263,8 +263,11 @@ class Order
 		global $wpdb;
 		$time = strtotime( $this->date . ' UTC' );
 		$dateInLocal = date( "Y-m-d H:i:s", $time );
-		$rows = $wpdb->get_results(
+		/*$rows = $wpdb->get_results(
 					"SELECT * FROM ". $wpdb->prefix ."shopp_purchase AS p LEFT JOIN ". $wpdb->prefix ."shopp_purchased AS ped ON ped.purchase = p.id WHERE p.modified > '" . $dateInLocal . "' and p.id='" . $this->id_order . "' and (p.txnstatus = 'authed' or p.txnstatus = 'captured')  order by p.id"
+						, ARRAY_A);*/
+		$rows = $wpdb->get_results(
+					"SELECT * FROM ". $wpdb->prefix ."shopp_purchase AS p LEFT JOIN ". $wpdb->prefix ."shopp_purchased AS ped ON ped.purchase = p.id WHERE p.modified > '" . $dateInLocal . "' and p.id='" . $this->id_order . "' order by p.id"
 						, ARRAY_A);
 
 		for($k = 0; $k < count( $rows );$k ++){
