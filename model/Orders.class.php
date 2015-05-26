@@ -92,7 +92,9 @@ class Orders
 						);
 		foreach ( $rows as $row ) {
 			//*if( getStatusName( $this->software, $row ) == 'on-hold' || getStatusName( $this->software, $row ) == 'processing' || getStatusName( $this->software, $row ) == 'completed' ) {
-				array_push($this->orders,new Order($this->software, $this->date,$row));
+				if ( !isDownloadable($this->software, null, $row ) ) {
+					array_push($this->orders,new Order($this->software, $this->date,$row));
+				}
 			//}//*/
 		}
 	}

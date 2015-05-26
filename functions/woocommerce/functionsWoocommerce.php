@@ -62,17 +62,20 @@ function getStatusName( $software, $row ) {
 	}
 }
 
-function isDownloadable( $row ) {
+function isDownloadable( $software, $date, $row ) {
 
+	$toReturn = true;
 	global $wpdb;
 	$table = $wpdb->prefix . "postmeta";
-	$row = $wpdb->get_row("SELECT * FROM " . $table . " WHERE post_id = " . $row['ID'] . " AND meta_key = '_downloadable' "  , ARRAY_A);
-	
-	if ( $row['meta_value'] == 'yes' ) {
-		return true;
-	} else {
-		return false;
+	$order = new Order($software, $date,$row);
+	foreach ( $order->getItems() as $item ) {
+		$result = $wpdb->get_row("SELECT * FROM " . $table . " WHERE post_id = " . 	$item->getProductID() . " and meta_key = '_downloadable'", ARRAY_A);
+		if ( $result['meta_value'] == "no" ) {
+			$toReturn = false;
+		}
 	}
+	
+	return $toReturn;
 }
 
 function getAttributeValue( $slug ) {

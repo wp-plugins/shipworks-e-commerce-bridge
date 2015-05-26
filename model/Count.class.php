@@ -48,9 +48,9 @@ class Count
 						foreach ( $orders as $order ) {
 							/*var_dump( $order );
 							var_dump(isDownloadable( $order ));*/
-							/*if ( !isDownloadable( $order ) ) {*/
+							if ( !isDownloadable($this->software, null, $order ) ) {
 								$this->number++;
-							/*}*/
+							}
 						}
 			} // Cas WP eCommerce
 			else if ( 'WP eCommerce' == $this->software->getSoftware() ) {
