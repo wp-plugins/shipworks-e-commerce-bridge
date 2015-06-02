@@ -106,6 +106,14 @@ Please contact us at contact@advanced-creation.com, we will fix the bug as soon 
 If you have any questions or issues about the plugin don't hesitate to contact us :
 contact@advanced-creation.com.
 
+7.I want to see only Processing or pending items, In Shipworks:
+
+Step 1: Click on double arrow on the right of Search All orders
+Step 2: If all of the following conditions are met -> click on the plus
+Step 3: Change order total by Order -> Online Status
+Step 4: Online Status Equals -> Select Processing
+Renew Step 2 if you want to add Pending items and modify all by any
+
 == Screenshots ==
 
 1. The Settings Page: enter your store address and the credentials that will be used by ShipWorks.
