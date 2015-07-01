@@ -281,6 +281,7 @@ class Item
 	protected function setInfoJigoshop() {
 		$this->itemID = $this->k;
 		$this->productID = $this->row['id'];
+		$unitprice;
 		if ( null == $this->row['variation_id'] ) {
 			// Dans ce cas le variation Id vaut l'id du produit ce qui est bon
 			$variationId = $this->row['id'];
@@ -288,6 +289,21 @@ class Item
 		} else {
 			// Dans ce cas l'id est celui de la variation qui va permettre d'aller cherche le sku et le prix
 			$variationId = $this->row['variation_id'];
+			$split = explode( '.' , $this->software->getVersion() );
+			if ( $split[0] > 1 || ( $split[0] == 1 & $split[1] >= 17 ) ) {
+				$variations = $this->row["variation"];
+				foreach( $variations as $key => $value ) {
+					array_push($this->attributes,new Attribute( $this->software, $this->date,$key, $value ));
+				}	
+				$unitprice = $this->row['cost'];
+			} else {
+				//On crée les attributs
+				$object = unserialize( getProductInfo( $variationId, 'order_items' ) );
+				foreach( $object as $key => $value ) {
+					array_push($this->attributes,new Attribute( $this->software, $this->date,$key, $value ));
+				}
+				$unitprice = $this->row['cost']/$this->row['qty'];
+			}
 			//On créer les attributs
 			$object = unserialize( getProductInfo( $variationId, 'variation_data' ) );
 			foreach( $object as $key => $value ) {
@@ -299,7 +315,7 @@ class Item
 		$this->name = $this->row['name'];
 		$this->quantity = $this->row['qty'];
 		$this->price = '';
-		$this->unitprice = $this->row['cost']/$this->quantity;
+		$this->unitprice = $unitprice;
 		$this->weight = getProductInfo( $variationId, 'weight' );
 	}
 	

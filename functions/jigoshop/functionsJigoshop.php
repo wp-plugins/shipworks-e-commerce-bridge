@@ -52,7 +52,7 @@ function getProductInfo( $id, $field ) {
 		}
 	}
 	
-	if ( $field = 'weight' ) {
+	if ( $field == 'weight' ) {
 		$result['meta_value'] = convertWeight( $result['meta_value'] );
 	}
 	
