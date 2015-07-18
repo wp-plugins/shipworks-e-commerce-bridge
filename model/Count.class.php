@@ -45,11 +45,15 @@ class Count
 						$orders = $wpdb->get_results(
 						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC", ARRAY_A
 						);
+						$count = 0;
 						foreach ( $orders as $order ) {
-							/*var_dump( $order );
-							var_dump(isDownloadable( $order ));*/
-							if ( !isDownloadable($this->software, null, $order ) ) {
-								$this->number++;
+							if ( $count < 100 ) {
+								if ( !isDownloadable($this->software, null, $order ) ) {
+									$this->number++;
+									$count = $count + 1;
+								}
+							} else {
+								break 1;
 							}
 						}
 			} // Cas WP eCommerce

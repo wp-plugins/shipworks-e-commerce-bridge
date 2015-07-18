@@ -1,10 +1,10 @@
 === ShipWorks Connector for WordPress  ===
 Contributors: AdvancedCreation
 Donate link: http://www.advanced-creation.com
-Tags: shipworks, wordpress, ShipWorks Connector, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge, connect
+Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge, connect
 Requires at least: 3.0.1
 Tested up to: 4.2.2
-Stable tag: 3.4.3
+Stable tag: 3.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,40 +79,12 @@ scales, weighing your packages is always fast and accurate.
 == Frequently Asked Questions ==
 
 1. If your in trouble with online status, if they are wrong or if the value is not good you need to check a few things with your SHipWorks software.
+* First in ShipWorks go into the menu in Manage -> Actions.
+* A window opens and there should be an action which is running when "A shipment is processed" and which task is "Upload the shipment details".
+* If not create one with the appropiate store. So that shipments details are automatically updated online when you ship your product.
 
-In ShipWorks go into the menu in Manage -> Actions.
-A window opens and there should be an action which is running when "A shipment is processed" and which task is "Upload the shipment details".
-If not create one with the appropriate store. So that shipments details are automatically updated online when you ship your product.
-
-2.What to do if I have an error 406 ?
-
-Error 406 is meaning your hosting have a mod_security module on their server. So you have to contact your hosting to ask them to remove it for your account. Sometimes they will need your IP to unlock it only for your computer.
-
-3.Where can I find my IP ?
-
-You can find it on internet by clicking on this link: http://www.whatismyip.com/
-
-4.What to do if I have an error 504 and a large amount of orders to import ?
-
-If you are trying to import more than 1000 orders for your first connection and you got the error 504, please import manually a xls file into shipworks
-
-5.You have an error "Reference to undeclared entity 'rsaquo'" ?
-
-Please change url module (when setup shipworks) starting by https (replace http by https)
-
-6.What to do If I have a bug on my order (in shipworks) ?
-
-Please contact us at contact@advanced-creation.com, we will fix the bug as soon as possible. (Most of the time we are fixing bugs in less than 24h)
 If you have any questions or issues about the plugin don't hesitate to contact us :
 contact@advanced-creation.com.
-
-7.I want to see only Processing or pending items, In Shipworks:
-
-Step 1: Click on double arrow on the right of Search All orders
-Step 2: If all of the following conditions are met -> click on the plus
-Step 3: Change order total by Order -> Online Status
-Step 4: Online Status Equals -> Select Processing
-Renew Step 2 if you want to add Pending items and modify all by any
 
 == Screenshots ==
 
