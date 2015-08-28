@@ -64,16 +64,20 @@ function getStatusName( $software, $row ) {
 
 function isDownloadable( $software, $date, $row ) {
 
-	$toReturn = true;
+	$toReturn = false;
 	global $wpdb;
 	$table = $wpdb->prefix . "postmeta";
 	$order = new Order($software, $date,$row);
+	$i = 0; $j = 0;
 	foreach ( $order->getItems() as $item ) {
+		$i++;
 		$result = $wpdb->get_row("SELECT * FROM " . $table . " WHERE post_id = " . 	$item->getProductID() . " and meta_key = '_downloadable'", ARRAY_A);
-		if ( $result['meta_value'] == "no" ) {
-			$toReturn = false;
+		if ( $result['meta_value'] == "yes" ) {
+			$toReturn = true;
+			$j++;
 		}
 	}
+	if($i != $j) $toReturn = false;
 	
 	return $toReturn;
 }

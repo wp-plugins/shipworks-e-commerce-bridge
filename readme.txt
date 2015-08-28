@@ -3,8 +3,8 @@ Contributors: AdvancedCreation
 Donate link: http://www.advanced-creation.com
 Tags: shipworks, wordpress, ShipWorks bridge, Woocommerce, shopp, shopperpress, WP eCommerce, Cart66 Lite, Cart 66 Pro, Jigoshop, e-commerce, order manager, shipping manager, e-commerce tool, e-commerce shipping, e-commerce manager, multisites, bridge, connect
 Requires at least: 3.0.1
-Tested up to: 4.2.2
-Stable tag: 3.4.4
+Tested up to: 4.3
+Stable tag: 3.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,9 @@ contact@advanced-creation.com.
 2. The ShipWorks software with a fiew orders downloaded from the site.
 
 == Changelog ==
+
+= 3.4.5 =
+Fixed bug on downloadable function / could skip some orders
 
 = 3.4.1 =
 All orders are download, even canceled order 
