@@ -10,7 +10,6 @@ function getVersion( $path ) {
 	$fichier = fopen( PLUGINS_PATH . $path ,"r");
 			$trouve = false;
 			// On récupère la version
-			if(!empty($fichier)) {
 			while( !feof( $fichier ) && !$trouve ) {
 			 // On récupère une ligne
 			  $ligne = fgets( $fichier );
@@ -24,7 +23,6 @@ function getVersion( $path ) {
 					$toReturn = substr( $ligne, $j, $i - $j);
 				}			
 			 }
-			}
 			 // On ferme le fichier
 			 fclose($fichier);
 	return $toReturn;

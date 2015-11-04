@@ -93,7 +93,7 @@ contact@advanced-creation.com.
 
 == Changelog ==
 
-= 3.4.6 =
+= 3.4.7 =
 Fixed looping page settings on windows hosting
 
 = 3.4.5 =
