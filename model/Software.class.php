@@ -62,6 +62,7 @@ class Software
 		if ( 'shopperpress' == $this->software ) {
 			$fichier = fopen( THEMES_PATH . "/shopperpress/functions.php","r");
 			// On récupère la version
+			if(!empty($fichier)) {
 			while( ! feof( $fichier ) ) {
 			 // On récupère une ligne
 			  $ligne = fgets( $fichier );
@@ -74,6 +75,7 @@ class Software
 					$this->version = substr( $ligne, $j, $i - $j);
 				}			
 			 }
+			}
 			 // On ferme le fichier
 			 fclose($fichier);
 		} else if ( 'Shopp' == $this->getSoftware() ) {

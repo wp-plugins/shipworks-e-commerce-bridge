@@ -93,6 +93,9 @@ contact@advanced-creation.com.
 
 == Changelog ==
 
+= 3.4.6 =
+Fixed looping page settings on windows hosting
+
 = 3.4.5 =
 Fixed bug on downloadable function / could skip some orders
 
