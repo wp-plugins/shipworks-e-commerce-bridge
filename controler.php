@@ -5,7 +5,7 @@
 Plugin Name: ShipWorks Connector
 Plugin URI: http://www.advanced-creation.com 
 Description: ShipWorks for Wordpress build a bridge between your E-Commerce sites on Wordpress (such as WooCommerce) and ShipWorks.
-Version: 3.4.7
+Version: 3.4.8
 Author: AdvancedCreation
 Author URI: http://www.advanced-creation.com
 License: GPL2
@@ -127,12 +127,14 @@ function shipworks_subscription() {
 /****************************************/
 
 // On veut savoir si l'appel a été fait par Shipworks
+add_action( 'plugins_loaded', 'shipworks_connection' );
 
-if ( isset($_POST['action']) && isset($_POST['username']) && isset($_POST['password']) ) {
-	include_once('connection.php');
-	exit;
+function shipworks_connection() {
+	if ( isset($_POST['action']) && isset($_POST['username']) && isset($_POST['password']) ) {
+		include_once('connection.php');
+		exit;
+	}
 }
-
 
 
 /*  Copyright 2013  Advanced Creation  (email : olivier@advanced-creation.com)
