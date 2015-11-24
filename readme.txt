@@ -129,6 +129,8 @@ contact@advanced-creation.com.
 2. The ShipWorks software with a fiew orders downloaded from the site.
 
 == Changelog ==
+= 3.4.9 =
+Fixed issue with premium subscription not working if no internet connection. Is valid for 1 week, since last check.
 
 = 3.4.7 =
 Fixed looping page settings on windows hosting

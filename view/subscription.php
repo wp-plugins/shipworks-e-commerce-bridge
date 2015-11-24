@@ -9,7 +9,6 @@
 	<p>
 		Next payment will be one month later.
 	</p>
-	<a href="#cancel" role="button" class="button-primary" data-toggle="modal">Cancel my subscription</a>
 	<div id="cancel" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-header">
 		<h3 id="myModalLabel">Cancel Subscription</h3>
@@ -22,7 +21,6 @@
 	  	<form name="cancelSubscriptionForm" method="post" action="<?php PLUGIN_PATH_SHIPWORKSWORDPRESS . '../../shipworks-e-commerce-bridge/view/control/controlSubscription.php'?>">
 			<input type="submit" class="button-primary" value="Cancel Subscription" name="cancel-subscription">
 		</form>
-		<button class="button-primary" data-dismiss="modal" aria-hidden="true">Close</button>
 	  </div>
 	</div>
 </div>

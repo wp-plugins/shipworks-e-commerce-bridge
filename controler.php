@@ -5,7 +5,7 @@
 Plugin Name: ShipWorks Connector
 Plugin URI: http://www.advanced-creation.com 
 Description: ShipWorks for Wordpress build a bridge between your E-Commerce sites on Wordpress (such as WooCommerce) and ShipWorks.
-Version: 3.4.8
+Version: 3.4.9
 Author: AdvancedCreation
 Author URI: http://www.advanced-creation.com
 License: GPL2
