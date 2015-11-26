@@ -79,9 +79,4 @@ if($show_include) {
 	echo "There Is A Communication Error With The Server, Please Try Again Later.";
 }
 
-/*include_once(PLUGIN_PATH_SHIPWORKSWORDPRESS.'functions/woocommerce/functionsWoocommerce.php');
-$customer_message = getOrderMessage(102);
-echo "<pre>";
-//print_r($customer_message);
-echo $customer_message[0]['post_excerpt'];*/
 ?>
