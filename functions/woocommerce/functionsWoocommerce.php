@@ -1,5 +1,4 @@
 <?php 
-
 function getInformation( $row, $field) {
 	global $wpdb;
 	$table = $wpdb->prefix . "postmeta";
@@ -179,6 +178,19 @@ function getOrderNotes( $id ) {
 	return $results;
 }
 
+function getOrderMessage($id) {
+	/*class GetMessage extends WC_Abstract_Order {
+
+	}
+	$get_message = new GetMessage($id);
+	$message_raw = "\"".htmlspecialchars(trim($get_message->customer_message))."\"";
+	return $message_raw;*/
+	global $wpdb;
+	$table = $wpdb->prefix . "posts";
+	$results = $wpdb->get_results("SELECT * FROM " . $table . " WHERE ID = $id", ARRAY_A);
+	return $results[0]['post_excerpt'];
+}
+
 function getNotePrivacy( $id ) {
 	global $wpdb;
 	$table = $wpdb->prefix . "commentmeta";
@@ -192,7 +204,7 @@ function getOrderComments( $id ) {
 	$table = $wpdb->prefix . "posts";
 	$result = $wpdb->get_row("SELECT * FROM " . $table . " WHERE ID = " . $id, ARRAY_A);
 	
-	return $result['post_title'];
+	return $result[0]['post_title'];
 }
 
 function add_customer_note( $note, $id ) {

@@ -57,7 +57,7 @@
 				?>
 			<?php if ( $order->getPrivateNotes() != null ) { ?>
 				<?php foreach( $order->getPrivateNotes() as $note ) { ?>
-				<Note public="false"><?php echo $note;?></Note>
+				<Note public="true"><?php echo $note;?></Note>
 				<?php } 
 				}?>		
 			</Notes>

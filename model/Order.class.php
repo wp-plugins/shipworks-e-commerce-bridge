@@ -375,15 +375,17 @@ class Order
 		}
 		
 		// Ajout des notes
-		$notes = getOrderNotes( $this->row['ID'] );
+		$notes = getOrderNotes($this->row['ID']);
 		foreach ( $notes as $note ) {
 			if ( getNotePrivacy( $note['comment_ID'] ) == 1 ) {
 				/*echo 'ok' . $note['comment_ID'] . $note['comment_content'];*/
 				array_push($this->coupons, $note['comment_content']);
 			} else if ( getNotePrivacy( $note['comment_ID'] ) == 0  ) {
-				array_push($this->privateNotes, $note['comment_content']);
+				//array_push($this->privateNotes, $note['comment_content']);
 			}
 		}
+
+		array_push($this->privateNotes, getOrderMessage($this->row['ID']));
 		
 		//Ajout les champs du custom checkout field si le plugin est la
 		if ( is_plugin_active_custom( "woocommerce-checkout-field-editor/checkout-field-editor.php" ) ) {

@@ -93,8 +93,8 @@ class Orders
 		$dateInLocal = date("Y-m-d H:i:s", $time);
 		global $wpdb;
 		$rows = $wpdb->get_results(
-						"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC" , ARRAY_A
-						);
+			"SELECT * FROM " . $wpdb->prefix . "posts WHERE post_modified_gmt > '" . $dateInLocal . "' AND post_type = 'shop_order' order by post_modified_gmt ASC" , ARRAY_A
+		);
 		$count = 0;
 		
 		//CREATE AN HOOK ON FUNCTION sc_orders_rows to allow customers to make changes
